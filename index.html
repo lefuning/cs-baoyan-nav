@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>计算机保研导航 · 数学 / 计算机基础 / 深度学习 / 保研申请</title>
+  <meta name="description" content="计算机保研一站式导航：数学、计算机基础、深度学习、保研申请四大支柱，37 个专题、399 道高频面试题、保研时间轴与精荐资源。" />
+  <style>
+    :root {
+      --bg: #f4f6fc;
+      --bg-2: #eaeefb;
+      --surface: #ffffff;
+      --surface-2: #f2f5fc;
+      --border: #e1e7f3;
+      --text: #141d33;
+      --muted: #565f74;
+      --faint: #8b94a8;
+      --primary: #2f6fed;
+      --primary-2: #5b8dff;
+      --teal: #0d9488;
+      --teal-2: #2dd4bf;
+      --violet: #7c5cff;
+      --violet-2: #a78bff;
+      --amber: #f59e0b;
+      --shadow: 0 1px 2px rgba(20,30,60,.05), 0 10px 30px rgba(20,30,60,.07);
+      --shadow-lg: 0 24px 60px rgba(20,30,60,.18);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --font: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    [data-theme="dark"] {
+      --bg: #0b0e16;
+      --bg-2: #0f131d;
+      --surface: #151a26;
+      --surface-2: #1b2130;
+      --border: #262d3d;
+      --text: #e9ecf5;
+      --muted: #a8b0c4;
+      --faint: #6c7488;
+      --primary: #5b8dff;
+      --primary-2: #7aa6ff;
+      --teal: #2dd4bf;
+      --teal-2: #4fd8c8;
+      --violet: #a78bff;
+      --violet-2: #bca6ff;
+      --amber: #fbbf24;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.3);
+      --shadow-lg: 0 24px 60px rgba(0,0,0,.55);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: var(--font); background: var(--bg); color: var(--text);
+      line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* 滚动入场 */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- 顶部导航 ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px clamp(18px, 5vw, 56px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      backdrop-filter: blur(14px); border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 11px; font-weight: 800; font-size: 18px; letter-spacing: -.01em; }
+    .nav-logo {
+      width: 38px; height: 38px; border-radius: 11px;
+      background: linear-gradient(135deg, var(--primary), var(--violet));
+      display: grid; place-items: center; color: #fff; font-size: 18px;
+      box-shadow: 0 6px 16px rgba(47,111,237,.4);
+    }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a { padding: 8px 15px; border-radius: 9px; font-size: 14px; font-weight: 600; color: var(--muted); transition: all .15s; }
+    .nav-links a:hover { color: var(--text); background: var(--surface-2); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .theme-btn {
+      width: 38px; height: 38px; border-radius: 10px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+      font-size: 16px; display: grid; place-items: center; transition: all .15s;
+    }
+    .theme-btn:hover { color: var(--primary); border-color: var(--primary); }
+    @media (max-width: 760px) { .nav-links { display: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative; overflow: hidden; isolation: isolate;
+      padding: clamp(60px, 10vw, 116px) clamp(18px, 5vw, 56px) clamp(48px, 7vw, 80px);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: -30% -10% auto -10%; height: 130%; z-index: -2;
+      background:
+        radial-gradient(60% 55% at 78% 12%, color-mix(in srgb, var(--primary) 30%, transparent), transparent 60%),
+        radial-gradient(50% 50% at 12% 8%, color-mix(in srgb, var(--teal) 26%, transparent), transparent 60%),
+        radial-gradient(55% 55% at 50% 100%, color-mix(in srgb, var(--violet) 22%, transparent), transparent 60%);
+      filter: blur(8px);
+    }
+    .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5; z-index: -1; animation: float 14s ease-in-out infinite; }
+    .blob.b1 { width: 320px; height: 320px; background: color-mix(in srgb, var(--primary) 60%, transparent); top: -60px; right: 8%; }
+    .blob.b2 { width: 260px; height: 260px; background: color-mix(in srgb, var(--teal) 55%, transparent); bottom: -40px; left: 6%; animation-delay: -5s; }
+    @keyframes float { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(26px) } }
+    .hero-inner { max-width: 940px; margin: 0 auto; text-align: center; position: relative; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px; padding: 7px 16px; border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 80%, transparent); border: 1px solid var(--border);
+      font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 24px; box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+    .hero h1 {
+      font-size: clamp(32px, 6.4vw, 58px); line-height: 1.12; margin: 0 0 18px;
+      letter-spacing: -.025em; font-weight: 850;
+      background: linear-gradient(120deg, var(--text) 20%, var(--primary) 60%, var(--violet));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p.lead { font-size: clamp(15px, 2.4vw, 18.5px); color: var(--muted); max-width: 700px; margin: 0 auto 32px; }
+    .search { position: relative; max-width: 620px; margin: 0 auto; }
+    .search input {
+      width: 100%; padding: 17px 18px 17px 52px; font-size: 16px; font-family: inherit;
+      border-radius: 15px; border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); box-shadow: var(--shadow-lg); outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    .search input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent); }
+    .search .s-icon { position: absolute; left: 19px; top: 50%; transform: translateY(-50%); color: var(--faint); font-size: 18px; }
+    .search kbd { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--faint); border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; background: var(--surface-2); }
+    .hero-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 36px; }
+    .hstat { background: color-mix(in srgb, var(--surface) 85%, transparent); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 24px; box-shadow: var(--shadow); min-width: 118px; backdrop-filter: blur(6px); }
+    .hstat b { display: block; font-size: 24px; font-weight: 850; background: linear-gradient(120deg, var(--primary), var(--violet)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .hstat span { font-size: 12.5px; color: var(--faint); }
+
+    /* ---------- 主体 ---------- */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: clamp(44px, 6vw, 76px) clamp(18px, 5vw, 32px) 30px; }
+    .section-title { text-align: center; margin-bottom: 36px; }
+    .section-title .kick { display: inline-block; font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; }
+    .section-title h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 8px; letter-spacing: -.01em; }
+    .section-title p { color: var(--muted); margin: 0; font-size: 15px; }
+
+    /* 支柱速览 */
+    .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 18px; margin-bottom: 64px; }
+    .pillar {
+      position: relative; display: block; padding: 26px 24px; border-radius: var(--radius);
+      background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow);
+      overflow: hidden; transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .pillar::after { content:""; position:absolute; right:-40px; top:-40px; width:140px; height:140px; border-radius:50%; opacity:.12; }
+    .pillar.m::after { background: var(--violet); } .pillar.c::after { background: var(--primary); } .pillar.d::after { background: var(--teal); } .pillar.a::after { background: var(--amber); }
+    .pillar:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .pillar .p-icon { width: 52px; height: 52px; border-radius: 14px; display:grid; place-items:center; font-size: 26px; color:#fff; margin-bottom: 16px; }
+    .pillar.m .p-icon { background: linear-gradient(135deg, var(--violet), var(--violet-2)); }
+    .pillar.c .p-icon { background: linear-gradient(135deg, var(--primary), var(--primary-2)); }
+    .pillar.d .p-icon { background: linear-gradient(135deg, var(--teal), var(--teal-2)); }
+    .pillar.a .p-icon { background: linear-gradient(135deg, var(--amber), #fbbf24); }
+    .pillar h3 { margin: 0 0 6px; font-size: 20px; }
+    .pillar p { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+    .pillar .p-meta { display:flex; align-items:center; justify-content: space-between; }
+    .pillar .p-count { font-size: 13px; font-weight: 700; color: var(--faint); }
+    .pillar .p-go { font-size: 14px; font-weight: 800; }
+    .pillar.m .p-go { color: var(--violet); } .pillar.c .p-go { color: var(--primary); } .pillar.d .p-go { color: var(--teal); } .pillar.a .p-go { color: var(--amber); }
+
+    /* 分类 */
+    .cat { margin-bottom: 60px; scroll-margin-top: 80px; }
+    .cat-head { display: flex; align-items: center; gap: 15px; margin-bottom: 6px; }
+    .cat-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 24px; color: #fff; flex-shrink: 0; box-shadow: var(--shadow); }
+    .cat.c-math .cat-icon { background: linear-gradient(135deg, var(--violet), var(--violet-2)); }
+    .cat.c-cs .cat-icon { background: linear-gradient(135deg, var(--primary), var(--primary-2)); }
+    .cat.c-dl .cat-icon { background: linear-gradient(135deg, var(--teal), var(--teal-2)); }
+    .cat.c-apply .cat-icon { background: linear-gradient(135deg, var(--amber), #f59e0b); }
+    .cat-head h2 { font-size: clamp(22px,3.4vw,28px); margin: 0; letter-spacing: -.01em; }
+    .cat-head .sub { font-size: 13.5px; color: var(--faint); font-weight: 600; }
+    .cat-desc { color: var(--muted); margin: 0 0 22px; font-size: 15px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    .card {
+      position: relative; display: block; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 20px 18px; box-shadow: var(--shadow);
+      transition: transform .18s, box-shadow .18s, border-color .18s; overflow: hidden;
+    }
+    .card::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background: var(--primary); opacity:0; transition: opacity .18s; }
+    .cat.c-math .card::before { background: var(--violet); }
+    .cat.c-cs .card::before { background: var(--primary); }
+    .cat.c-dl .card::before { background: var(--teal); }
+    .cat.c-apply .card::before { background: var(--amber); }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: color-mix(in srgb, var(--primary) 40%, var(--border)); }
+    .card:hover::before { opacity: 1; }
+    .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .card-tag { font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--surface-2); color: var(--muted); }
+    .card-tag.core { background: color-mix(in srgb, var(--primary) 14%, transparent); color: var(--primary); }
+    .card-tag.hot { background: color-mix(in srgb, #ef4444 14%, transparent); color: #ef4444; }
+    .card-tag.must { background: color-mix(in srgb, var(--teal) 16%, transparent); color: var(--teal); }
+    .card-tag.pre { background: color-mix(in srgb, var(--violet) 14%, transparent); color: var(--violet); }
+    .card-emoji { font-size: 22px; }
+    .card h3 { font-size: 17px; margin: 0 0 6px; letter-spacing: -.01em; }
+    .card p { font-size: 13.5px; color: var(--muted); margin: 0 0 14px; min-height: 38px; }
+    .card-go { font-size: 13px; font-weight: 800; color: var(--primary); display: inline-flex; align-items: center; gap: 5px; transition: gap .18s; }
+    .card:hover .card-go { gap: 9px; }
+
+    /* 时间轴 */
+    .timeline { position: relative; margin: 10px 0 0; padding-left: 8px; }
+    .timeline::before { content:""; position:absolute; left: 19px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--primary), var(--teal), var(--violet)); }
+    .tl-item { position: relative; padding: 0 0 26px 56px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot { position: absolute; left: 10px; top: 4px; width: 20px; height: 20px; border-radius: 50%; background: var(--surface); border: 3px solid var(--primary); box-shadow: var(--shadow); }
+    .tl-item:nth-child(2) .tl-dot { border-color: var(--teal); }
+    .tl-item:nth-child(3) .tl-dot { border-color: var(--violet); }
+    .tl-item:nth-child(4) .tl-dot { border-color: var(--amber); }
+    .tl-item:nth-child(5) .tl-dot { border-color: var(--primary); }
+    .tl-item:nth-child(6) .tl-dot { border-color: var(--teal); }
+    .tl-time { font-size: 13px; font-weight: 800; color: var(--primary); letter-spacing: .02em; }
+    .tl-item h4 { margin: 2px 0 4px; font-size: 17px; }
+    .tl-item p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    /* 资源 + 考点 两栏 */
+    .two-col { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: start; }
+    @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .panel h3 { margin: 0 0 16px; font-size: 19px; display:flex; align-items:center; gap:8px; }
+    .res { display: flex; gap: 12px; padding: 13px 0; border-bottom: 1px dashed var(--border); }
+    .res:last-child { border-bottom: none; }
+    .res .r-ico { width: 38px; height: 38px; border-radius: 10px; background: var(--surface-2); display:grid; place-items:center; font-size: 18px; flex-shrink:0; }
+    .res .r-body { flex: 1; }
+    .res .r-title { font-weight: 700; font-size: 14.5px; display:flex; align-items:center; gap:8px; flex-wrap: wrap; }
+    .res .r-kind { font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: var(--surface-2); color: var(--faint); }
+    .res .r-kind.book { color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, transparent); }
+    .res .r-kind.video { color: var(--teal); background: color-mix(in srgb, var(--teal) 12%, transparent); }
+    .res .r-kind.web { color: var(--violet); background: color-mix(in srgb, var(--violet) 12%, transparent); }
+    .res .r-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    .toplist { list-style: none; padding: 0; margin: 0; counter-reset: tp; }
+    .toplist li { position: relative; padding: 11px 0 11px 40px; border-bottom: 1px dashed var(--border); font-size: 14px; color: var(--muted); }
+    .toplist li:last-child { border-bottom: none; }
+    .toplist li::before { counter-increment: tp; content: counter(tp); position:absolute; left:0; top:9px; width:26px; height:26px; border-radius:8px; background: linear-gradient(135deg, var(--primary), var(--violet)); color:#fff; font-weight:800; font-size:13px; display:grid; place-items:center; }
+    .toplist li b { color: var(--text); }
+
+    .quick { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 54px; }
+    .quick a { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 14px; font-weight: 600; color: var(--text); box-shadow: var(--shadow); transition: all .15s; }
+    .quick a:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+
+    .empty { display: none; text-align: center; color: var(--faint); padding: 50px 0; font-size: 15px; }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 8px 0 56px; }
+
+    footer { border-top: 1px solid var(--border); padding: 38px 20px 30px; text-align: center; color: var(--faint); font-size: 13.5px; background: var(--bg-2); }
+    footer b { color: var(--muted); }
+    footer .f-links { display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin-bottom: 14px; }
+    footer .f-links a { color: var(--muted); font-weight:600; }
+    footer .f-links a:hover { color: var(--primary); }
+  </style>
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <nav class="nav">
+    <a class="nav-brand" href="#top">
+      <span class="nav-logo">🎓</span>
+      <span>计算机保研导航</span>
+    </a>
+    <div class="nav-links">
+      <a href="#pillars">四大支柱</a>
+      <a href="#math">数学</a>
+      <a href="#cs">计算机基础</a>
+      <a href="#dl">深度学习</a>
+      <a href="#apply">保研申请</a>
+      <a href="#timeline">保研时间轴</a>
+      <a href="#resources">精荐资源</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" aria-label="切换主题">🌙</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="top">
+    <span class="blob b1"></span><span class="blob b2"></span>
+    <div class="hero-inner">
+      <span class="hero-badge">🚀 面向计算机保研人 · 一站式复习导航</span>
+      <h1>计算机保研导航<br />数学 · 计算机基础 · 深度学习 · 保研申请</h1>
+      <p class="lead">把散落各处的保研复习资料，整理成一条清晰主线。四大支柱、37 个专题、399 道高频面试题，再加上保研时间轴与精荐资源——点击下方卡片或搜索，直达精讲与题库。</p>
+      <div class="search">
+        <span class="s-icon">🔍</span>
+        <input id="search" type="text" placeholder="搜专题：Transformer、TCP、SVD、操作系统、个人陈述、联系导师…" autocomplete="off" />
+        <kbd>/</kbd>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><b>4</b><span>核心支柱</span></div>
+        <div class="hstat"><b>37</b><span>复习专题</span></div>
+        <div class="hstat"><b>399</b><span>高频面试题</span></div>
+        <div class="hstat"><b>全程</b><span>保研时间轴</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="content">
+    <!-- 四大支柱速览 -->
+    <section class="reveal" id="pillars">
+      <div class="section-title">
+        <span class="kick">Four Pillars</span>
+        <h2>四大保研支柱</h2>
+        <p>数学是底层语言，计算机基础是考核核心，深度学习是 AI 方向的主战场，保研申请帮你把实力变现为 offer。</p>
+      </div>
+      <div class="pillars">
+        <a class="pillar m" href="#math">
+          <div class="p-icon">📐</div>
+          <h3>数学</h3>
+          <p>线性代数 · 概率统计 · 微积分 · 离散数学。面试从"推导 + 几何直觉"深挖。</p>
+          <div class="p-meta"><span class="p-count">7 个专题</span><span class="p-go">进入 →</span></div>
+        </a>
+        <a class="pillar c" href="#cs">
+          <div class="p-icon">💻</div>
+          <h3>计算机基础</h3>
+          <p>数据结构 · 操作系统 · 网络 · 组成原理 · 数据库 · C/C++。含 408 核心。</p>
+          <div class="p-meta"><span class="p-count">8 个专题</span><span class="p-go">进入 →</span></div>
+        </a>
+        <a class="pillar d" href="#dl">
+          <div class="p-icon">🤖</div>
+          <h3>深度学习</h3>
+          <p>从感知机到 Transformer、扩散模型与大模型进阶，配套高频面试题。</p>
+          <div class="p-meta"><span class="p-count">14 个专题</span><span class="p-go">进入 →</span></div>
+        </a>
+        <a class="pillar a" href="#apply">
+          <div class="p-icon">🎓</div>
+          <h3>保研申请</h3>
+          <p>择校定位 · 成绩排名 · 文书材料 · 面试技巧 · 全流程时间线。</p>
+          <div class="p-meta"><span class="p-count">8 个专题</span><span class="p-go">进入 →</span></div>
+        </a>
+      </div>
+    </section>
+
+    <div class="quick reveal">
+      <a href="math/index.html#interview">📝 数学综合题</a>
+      <a href="cs/index.html#interview">📝 专业课面试题</a>
+      <a href="dl/index.html#interview">📝 深度学习面试题</a>
+      <a href="cs/index.html#ds">🌲 数据结构必考</a>
+      <a href="dl/index.html#transformer">🚀 Transformer 核心</a>
+      <a href="dl/index.html#diffusion">🌈 扩散模型</a>
+      <a href="dl/index.html#llm-adv">🧠 大模型进阶</a>
+      <a href="cs/index.html#se">🛠️ 系统设计</a>
+      <a href="dl/index.html#roadmap">🗺️ 学习路线</a>
+      <a href="apply/index.html#ranking">📊 排名要求</a>
+      <a href="apply/index.html#docs">📝 文书材料</a>
+      <a href="apply/index.html#interview">🎤 面试真题</a>
+    </div>
+
+    <!-- 数学 -->
+    <section class="cat c-math reveal" id="math">
+      <div class="cat-head">
+        <div class="cat-icon">📐</div>
+        <div><h2>数学</h2><div class="sub">机器学习与算法的底层语言</div></div>
+      </div>
+      <p class="cat-desc">特征值、贝叶斯、梯度、图论——保研面试从"推导 + 几何直觉"层面深挖，这里把公式背后的"为什么"讲清楚。另含数值分析、统计推断、随机过程与最优化进阶。</p>
+      <div class="grid" data-cat="math"></div>
+    </section>
+
+    <div class="divider reveal"></div>
+
+    <!-- 计算机基础 -->
+    <section class="cat c-cs reveal" id="cs">
+      <div class="cat-head">
+        <div class="cat-icon">💻</div>
+        <div><h2>计算机基础</h2><div class="sub">数据结构 / OS / 网络 / 组成 / 数据库 / C++</div></div>
+      </div>
+      <p class="cat-desc">保研（含 408）的绝对核心，面试很少考偏题但会追问"为什么"。六大专业课 + 软件工程与系统设计 + 编译原理，一站搞定。</p>
+      <div class="grid" data-cat="cs"></div>
+    </section>
+
+    <div class="divider reveal"></div>
+
+    <!-- 深度学习 -->
+    <section class="cat c-dl reveal" id="dl">
+      <div class="cat-head">
+        <div class="cat-icon">🤖</div>
+        <div><h2>深度学习</h2><div class="sub">从感知机到 Transformer 与大模型</div></div>
+      </div>
+      <p class="cat-desc">从神经网络基础到 Transformer 的完整脉络，并延伸到生成式模型、扩散模型、大模型进阶（RLHF/RAG/Agent）与工程优化，配套高频面试题。</p>
+      <div class="grid" data-cat="dl"></div>
+    </section>
+
+    <div class="divider reveal"></div>
+
+    <!-- 保研申请 -->
+    <section class="cat c-apply reveal" id="apply">
+      <div class="cat-head">
+        <div class="cat-icon">🎓</div>
+        <div><h2>保研申请</h2><div class="sub">择校 / 排名 / 文书 / 面试 / 时间线</div></div>
+      </div>
+      <p class="cat-desc">把申请这件事拆成可执行步骤：择校定位、成绩排名门槛、英语要求、文书四件套（简历/个人陈述/推荐信/联系导师）、压力/行为/简历面试技巧与全流程时间线。</p>
+      <div class="grid" data-cat="apply"></div>
+    </section>
+
+    <div class="empty" id="empty">😶 没有匹配的专题，换个关键词试试～</div>
+
+    <!-- 保研时间轴 -->
+    <section class="reveal" id="timeline" style="margin-top:64px;">
+      <div class="section-title">
+        <span class="kick">Roadmap</span>
+        <h2>保研全流程时间轴</h2>
+        <p>以大三下至大四上为主线的关键节点，配合本站的复习节奏安排。</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item"><span class="tl-dot"></span><div class="tl-time">大三上 · 12月–2月</div><h4>定方向与打基础</h4><p>确定目标院校（如南航）与科研方向；系统复习数学与专业课，开始啃《动手学深度学习》。</p></div>
+        <div class="tl-item"><span class="tl-dot"></span><div class="tl-time">大三下 · 3月–5月</div><h4>科研 / 竞赛 / 攒材料</h4><p>推进科研项目、写小论文或复现顶会；刷 LeetCode 机试；整理成绩单、推荐信、个人陈述初稿。</p></div>
+        <div class="tl-item"><span class="tl-dot"></span><div class="tl-time">大三下末 · 6月</div><h4>夏令营申请</h4><p>关注各校官网与保研公众号，集中投递申请材料；准备中英文自我介绍与项目 PPT。</p></div>
+        <div class="tl-item"><span class="tl-dot"></span><div class="tl-time">暑假 · 7月–8月</div><h4>夏令营考核</h4><p>笔试（数学+专业课）+ 机试（算法手撕）+ 面试（项目/论文/英语）； Transformer 与专业课是高频考点。</p></div>
+        <div class="tl-item"><span class="tl-dot"></span><div class="tl-time">大四上 · 9月</div><h4>预推免 & 九推</h4><p>未上岸则冲刺预推免；9.28 左右国家推免系统填报志愿，确认复试/待录取。</p></div>
+        <div class="tl-item"><span class="tl-dot"></span><div class="tl-time">大四上 · 10月</div><h4>录取确认</h4><p>在推免系统接受待录取通知，完善体检与档案，保研流程结束 🎉。</p></div>
+      </div>
+    </section>
+
+    <div class="divider reveal"></div>
+
+    <!-- 精荐资源 + 高频考点 -->
+    <section class="reveal" id="resources">
+      <div class="section-title">
+        <span class="kick">Resources</span>
+        <h2>精荐学习资源 &amp; 高频考点</h2>
+        <p>按支柱精选的经典教材 / 课程 / 网站，以及面试最常被追问的 TOP 清单。</p>
+      </div>
+      <div class="two-col">
+        <div class="panel">
+          <h3>📚 精荐资源</h3>
+          <div class="res"><div class="r-ico">📐</div><div class="r-body"><div class="r-title">3Blue1Brown《线性代数/微积分本质》<span class="r-kind video">视频</span></div><div class="r-desc">用几何直觉讲透矩阵、特征值与梯度，强烈推荐打基础。</div></div></div>
+          <div class="res"><div class="r-ico">📘</div><div class="r-body"><div class="r-title">《凸优化》Boyd<span class="r-kind book">书</span></div><div class="r-desc">优化理论的圣经，前几章足够覆盖保研所需的凸性与 KKT。</div></div></div>
+          <div class="res"><div class="r-ico">💻</div><div class="r-body"><div class="r-title">CSAPP《深入理解计算机系统》<span class="r-kind book">书</span></div><div class="r-desc">组成原理 + 系统级视角，408 与面试的硬核基础。</div></div></div>
+          <div class="res"><div class="r-ico">🌐</div><div class="r-body"><div class="r-title">李沐《动手学深度学习》d2l.ai<span class="r-kind web">网站</span></div><div class="r-desc">代码 + 理论一体，PyTorch 入门与 CNN/RNN/Transformer 实战首选。</div></div></div>
+          <div class="res"><div class="r-ico">🎓</div><div class="r-body"><div class="r-title">李宏毅《机器学习》课程<span class="r-kind video">视频</span></div><div class="r-desc">中文 ML/DL 经典，Transformer、生成模型讲解深入浅出。</div></div></div>
+          <div class="res"><div class="r-ico">📗</div><div class="r-body"><div class="r-title">王道 / 天勤 408 复习全书<span class="r-kind book">书</span></div><div class="r-desc">数据结构/OS/网络/组成四门的系统化题库与考点梳理。</div></div></div>
+        </div>
+        <div class="panel">
+          <h3>🔥 高频考点 TOP</h3>
+          <ul class="toplist">
+            <li><b>数学</b>：特征值几何意义、SVD 与 PCA、贝叶斯公式、MLE/MAP、梯度与泰勒、正定矩阵判定。</li>
+            <li><b>数据结构</b>：排序稳定性对比、红黑树/B+树、Dijkstra、KMP、动态规划两大要素、TopK。</li>
+            <li><b>操作系统</b>：进程 vs 线程、死锁四条件、虚拟内存、LRU、页面置换、epoll。</li>
+            <li><b>计算机网络</b>：TCP 三次握手/四次挥手、拥塞控制、HTTP/HTTPS、从 URL 到页面。</li>
+            <li><b>深度学习</b>：反向传播手推、ReLU 优势、为何除以 √d_k、位置编码、LayerNorm vs BatchNorm。</li>
+            <li><b>Transformer</b>：QKV 三者作用、多头注意力、残差连接、BERT vs GPT、KV Cache/FlashAttention。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="f-links">
+      <a href="math/index.html">数学复习</a>
+      <a href="cs/index.html">计算机基础</a>
+      <a href="dl/index.html">深度学习</a>
+      <a href="apply/index.html">保研申请</a>
+      <a href="#timeline">保研时间轴</a>
+      <a href="#resources">精荐资源</a>
+    </div>
+    <b>计算机保研导航</b> · 由「工友」为你整理 —— 数学 / 计算机基础 / 深度学习 / 保研申请 四大支柱 🎓<br />
+    内容持续更新，祝保研顺利，上岸理想院校！
+  </footer>
+
+  <script>
+    /* ---------- 数据 ---------- */
+    const DATA = {
+      math: [
+        { emoji:"📐", title:"线性代数", desc:"特征值/SVD/PCA/正定矩阵，深度学习的母语。", tag:"必考", cls:"must", href:"math/index.html#linear", kw:"线代 矩阵 特征值 特征向量 svd 奇异值分解 pca 正定 二次型 行列式" },
+        { emoji:"🎲", title:"概率统计", desc:"贝叶斯/常见分布/MLE/信息论，ML 的语言。", tag:"必考", cls:"must", href:"math/index.html#prob", kw:"概率 贝叶斯 分布 期望 方差 似然 mle map 信息论 熵 kl散度 中心极限" },
+        { emoji:"∫", title:"微积分", desc:"梯度/Hessian/泰勒/拉格朗日/凸优化基础。", tag:"高频", cls:"hot", href:"math/index.html#calc", kw:"微积分 导数 梯度 雅可比 hessian 泰勒 拉格朗日 凸优化 牛顿法" },
+        { emoji:"🔢", title:"离散数学", desc:"图论/逻辑/组合/群论，算法理论基石。", tag:"高频", cls:"hot", href:"math/index.html#discrete", kw:"离散 集合 关系 图论 欧拉 哈密顿 二分图 逻辑 组合 群论 鸽巢" },
+        { emoji:"🧮", title:"数值分析与统计推断", desc:"浮点误差/迭代法/假设检验/回归。", tag:"进阶", cls:"pre", href:"math/index.html#numerical", kw:"数值分析 浮点 条件数 迭代法 统计推断 假设检验 回归 置信区间" },
+        { emoji:"📈", title:"随机过程与最优化进阶", desc:"马尔可夫链/对偶/二阶方法。", tag:"进阶", cls:"pre", href:"math/index.html#stoch", kw:"随机过程 马尔可夫 平稳分布 最优化 对偶 拉格朗日 二阶方法 admm" },
+        { emoji:"📝", title:"数学综合面试题", desc:"跨科目推导题，先口述再对答案。", tag:"冲刺", cls:"core", href:"math/index.html#interview", kw:"面试题 推导 综合 跨科目" }
+      ],
+      cs: [
+        { emoji:"🌲", title:"数据结构与算法", desc:"排序/树/图/哈希/DP，机试面试绝对核心。", tag:"必考", cls:"must", href:"cs/index.html#ds", kw:"数据结构 算法 排序 树 二叉树 图 哈希 动态规划 堆 kmp 复杂度" },
+        { emoji:"💻", title:"操作系统", desc:"进程线程/死锁/内存/虚拟内存/调度。", tag:"必考", cls:"must", href:"cs/index.html#os", kw:"操作系统 进程 线程 死锁 内存 虚拟内存 分页 调度 页面置换 ipc" },
+        { emoji:"🌐", title:"计算机网络", desc:"TCP 三次握手/HTTP/拥塞控制。", tag:"必考", cls:"must", href:"cs/index.html#network", kw:"网络 tcp udp 三次握手 四次挥手 http https 拥塞控制 dns 子网" },
+        { emoji:"🔧", title:"计算机组成原理", desc:"补码/Cache/流水线/中断/IO。", tag:"高频", cls:"hot", href:"cs/index.html#co", kw:"组成原理 补码 浮点 ieee754 cache 流水线 中断 数据表示" },
+        { emoji:"🗄️", title:"数据库", desc:"事务/索引/隔离级别/范式。", tag:"高频", cls:"hot", href:"cs/index.html#db", kw:"数据库 事务 索引 b+树 隔离级别 范式 sql" },
+        { emoji:"⚙️", title:"C/C++ 语言基础", desc:"指针/内存/虚函数/面向对象。", tag:"常考", cls:"", href:"cs/index.html#cpp", kw:"c++ c语言 指针 内存 虚函数 面向对象 引用" },
+        { emoji:"🛠️", title:"软件工程与系统设计", desc:"设计模式/分布式/高并发/缓存。", tag:"高频", cls:"hot", href:"cs/index.html#se", kw:"软件工程 系统设计 设计模式 分布式 高并发 缓存 微服务 数据库设计" },
+        { emoji:"🔩", title:"编译原理基础", desc:"词法/语法/语义/运行时。", tag:"常考", cls:"", href:"cs/index.html#compile", kw:"编译原理 词法分析 语法分析 语义 中间代码 运行时 垃圾回收" }
+      ],
+      dl: [
+        { emoji:"🐍", title:"Python 基础", desc:"NumPy / PyTorch 自动求导，深度学习前置。", tag:"前置", cls:"pre", href:"dl/index.html#python", kw:"python numpy pytorch 张量 自动求导 语法" },
+        { emoji:"📊", title:"机器学习基础", desc:"监督/无监督/评估指标/经典算法。", tag:"前置", cls:"pre", href:"dl/index.html#ml", kw:"机器学习 监督 无监督 逻辑回归 决策树 svm 评估 混淆矩阵" },
+        { emoji:"🧠", title:"神经网络基础", desc:"神经元/激活函数/损失函数。", tag:"必考", cls:"must", href:"dl/index.html#basics", kw:"神经网络 感知机 激活函数 relu sigmoid softmax 损失 交叉熵" },
+        { emoji:"🔁", title:"反向传播", desc:"链式法则手推，发动机级考点。", tag:"必考", cls:"must", href:"dl/index.html#backprop", kw:"反向传播 链式法则 梯度消失 梯度爆炸 手推" },
+        { emoji:"⚙️", title:"优化器", desc:"SGD / Momentum / Adam 怎么更新。", tag:"高频", cls:"hot", href:"dl/index.html#optimizer", kw:"优化器 sgd momentum adam 梯度下降 warmup" },
+        { emoji:"👁️", title:"CNN 卷积网络", desc:"卷积/池化/ResNet 残差结构。", tag:"高频", cls:"hot", href:"dl/index.html#cnn", kw:"cnn 卷积 池化 resnet 感受野 1x1卷积" },
+        { emoji:"🔗", title:"RNN · LSTM", desc:"序列建模，Transformer 的前身。", tag:"高频", cls:"hot", href:"dl/index.html#rnn", kw:"rnn lstm 门控 bptt seq2seq 序列" },
+        { emoji:"🎯", title:"注意力机制", desc:"Q/K/V 与缩放点积注意力。", tag:"核心", cls:"core", href:"dl/index.html#attention", kw:"注意力 attention qkv query key value 缩放点积" },
+        { emoji:"🚀", title:"Transformer 详解", desc:"多头/位置编码/FFN，最高频考点。", tag:"核心", cls:"core", href:"dl/index.html#transformer", kw:"transformer 多头注意力 位置编码 layernorm 残差 mask 自注意力" },
+        { emoji:"🌈", title:"生成式模型与扩散模型", desc:"VAE/GAN/Diffusion 生成范式。", tag:"热点", cls:"core", href:"dl/index.html#diffusion", kw:"扩散模型 diffusion vae gan 生成模型 去噪 得分 采样" },
+        { emoji:"🧠", title:"大模型进阶", desc:"RLHF / RAG / Agent / MoE。", tag:"热点", cls:"core", href:"dl/index.html#llm-adv", kw:"大模型 llm rlhf rag agent moe 对齐 微调 提示" },
+        { emoji:"⚡", title:"Transformer 工程优化", desc:"FlashAttention / KV Cache / 量化。", tag:"热点", cls:"core", href:"dl/index.html#engine", kw:"工程优化 flashattention kv cache 量化 moe 推理加速 长序列" },
+        { emoji:"🤖", title:"BERT · GPT", desc:"预训练两大范式，大模型基石。", tag:"核心", cls:"core", href:"dl/index.html#llm", kw:"bert gpt 预训练 微调 自回归 双向 encoder decoder" },
+        { emoji:"📝", title:"深度学习面试题库", desc:"40+ 详解，含手撕代码与项目问答。", tag:"冲刺", cls:"core", href:"dl/index.html#interview", kw:"面试题 题库 手撕 代码 项目 论文 英语" }
+      ],
+      apply: [
+        { emoji:"🧭", title:"申请总览", desc:"保研定义、夏令营/预推免/九推三条主线、保研率。", tag:"入门", cls:"pre", href:"apply/index.html#overview", kw:"保研 推免 夏令营 预推免 九推 保研率 考研 出国" },
+        { emoji:"🎯", title:"择校定位", desc:"冲稳保三档 + 错位竞争，目标院校怎么选。", tag:"核心", cls:"core", href:"apply/index.html#school", kw:"择校 定位 目标院校 冲稳保 错位 双非 海投 联系导师" },
+        { emoji:"📊", title:"成绩排名", desc:"清北复交人浙南排名门槛与补强策略。", tag:"必看", cls:"must", href:"apply/index.html#ranking", kw:"成绩排名 绩点 前10% 排名要求 综合排名 专业排名 补强" },
+        { emoji:"🇬🇧", title:"英语门槛", desc:"六级/雅思/托福、口语与专业英语准备。", tag:"必看", cls:"must", href:"apply/index.html#english", kw:"英语 六级 雅思 托福 口语 自我介绍 专业英语 未要求六级" },
+        { emoji:"📝", title:"文书材料", desc:"简历/个人陈述/推荐信/联系导师四件套。", tag:"核心", cls:"core", href:"apply/index.html#docs", kw:"文书 简历 个人陈述 推荐信 联系导师 邮件 自我陈述 ps" },
+        { emoji:"🎤", title:"面试技巧", desc:"压力面试/行为面试/简历面试/英语面试真题。", tag:"冲刺", cls:"core", href:"apply/index.html#interview", kw:"面试 压力面试 行为面试 star 简历面试 英语面试 自我介绍 项目深挖" },
+        { emoji:"🗺️", title:"时间线攻略", desc:"大三到 9.28 的全流程节点与准备节奏。", tag:"规划", cls:"hot", href:"apply/index.html#timeline", kw:"时间线 攻略 大三 夏令营 预推免 九推 系统填报 9月28" },
+        { emoji:"📚", title:"资源路线", desc:"申请资料清单：小白手册/文书80问/面试题库。", tag:"参考", cls:"", href:"apply/index.html#roadmap", kw:"资源 资料 小白手册 文书80问 面试题库 全攻略 经验" }
+      ]
+    };
+
+    /* ---------- 渲染 ---------- */
+    function render() {
+      for (const cat in DATA) {
+        const box = document.querySelector('.grid[data-cat="'+cat+'"]');
+        if (!box) continue;
+        box.innerHTML = DATA[cat].map(function (c) {
+          return '' +
+            '<a class="card" href="'+c.href+'">' +
+              '<div class="card-top">' +
+                '<span class="card-emoji">'+c.emoji+'</span>' +
+                '<span class="card-tag '+c.cls+'">'+c.tag+'</span>' +
+              '</div>' +
+              '<h3>'+c.title+'</h3>' +
+              '<p>'+c.desc+'</p>' +
+              '<span class="card-go">前往精讲 →</span>' +
+            '</a>';
+        }).join('');
+      }
+    }
+    render();
+
+    /* ---------- 实时搜索 ---------- */
+    const search = document.getElementById('search');
+    const empty = document.getElementById('empty');
+    function filter(q) {
+      q = q.trim().toLowerCase();
+      let anyVisible = false;
+      for (const cat in DATA) {
+        const section = document.getElementById(cat);
+        const box = document.querySelector('.grid[data-cat="'+cat+'"]');
+        let catVisible = false;
+        Array.prototype.forEach.call(box.children, function (el, i) {
+          const item = DATA[cat][i];
+          const hay = (item.title + ' ' + item.desc + ' ' + item.kw).toLowerCase();
+          const show = !q || hay.indexOf(q) !== -1;
+          el.style.display = show ? '' : 'none';
+          if (show) catVisible = true;
+        });
+        section.style.display = catVisible ? '' : 'none';
+        if (catVisible) anyVisible = true;
+      }
+      empty.style.display = anyVisible ? 'none' : 'block';
+    }
+    search.addEventListener('input', function () { filter(this.value); });
+    search.addEventListener('keydown', function (e) { if (e.key === 'Escape') { this.value=''; filter(''); } });
+
+    /* ---------- 快捷键 / 聚焦搜索 ---------- */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '/' && document.activeElement !== search) { e.preventDefault(); search.focus(); }
+    });
+
+    /* ---------- 滚动入场 ---------- */
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+    /* ---------- 主题切换 ---------- */
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    function applyTheme(t) {
+      html.setAttribute('data-theme', t);
+      themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+      try { localStorage.setItem('by-nav-theme', t); } catch (e) {}
+    }
+    (function initTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem('by-nav-theme'); } catch (e) {}
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+    })();
+    themeBtn.addEventListener('click', function () {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>
