@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>大模型 LLM 专题 · 架构 / RAG / Agent / 部署 —— 保研面试指南</title>
+  <meta name="description" content="面向计算机保研人的大模型（LLM）专题：从归一化、注意力优化到 RAG、Agent、显存与分布式训练，配套高频面试题库与标准答案。" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="read-progress" id="readProgress"></div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <a class="brand" href="#top">
+        <span class="brand-logo">LLM</span>
+        <span>
+          <span class="brand-name">大模型专题</span><br />
+          <span class="brand-sub">保研导航 · 深度学习</span>
+        </span>
+      </a>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-group-label">开胃：概览</div>
+      <a class="nav-link" href="#overview"><span class="nav-icon">🧭</span> 大模型概览</a>
+      <a class="nav-link" href="#family"><span class="nav-icon">🏗️</span> 三大架构体系</a>
+      <a class="nav-link" href="#tokenizer"><span class="nav-icon">🔤</span> Tokenizer</a>
+      <div class="nav-group-label">架构深入</div>
+      <a class="nav-link" href="#norm"><span class="nav-icon">📐</span> 归一化 Norm</a>
+      <a class="nav-link" href="#ffn"><span class="nav-icon">⚡</span> FFN 与激活</a>
+      <a class="nav-link" href="#attn"><span class="nav-icon">🎯</span> 注意力优化</a>
+      <a class="nav-link" href="#pos"><span class="nav-icon">📍</span> 位置编码</a>
+      <div class="nav-group-label">训练与对齐</div>
+      <a class="nav-link" href="#pretrain"><span class="nav-icon">🚀</span> 预训练</a>
+      <a class="nav-link" href="#loss"><span class="nav-icon">Σ</span> 损失函数</a>
+      <a class="nav-link" href="#finetune"><span class="nav-icon">🛠️</span> 微调 PEFT</a>
+      <a class="nav-link" href="#alignment"><span class="nav-icon">🤝</span> 对齐 RLHF/DPO</a>
+      <a class="nav-link" href="#hallucination"><span class="nav-icon">👻</span> 幻觉问题</a>
+      <div class="nav-group-label">RAG 与 Agent</div>
+      <a class="nav-link" href="#rag"><span class="nav-icon">📚</span> RAG 基础</a>
+      <a class="nav-link" href="#rag-opt"><span class="nav-icon">🔧</span> RAG 优化</a>
+      <a class="nav-link" href="#rag-eval"><span class="nav-icon">📊</span> RAG 评测</a>
+      <a class="nav-link" href="#agent"><span class="nav-icon">🤖</span> Agent 智能体</a>
+      <div class="nav-group-label">推理与部署</div>
+      <a class="nav-link" href="#memory"><span class="nav-icon">💾</span> 显存估算</a>
+      <a class="nav-link" href="#distributed"><span class="nav-icon">🌐</span> 分布式训练</a>
+      <a class="nav-link" href="#serving"><span class="nav-icon">⚙️</span> 推理加速</a>
+      <a class="nav-link" href="#eval"><span class="nav-icon">🏅</span> 模型评测</a>
+      <div class="nav-group-label">保研面试</div>
+      <a class="nav-link" href="#interview"><span class="nav-icon">📝</span> 面试题库</a>
+      <a class="nav-link" href="index.html"><span class="nav-icon">↩️</span> 返回深度学习</a>
+    </nav>
+    <div class="sidebar-foot">为计算机保研人整理 · 持续更新</div>
+  </aside>
+
+  <!-- ============ 主内容 ============ -->
+  <div class="content" id="top">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="菜单">☰</button>
+      <span class="topbar-title" id="topbarTitle">大模型 LLM 专题 · 保研面试指南</span>
+      <div class="topbar-actions">
+        <a class="btn btn-ghost" href="../index.html" style="padding:8px 14px;font-size:13px;">🏠 导航首页</a>
+        <button class="icon-btn" id="themeBtn" aria-label="切换主题">🌙</button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge">🎓 计算机保研 · 大模型（LLM）备考</span>
+        <h1>大模型面试专题<br />从归一化到 RAG、Agent 与部署</h1>
+        <p>面向保研面试系统梳理大语言模型的核心知识点：架构细节（Norm / FFN / 注意力优化）、训练与对齐、检索增强生成（RAG）、智能体（Agent）、显存与分布式训练，配套高频面试题与标准答案，帮你在大模型方向上拉开差距。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#overview">开始学习 →</a>
+          <a class="btn btn-ghost" href="#interview">直接刷面试题</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">21</div><div class="stat-label">核心章节</div></div>
+          <div class="stat"><div class="stat-num">60+</div><div class="stat-label">面试题详解</div></div>
+          <div class="stat"><div class="stat-num">5 大</div><div class="stat-label">知识主线</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+
+      <!-- ================= 大模型概览 ================= -->
+      <section id="overview">
+        <div class="section-kicker">🧭 第 0 步</div>
+        <h2>大模型概览：什么是 LLM，为什么重要</h2>
+        <p class="lead">大模型通常指参数在<strong>十亿（Billion）</strong>量级以上的模型；大语言模型（LLM）则是面向语言的大模型。<span class="key">预训练 + 微调/提示</span>的范式让"通用能力"得以涌现，成为今天 AI 方向保研最热门的切入点。</p>
+
+        <h3>1. 大模型的核心优点</h3>
+        <ul>
+          <li><strong>少标注、强泛化</strong>：先在海量无标注语料上自监督预训练，再用少量有标注数据微调即可适配下游任务，大幅降低标注成本。</li>
+          <li><strong>生成能力</strong>：能产出文本、代码、推理链等有价值的"新颖内容"。</li>
+          <li><strong>涌现能力（Emergent Capabilities）</strong>：模型规模跨越临界点后，突然出现小模型不具备的能力（如复杂推理、符号操作）。</li>
+        </ul>
+
+        <h3>2. 大模型的代价</h3>
+        <ul>
+          <li><strong>算力与成本</strong>：训练 GPT-3 级别模型估计耗资约 30 万美元、产生约 284 吨 CO₂ 排放。</li>
+          <li><strong>数据质量与偏见</strong>：数据偏见、泄露、滥用会带来不准确或不道德的输出。</li>
+          <li><strong>可解释与可靠性</strong>：行为难理解、难控制，需要持续研究可靠性与安全性。</li>
+        </ul>
+
+        <div class="card warn">
+          <div class="card-title">⚠️ 参数后缀的含义</div>
+          <p>模型名后的 <strong>175B / 60B / 540B</strong> 指参数个数（B = Billion 十亿）。175B 即 1750 亿参数，约为 ChatGPT 早期的规模。注意：放出来的模型权重多为 <strong>FP16</strong>，文件约占 <code>2n GB</code>、加载到显存推理也约占 <code>2n GB</code>。</p>
+        </div>
+      </section>
+
+      <!-- ================= 三大架构体系 ================= -->
+      <section id="family">
+        <div class="section-kicker">🏗️ 第 1 步</div>
+        <h2>三大架构体系：Encoder-Decoder / Causal / Prefix</h2>
+        <p class="lead">主流开源 LLM 体系按<strong>注意力掩码（attention mask）</strong>分为三类。理解它们的差异，是回答"为什么现在大多是 Decoder-only"的前提。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>体系</th><th>注意力</th><th>代表模型</th><th>特点</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Encoder-Decoder</strong></td><td>输入双向 + 输出单向</td><td>T5、Flan-T5、BART</td><td>理解类任务好；长文本生成弱、训练效率低</td></tr>
+              <tr><td><strong>Causal Decoder</strong></td><td>严格从左到右单向</td><td>LLaMA、GPT 系</td><td>zero-shot 最强、有涌现能力、训练效率高</td></tr>
+              <tr><td><strong>Prefix Decoder</strong></td><td>prefix 双向 + 输出单向（折中）</td><td>ChatGLM、U-PaLM</td><td>介于两者之间；训练效率偏低</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>为什么现在大多是 Decoder-only？</h3>
+        <ul>
+          <li><strong>Zero-shot 能力最好</strong>：Causal Decoder 预训练目标（预测下一 token）与下游应用完全一致，无需像 Encoder-Decoder 那样依赖大量标注做多任务微调。</li>
+          <li><strong>工程与训练效率</strong>：所有 token 上都计算损失；而 Prefix/Causal 的差异在于 Prefix 只在输出部分算损失。</li>
+          <li><strong>理论视角</strong>：Encoder 的双向注意力存在<strong>低秩问题</strong>，可能削弱表达能力；而生成任务引入双向注意力并无实质收益。同等参数量与推理成本下，Decoder-only 是最优选择。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：涌现能力真的发生"突变"吗</div>
+          <p>关于涌现（Emergent）能力，主流有两个猜想：</p>
+          <ol class="steps">
+            <li><div class="step-title">评价指标不平滑</div><p>很多任务用的是"是否超过阈值"的二值指标，子任务平滑提升，宏观上却表现为突变。</p></li>
+            <li><div class="step-title">复合任务 vs 子任务</div><p>假设任务 T 由 5 个子任务构成，每个子任务指标从 40% → 60% 平滑增长，但最终任务可能只是从 1.1% → 7%——宏观看起来像"涌现"，实则子任务是平滑进步的。</p></li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ================= Tokenizer ================= -->
+      <section id="tokenizer">
+        <div class="section-kicker">🔤 第 2 步</div>
+        <h2>Tokenizer：文本如何变成 token</h2>
+        <p class="lead">Tokenizer 决定了"一个中文/英文词被切成几个 token"，直接影响<strong>编码效率与上下文长度</strong>。这是大模型落地（尤其是中文）常被追问的点。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>算法</th><th>合并策略</th><th>代表模型</th></tr></thead>
+            <tbody>
+              <tr><td><strong>BPE</strong></td><td>将<strong>最高频</strong>的相邻字节对合并</td><td>GPT-2、BART、LLaMA</td></tr>
+              <tr><td><strong>WordPiece</strong></td><td>选择<strong>提升语言模型概率最大</strong>的相邻子词合并</td><td>BERT</td></tr>
+              <tr><td><strong>SentencePiece</strong></td><td>把空格当特殊字符，再用 BPE/Unigram 构造词表</td><td>ChatGLM、BLOOM、PaLM</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card info">
+          <div class="card-title">💡 中文分词效率对比（面试常考）</div>
+          <p>LLaMA 词表最小，中英文分词都<strong>最碎</strong>（中文平均 token 数高达 1.45，大概率把一个汉字切成 2 个以上 token）。Chinese-LLaMA 扩展词表后，中文平均 token 数显著下降。ChatGLM-6B 是平衡中英文效果最好的 tokenizer；BLOOM 词表虽大但多语种，中英文效率与 ChatGLM-6B 基本相当。</p>
+        </div>
+
+        <h3>🧠 Tokenizer 面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">分词</span><span class="qa-q">BPE 和 WordPiece 的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">本质都是子词算法。区别在于<strong>合并准则</strong>：BPE 直接选<strong>频次最高</strong>的相邻子词对合并；WordPiece 选<strong>使语言模型概率提升最大</strong>的相邻子词对合并。BERT 用 WordPiece，GPT-2/LLaMA 用 BPE。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">效率</span><span class="qa-q">为什么 LLaMA 处理中文很"碎"？</span><span class="qa-toggle">▼</span></div><div class="qa-body">LLaMA 原始词表偏小且以英文为主，中文被切成很多细粒度 subword，平均每个汉字要 1.45 个 token。这既浪费上下文长度又增加推理开销——这也是 Chinese-LLaMA 等中文扩展版要<strong>扩词表</strong>的原因。</div></div>
+      </section>
+
+      <!-- ================= 归一化 ================= -->
+      <section id="norm">
+        <div class="section-kicker">📐 第 3 步</div>
+        <h2>归一化：LayerNorm / RMSNorm / DeepNorm</h2>
+        <p class="lead">归一化是大模型能稳定训练 Deep 网络的关键。从 LN 到 RMSNorm、再到 DeepNorm，主线是"<strong>更快 + 更稳定</strong>"。</p>
+
+        <h3>1. LayerNorm vs RMSNorm</h3>
+        <p>LayerNorm 对每样本特征维做<strong>减均值、除标准差</strong>的归一化；RMSNorm（均方根 Norm）<strong>去掉了减均值的平移部分</strong>，只做缩放：</p>
+        <div class="formula">$$ \text{RMS}(x) = \sqrt{\frac{1}{N}\sum_{i=1}^{N} x_i^2}, \qquad \hat{x}_i = \frac{x_i}{\text{RMS}(x)} $$</div>
+        <p>相比 LN，RMSNorm <strong>计算更快</strong>，效果基本持平甚至略有提升——因此成了 LLaMA 等新一代模型的默认选择。</p>
+
+        <h3>2. DeepNorm</h3>
+        <p>DeepNorm 在执行 LayerNorm 之前<strong>放大残差连接</strong>（$\alpha&gt;1$），并在初始化时<strong>缩小模型参数</strong>（$\beta&lt;1$）。这样能把"模型更新"限制在常数级别，<span class="key">缓解深层 Transformer 的爆炸式更新</span>，让训练更稳定。</p>
+
+        <h3>3. LN 放在哪？Pre / Post / Sandwich</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>位置</th><th>放置</th><th>特点</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Post-LN</strong></td><td>LN 在残差连接<strong>之后</strong></td><td>深层梯度范式逐渐增大，易训练不稳定</td></tr>
+              <tr><td><strong>Pre-LN</strong></td><td>LN 在残差连接<strong>之中</strong></td><td>深层梯度范式近似相等，训练更稳定；效果略逊 Post-LN</td></tr>
+              <tr><td><strong>Sandwich-LN</strong></td><td>Pre-LN 基础上额外插一个 LN</td><td>CogView 用它避免值爆炸；但可能训练不稳定</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card tip">
+          <div class="card-title">💡 记忆口诀</div>
+          <p>Post 稳但易崩、Pre 稳且常用、Sandwich 防爆炸但易崩。今天的主流大模型几乎都采用 <strong>Pre-LN</strong>（配合 RMSNorm）。</p>
+        </div>
+
+        <h3>🧠 归一化面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Norm</span><span class="qa-q">RMSNorm 相比 LayerNorm 好在哪？</span><span class="qa-toggle">▼</span></div><div class="qa-body">RMSNorm 省去了计算均值并做平移的部分，只保留"除 RMS"的缩放，<strong>计算更快</strong>，效果基本相当甚至略好，因此是 LLaMA 等模型的默认归一化。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Norm</span><span class="qa-q">Pre-LN 和 Post-LN 有什么区别？为什么现在多用 Pre-LN？</span><span class="qa-toggle">▼</span></div><div class="qa-body">Post-LN 把 LN 放在残差之后，深层梯度范式逐渐增大，大模型容易训练不稳定；Pre-LN 把 LN 放进残差分支，深层梯度范式近似相等，训练更稳定（代价是效果略差）。工程上稳定优先，所以主流用 Pre-LN。</div></div>
+      </section>
+
+      <!-- ================= FFN 与激活 ================= -->
+      <section id="ffn">
+        <div class="section-kicker">⚡ 第 4 步</div>
+        <h2>FFN 与激活函数：FFN / GLU</h2>
+        <p class="lead">Transformer 里 FFN 贡献了绝大部分参数。引入 GLU（门控线性单元）后，参数组织方式变了，但表达力更强。</p>
+
+        <h3>1. 标准 FFN</h3>
+        <div class="formula">$$ FFN(x) = W_2 \cdot \text{GELU}(W_1 x + b_1) + b_2 $$</div>
+        <p>包含 <strong>2 个可训练权重矩阵</strong>，中间维度通常放大到 <strong>4h</strong>（h 为隐藏维）。</p>
+
+        <h3>2. 基于 GLU 的 FFN</h3>
+        <div class="formula">$$ FFN_{GLU}(x) = (W_1 x) \odot \sigma(W_2 x) \cdot W_3 $$</div>
+        <p>引入一个<strong>门控分支</strong>，需要 <strong>3 个权重矩阵</strong>，中间维度变为 <code>4h·2/3</code>（约 2.67h），在相近计算量下提升效果。LLaMA / ChatGLM 等均采用 GLU 变体（如 SwiGLU）。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>激活</th><th>形式</th><th>备注</th></tr></thead>
+            <tbody>
+              <tr><td><strong>GeLU</strong></td><td>概率式加权（高斯误差线性单元）</td><td>Transformer 经典默认</td></tr>
+              <tr><td><strong>Swish / SiLU</strong></td><td>$x \cdot \sigma(\beta x)$</td><td>平滑、常用作 GLU 门控</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>🧠 FFN 面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">FFN</span><span class="qa-q">GLU 结构与标准 FFN 有什么不同？为什么要用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">标准 FFN 是两个矩阵（中间维 4h）；GLU 引入门控，需要三个矩阵（中间维约 2.67h）。门控机制让网络学会"选择性通过"信息，在相近计算量下提升表达力，因此 LLaMA 等采用 SwiGLU。</div></div>
+      </section>
+
+      <!-- ================= 注意力优化 ================= -->
+      <section id="attn">
+        <div class="section-kicker">🎯 第 5 步</div>
+        <h2>注意力优化：MQA / GQA / FlashAttention / KV Cache</h2>
+        <p class="lead">标准多头注意力（MHA）在<strong>推理阶段</strong>反复加载巨大的 KV Cache，成为内存瓶颈。三大优化主线：减少 KV 头数（MQA/GQA）、IO 优化（FlashAttention）、缓存复用（KV Cache）。</p>
+
+        <h3>1. Multi-Query Attention（MQA）</h3>
+        <p>所有注意力头<strong>共享同一组 Key 和 Value</strong>，只有 Query 各自独立。相比 MHA（每个头各有一套 K/V），KV Cache 体积大幅减小，<strong>显存占用下降、推理提速</strong>。代价是训练时有细微效果损失。代表模型：PaLM、ChatGLM2、Falcon。</p>
+
+        <h3>2. Grouped-Query Attention（GQA）</h3>
+        <p>GQA 是 MHA 与 MQA 的<strong>折中</strong>：把 Query 头分成若干组，每组共享一组 K/V。兼顾效果与效率。代表：LLaMA2-34B/70B、ChatGLM2。</p>
+
+        <h3>3. FlashAttention</h3>
+        <p>核心是用<strong>分块 Softmax + 在线归一化</strong>，在高速 SRAM 内分批计算注意力，<strong>不显式构造 $N\times N$ 的大矩阵</strong>，把 HBM 读写从 $O(N^2)$ 降到近似线性。关键词：<span class="key">HBM、SRAM、分块 Softmax、重计算、Kernel 融合</span>。LLaMA、Falcon 等都在用。</p>
+
+        <h3>4. KV Cache</h3>
+        <p>自回归生成时，每新生成一个 token 都要重算前面所有 token 的 K/V。<strong>KV Cache 把历史 K/V 缓存</strong>起来避免重复计算，把每步复杂度从 $O(n^2)$ 降到 $O(n)$（随序列线性增长），是解码加速的关键。</p>
+
+        <div class="card warn">
+          <div class="card-title">⚠️ 长上下文的两大优化方向</div>
+          <p>① <strong>提升上下文长度</strong>（如位置编码外推、稀疏/线性注意力）；② <strong>加速与降显存</strong>（MQA/GQA、FlashAttention、PagedAttention）。面试常被问"长文本怎么省显存、怎么提速"，本质就是这两条。</p>
+        </div>
+
+        <h3>🧠 注意力面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Attn</span><span class="qa-q">MQA 和 MHA 的区别？有什么好处？</span><span class="qa-toggle">▼</span></div><div class="qa-body">MHA 每个注意力头都有各自的 Q/K/V；MQA 在所有头上<strong>共享 K 和 V</strong>，只保留各自的 Q。好处是 KV Cache 大幅减小，显存占用下降、推理速度提升；代价是训练时有细微效果损失。PaLM、ChatGLM2、Falcon 采用了 MQA。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Attn</span><span class="qa-q">GQA 是什么？为什么要折中？</span><span class="qa-toggle">▼</span></div><div class="qa-body">GQA 把 Query 头分组，每组共享一组 K/V，介于 MHA（每头独立 K/V）和 MQA（全局共享）之间。它既保留了接近 MHA 的效果，又获得了接近 MQA 的显存/速度优势。LLaMA2-34B/70B、ChatGLM2 使用 GQA。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Attn</span><span class="qa-q">FlashAttention 为什么更快更省显存？</span><span class="qa-toggle">▼</span></div><div class="qa-body">标准注意力要把 $N\times N$ 注意力矩阵写回 HBM，IO 昂贵。FlashAttention 在 SRAM 内<strong>分块计算并做在线 softmax</strong>，不 materialize 大矩阵，IO 从平方级降到近线性，既省显存又提速，且数学结果一致。</div></div>
+      </section>
+
+      <!-- ================= 位置编码 ================= -->
+      <section id="pos">
+        <div class="section-kicker">📍 第 6 步</div>
+        <h2>位置编码：sin/cos、RoPE、ALiBi</h2>
+        <p class="lead">自注意力是置换等变的（不含顺序信息），必须显式注入位置。从绝对位置编码到相对位置编码，主线是"<strong>更好地建模相对位置 + 外推</strong>"。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>方案</th><th>思想</th><th>代表</th></tr></thead>
+            <tbody>
+              <tr><td><strong>sin/cos 绝对位置</strong></td><td>不同频率编码绝对位置，PE 可线性推出相对位置</td><td>原始 Transformer</td></tr>
+              <tr><td><strong>RoPE 旋转位置</strong></td><td>用旋转矩阵把相对位置编码进注意力</td><td>LLaMA、ChatGLM</td></tr>
+              <tr><td><strong>ALiBi</strong></td><td>在注意力分数上直接加与距离成比例的偏置</td><td>MPT、BLOOM 变体</td></tr>
+              <tr><td><strong>可学习位置嵌入</strong></td><td>把位置当可训练 embedding</td><td>BERT</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card info">
+          <div class="card-title">💡 为什么 RoPE 这么流行</div>
+          <p>RoPE 通过"<strong>旋转</strong>"操作把 query/key 的位置信息编码进点积，天然具备长度外推能力，且实现简单、效果稳定，是当今 Decoder-only 模型的标配。</p>
+        </div>
+
+        <h3>🧠 位置编码面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Pos</span><span class="qa-q">为什么需要位置编码？RoPE 解决了什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">自注意力对输入顺序不变（置换等变），不含时序信息，必须显式注入位置。RoPE 用旋转矩阵把相对位置编码进注意力，具备良好的长度外推能力，且实现简单，是 LLaMA 等 Decoder-only 模型的主流选择。</div></div>
+      </section>
+
+      <!-- ================= 预训练 ================= -->
+      <section id="pretrain">
+        <div class="section-kicker">🚀 第 7 步</div>
+        <h2>预训练：训练目标与缩放定律</h2>
+        <p class="lead">预训练是在海量语料上<strong>自回归预测下一 token</strong>，获得通用语言能力。背后还有"模型越大越好"的缩放定律（Scaling Law）。</p>
+
+        <h3>1. 主流训练目标</h3>
+        <ul>
+          <li><strong>语言模型（自回归）</strong>：根据已有词预测下一个词，训练目标是最大似然。Causal Decoder 在所有 token 上算损失。</li>
+          <li><strong>去噪自编码器</strong>：随机替换/打乱文本段，训练模型恢复原文（如 T5、GLM-130B），实现难度更高，只在输出部分算损失。</li>
+        </ul>
+
+        <h3>2. 缩放定律（Scaling Law）</h3>
+        <p>经验规律：模型性能随<strong>参数量、数据量、算力</strong>的增加而可预测地提升。这也是"越大越好"的工程信仰来源——但边际收益与成本需权衡。</p>
+
+        <div class="card tip">
+          <div class="card-title">💡 与你的科研结合</div>
+          <p>你做的是<strong>图神经网络金融反欺诈</strong>，可谈：用 GNN 做特征/检索增强、用 LLM-RAG 接入法规知识库做可解释风控决策——把前沿大模型能力与你的方向交叉，是导师很看重的"交叉创新"点。</p>
+        </div>
+      </section>
+
+      <!-- ================= 损失函数 ================= -->
+      <section id="loss">
+        <div class="section-kicker">Σ 第 8 步</div>
+        <h2>损失函数：交叉熵、KL 散度</h2>
+        <p class="lead">分类任务几乎都用<strong>交叉熵</strong>；对齐阶段则会大量用到 <strong>KL 散度</strong>做分布约束。</p>
+
+        <h3>1. 交叉熵（Cross-Entropy）</h3>
+        <div class="formula">$$ L_{CE} = -\sum_{i} y_i \log p_i $$</div>
+        <p>衡量预测分布与真实标签分布的差异。<strong>为什么分类用 CE 不用 MSE？</strong> 因为 CE 对概率的细微差异更敏感，且 Softmax+CE 的梯度形式漂亮（$\hat{y}-y$），不会在饱和区梯度消失；MSE 在分类问题里数学性质不再适用。</p>
+
+        <h3>2. KL 散度</h3>
+        <div class="formula">$$ D_{KL}(P\|Q) = \sum_i P(i)\log\frac{P(i)}{Q(i)} $$</div>
+        <p>衡量两个分布的<strong>非对称</strong>差异（非负）。KL 散度 = 交叉熵 − 熵，所以<strong>交叉熵是 KL 的一种特殊形式</strong>。RLHF 中常用 KL 约束策略模型不要偏离参考模型太远。</p>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Loss</span><span class="qa-q">分类问题为什么用交叉熵而不用 MSE？</span><span class="qa-toggle">▼</span></div><div class="qa-body">分类目标是输出概率分布，CE 对概率细微差异更敏感、梯度性质好（Softmax+CE 梯度为 $\hat y - y$），不会在饱和区梯度消失；而 MSE 是为连续回归设计的，套上 sigmoid/softmax 后数学性质变差、易梯度消失。</div></div>
+      </section>
+
+      <!-- ================= 微调 ================= -->
+      <section id="finetune">
+        <div class="section-kicker">🛠️ 第 9 步</div>
+        <h2>微调：SFT / LoRA / QLoRA / 增量预训练 / 蒸馏</h2>
+        <p class="lead">预训练后要让模型"听话、适配任务"。从全参数微调到参数高效微调（PEFT），主线是"<strong>用更少资源撬动更大效果</strong>"。</p>
+
+        <h3>1. SFT（监督微调）</h3>
+        <p>用"<strong>指令—回答</strong>"格式数据教模型按指令办事，是把通用大模型变成"助手"的关键一步。</p>
+
+        <h3>2. LoRA / QLoRA（参数高效微调）</h3>
+        <p>冻结原权重，在每层旁插入<strong>低秩矩阵对 $BA$</strong>（秩 $r \ll d$）训练：</p>
+        <div class="formula">$$ \Delta W = B A,\qquad B\in\mathbb{R}^{d\times r},\ A\in\mathbb{R}^{r\times d},\ r\ll d $$</div>
+        <p>可训练参数仅约原模型的 <strong>0.1%~1%</strong>，显存与存储大幅降低，且可多适配器热插拔。<strong>QLoRA</strong> 进一步把权重量化到 4bit 再做 LoRA，单卡也能微调百亿模型。</p>
+
+        <h3>3. 增量预训练（Continue Pre-training）</h3>
+        <p>在已有基座上，用<strong>新增领域语料</strong>（如中文、医学、法律）继续预训练，注入领域知识，再接 SFT。</p>
+
+        <h3>4. 知识蒸馏（Distillation）</h3>
+        <p>冻结的大模型作 <strong>Teacher</strong>，小模型作 <strong>Student</strong>，用 Teacher 的输出（软标签）指导 Student 学习，把大模型能力"压缩"到小模型。常见形式：</p>
+        <ul>
+          <li><strong>离线蒸馏</strong>：Student 的损失 = 自身 loss + 与 Teacher 的 loss。</li>
+          <li><strong>半监督蒸馏</strong>：用 Teacher 生产伪标签喂给 Student。</li>
+          <li><strong>自蒸馏</strong>：后期把前面训练好的自己当 Teacher。</li>
+        </ul>
+        <p>代表：Hinton 蒸馏、FitNets、TinyBERT、Born-Again Network（BAN）。对齐 ChatGPT 的一个常见做法就是蒸馏。</p>
+
+        <h3>🧠 微调面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">微调</span><span class="qa-q">LoRA 为什么能省资源？</span><span class="qa-toggle">▼</span></div><div class="qa-body">冻结原权重，只在每层旁插入低秩矩阵对 $BA$（$r\ll d$）训练，可训练参数仅约原模型的 0.1%~1%，显存与存储大幅降低，且可多适配器热插拔。QLoRA 再把基座量化到 4bit，单卡可微调百亿模型。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">蒸馏</span><span class="qa-q">知识蒸馏有哪几种？有什么实际应用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">离线蒸馏（Student loss 与 Teacher loss 联合优化）、半监督蒸馏（Teacher 产伪标签）、自蒸馏（后期用自己当 Teacher）。代表有 TinyBERT、FitNets、BAN。一个经典应用是用大模型蒸馏来"对齐"小模型能力。</div></div>
+      </section>
+
+      <!-- ================= 对齐 ================= -->
+      <section id="alignment">
+        <div class="section-kicker">🤝 第 10 步</div>
+        <h2>对齐：RLHF / PPO / DPO</h2>
+        <p class="lead">预训练只让模型"像文本"，对齐让它"<strong>有用、无害、诚实</strong>"。核心是从人类偏好中学习。</p>
+
+        <h3>1. RLHF 三步走</h3>
+        <ol class="steps">
+          <li><div class="step-title">训练奖励模型（RM）</div><p>用人类对回答的<strong>偏好排序</strong>训练一个奖励模型 $r_\phi$。</p></li>
+          <li><div class="step-title">PPO 强化学习优化</div><p>以奖励为信号、用 <strong>KL 约束</strong>防止策略跑偏，强化学习微调策略模型。</p></li>
+          <li><div class="step-title">（替代）DPO</div><p>直接偏好优化，<strong>绕过显式奖励模型</strong>，把偏好数据直接做成分类损失，更简单稳定。</p></li>
+        </ol>
+        <div class="formula">$$ \max_\pi\; \mathbb{E}_{x}\big[\,r_\phi(x,y)\,\big] - \beta\, KL(\pi_\theta(y|x)\,\|\,\pi_{ref}(y|x)\big) $$</div>
+
+        <h3>2. DPO 为什么受欢迎</h3>
+        <p>RLHF/PPO 流程复杂、训练不稳定、对超参敏感。DPO 把"奖励建模 + 强化学习"两步合并成一个<strong>监督式分类目标</strong>，不需要单独训 RM，也不需要 PPO 的在线采样，工程上友好得多。</p>
+
+        <h3>🧠 对齐面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">对齐</span><span class="qa-q">RLHF 是什么？为什么需要它？DPO 解决了什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">RLHF 用人类偏好训练奖励模型，再用 PPO 强化学习让模型输出更符合人类期望（有用/无害/诚实）。它复杂且不稳定。DPO 直接偏好优化，绕过显式奖励模型和 PPO，把偏好数据变成一个简单的分类损失，更简单稳定。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">对齐</span><span class="qa-q">PPO 里的 KL 惩罚项有什么用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">KL 项约束被优化的策略模型不要偏离参考模型（通常是 SFT 后的模型）太远，防止强化学习为了"刷高分"而生成偏离分布、格式崩坏的文本（reward hacking）。$\beta$ 控制约束强度。</div></div>
+      </section>
+
+      <!-- ================= 幻觉 ================= -->
+      <section id="hallucination">
+        <div class="section-kicker">👻 第 11 步</div>
+        <h2>幻觉（Hallucination）：成因、度量与缓解</h2>
+        <p class="lead">幻觉指"<strong>一本正经地胡说八道</strong>"——表述流畅却不符合事实。这是 LLM 落地（尤其医疗、金融）最关键的可靠性问题。</p>
+
+        <h3>1. 主要成因</h3>
+        <ul>
+          <li><strong>训练数据</strong>：重复、噪声、源-目标不一致会让模型偏好错误模式。</li>
+          <li><strong>解码随机性</strong>：top-k / top-p / 温度等增加多样性的策略会引入不确定。</li>
+          <li><strong>参数知识偏向</strong>：模型过度依赖预训练记忆，忽略实时上下文。</li>
+          <li><strong>训练-推理差异</strong>：训练时基于真实前文预测，推理时基于自己生成的（可能错误）前文预测，长文本下更易累积出错。</li>
+        </ul>
+
+        <h3>2. 幻觉的类型</h3>
+        <ul>
+          <li><strong>内在幻觉</strong>：生成内容与源内容相矛盾。</li>
+          <li><strong>外在幻觉</strong>：生成内容无法从源内容中得到验证（既不被支持也不被反驳）。</li>
+        </ul>
+
+        <h3>3. 缓解手段</h3>
+        <ul>
+          <li><strong>外部知识验证</strong>：用检索（RAG）或知识库校验正确性（如 SelfCheckGPT：多次采样看一致性，发散则大概率在胡说）。</li>
+          <li><strong>修改解码策略</strong>：事实核心采样（句子后半段收紧 top-p）。</li>
+          <li><strong>主动检测+修复</strong>：用低置信度（logit 得分）信号定位候选幻觉，检索证据并修复。</li>
+          <li><strong>微调注入 honest</strong>：构造"不知道就不答"的样本，强化诚实原则。</li>
+        </ul>
+
+        <div class="card warn">
+          <div class="card-title">⚠️ 幻觉一定有害吗</div>
+          <p>不一定。在需要创造力的场景（写剧情、头脑风暴）,"幻觉"反而能带来奇思妙想。容忍度取决于应用：医疗诊断零容忍，创意写作可放宽。</p>
+        </div>
+
+        <h3>🧠 幻觉面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">幻觉</span><span class="qa-q">LLM 为什么会产生幻觉？怎么缓解？</span><span class="qa-toggle">▼</span></div><div class="qa-body">成因：训练数据噪声/重复、解码随机性（top-p/温度）、模型过度依赖参数记忆忽略上下文、训练-推理的分布差异。缓解：RAG 外部知识校验、修改解码策略（事实核心采样）、主动检测修复（低置信度定位+检索证据）、微调注入 honest 原则。SelfCheckGPT 用多次采样一致性判断是否在胡说。</div></div>
+      </section>
+
+      <!-- ================= RAG 基础 ================= -->
+      <section id="rag">
+        <div class="section-kicker">📚 第 12 步</div>
+        <h2>RAG 检索增强生成：基础流程</h2>
+        <p class="lead">RAG 把"<strong>外部知识库</strong>"接给 LLM，解决知识过时、幻觉、私有数据三大痛点。相比"微调注入知识"，RAG 成本更低、更新更灵活。</p>
+
+        <h3>1. 为什么需要外挂知识库</h3>
+        <p>把外部知识注入大模型，最直接的方法是微调——但几十万量级数据未必能很好注入，且<strong>训练昂贵、需要多卡训练多天</strong>。RAG 用检索替代微调，是更优解。</p>
+
+        <h3>2. RAG 标准流程</h3>
+        <ol class="steps">
+          <li><div class="step-title">加载文件 → 读取文本</div><p>把文档（PDF/DOCX/网页）读成纯文本。</p></li>
+          <li><div class="step-title">文本分割（Chunking）</div><p>切成分块，粒度是核心权衡点。</p></li>
+          <li><div class="step-title">文本向量化（Embedding）</div><p>每个 chunk 变成向量存入向量库（如 FAISS）。</p></li>
+          <li><div class="step-title">问句向量化 + 相似检索</div><p>用余弦等算法召回 top-k 最相似的 chunk。</p></li>
+          <li><div class="step-title">拼进 Prompt 提交 LLM</div><p>把检索到的上下文与问题一起交给 LLM 生成。</p></li>
+        </ol>
+
+        <div class="card info">
+          <div class="card-title">💡 核心技术是 Embedding</div>
+          <p>RAG 的灵魂是<strong> embedding + 向量相似度检索</strong>。一个高质量、与领域对齐的 embedding 模型，往往比换一个更大的 LLM 更能提升效果（很多"召回乱七八糟"的坑，根因都在 embedding 与切分）。</p>
+        </div>
+
+        <h3>典型 RAG Prompt 模板</h3>
+        <pre><code class="language-text">已知信息：
+{context}
+
+根据上述已知信息，简洁、专业地回答用户问题。如果无法从中得到答案，
+请说"根据已知信息无法回答该问题"或"没有提供足够的相关信息"，
+不允许在答案中添加编造成分，答案请使用中文。
+问题是：{question}</code></pre>
+      </section>
+
+      <!-- ================= RAG 优化 ================= -->
+      <section id="rag-opt">
+        <div class="section-kicker">🔧 第 13 步</div>
+        <h2>RAG 优化：9 大痛点与高级范式</h2>
+        <p class="lead">RAG 工程 80% 的功夫在<strong>检索（推荐系统）</strong>，推理交给 LLM 整合。下面是实战中最常踩的坑与对策。</p>
+
+        <h3>1. 九大核心痛点速查</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>痛点</th><th>对策要点</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>切分粒度难把控（噪声 vs 语义丢失）</td><td>按<strong>语义切分</strong>（discourse parsing / BERT 相似度阈值合并），建"关键信息→原文"二级索引</td></tr>
+              <tr><td>2</td><td>垂直领域表现差</td><td>微调 embedding 模型 + 微调 LLM</td></tr>
+              <tr><td>3</td><td>LangChain 内置分句差</td><td>更好拆分模型 / 中心句上下文过滤 / 段级总结再匹配</td></tr>
+              <tr><td>4</td><td>召回相关性低</td><td>结构化文本、短 chunk + 高质量 embedding、FAISS 配合 ES 混合检索</td></tr>
+              <tr><td>5</td><td>LLM 生成质量不稳</td><td>多套 prompt 模板尝试 + 领域语料微调</td></tr>
+              <tr><td>6</td><td>embedding 表示偏差大</td><td>更小 chunk + 更大 top-k；跨语言用多语言 embedding</td></tr>
+              <tr><td>7</td><td>prompt 敏感</td><td>前期多做指令数据尝试，固定输出格式</td></tr>
+              <tr><td>8</td><td>各家 LLM 接茬能力差异</td><td>选可控开源模型（llama2/baichuan2）做领域微调</td></tr>
+              <tr><td>9</td><td>召回内容与问题无关</td><td>更细粒度 recall + 学术 embedding / 更精细 PDF 解析（PDFTriage）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2. 高级 RAG 范式</h3>
+        <ul>
+          <li><strong>语义切分 + 二级索引</strong>：只对"关键信息"做 embedding 参与检索，命中后再映射回"原始文本"喂给 LLM，兼顾召回率与噪声控制。</li>
+          <li><strong>混合检索（Hybrid Search）</strong>：FAISS 向量检索 + ES 关键词检索融合，兼顾语义与精确匹配。</li>
+          <li><strong>查询重写 / 多查询（RAG Fusion）</strong>：把原问题改写成多个子查询分别检索，再融合结果，提升召回覆盖。</li>
+          <li><strong>重排（Re-rank）</strong>：先粗召回 top-k×n，再用 cross-encoder 重排取真正 top-k，显著提升精度。</li>
+          <li><strong>Self-RAG</strong>：让模型<strong>自我反思</strong>是否需要检索、检索结果是否有用，按需检索、按需生成，缓解无效检索与过度依赖。</li>
+          <li><strong>多模态 / 多向量 RAG</strong>：用多个向量表示一段内容（如标题向量 + 正文向量），或用图文联合 embedding 支持图片检索。</li>
+        </ul>
+
+        <div class="card tip">
+          <div class="card-title">💡 一句话记住 RAG 优化主线</div>
+          <p>检索三目标：<span class="key">① 尽可能提高召回率 ② 尽可能减少无关信息 ③ 速度快</span>。所有优化都围绕这三条——切分、embedding 微调、混合检索、重排、查询重写都是手段。</p>
+        </div>
+
+        <h3>🧠 RAG 面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">RAG</span><span class="qa-q">RAG 解决了 LLM 的哪些问题？流程是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">缓解知识过时（训练截止）、幻觉（无依据编造）、无法访问私有数据三大痛点。流程：加载文档→切分→embedding 入库→问句 embedding→相似检索 top-k→拼进 prompt→LLM 生成。核心在 embedding + 向量检索，关键在切分粒度与重排。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">RAG</span><span class="qa-q">RAG 常见的优化手段有哪些?</span><span class="qa-toggle">▼</span></div><div class="qa-body">语义切分 + 二级索引、混合检索（FAISS+ES）、查询重写/RAG Fusion、重排（re-rank）、Self-RAG 自我反思检索、多向量/多模态 RAG、对 embedding 与 LLM 做领域微调。检索目标是高召回、低噪声、快。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">RAG</span><span class="qa-q">什么是 Self-RAG？它解决了什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">Self-RAG 让模型在生成过程中<strong>自我反思</strong>：判断"是否需要检索""检索到的内容是否有用"，按需检索、按需生成。它缓解了朴素 RAG 的两个问题——无效/无关检索干扰，以及该检索时却没检索。</div></div>
+      </section>
+
+      <!-- ================= RAG 评测 ================= -->
+      <section id="rag-eval">
+        <div class="section-kicker">📊 第 14 步</div>
+        <h2>RAG 评测：指标、能力与框架</h2>
+        <p class="lead">RAG 评测要分模块看：<strong>检索模块</strong>和<strong>生成模块</strong>分开评，再端到端评最终答案。</p>
+
+        <h3>1. 独立评测</h3>
+        <ul>
+          <li><strong>检索模块</strong>：Hit Rate、MRR（平均排名倒数）、NDCG、Precision。</li>
+          <li><strong>生成模块</strong>：关注<strong>上下文相关性</strong>（检索到的文档与问题是否相关）。</li>
+        </ul>
+
+        <h3>2. 端到端评测</h3>
+        <ul>
+          <li>无标签：答案的<strong>准确性、相关性、无害性</strong>。</li>
+          <li>有标签：<strong>Accuracy、EM（精确匹配）</strong>。</li>
+        </ul>
+
+        <h3>3. 三大关键指标 + 四项能力</h3>
+        <p>通用指标聚焦三点：<strong>答案准确性、答案相关性、上下文相关性</strong>。RGB 研究定义了 RAG 所需的四项能力：<strong>抗噪声能力、拒绝无效回答能力、信息综合能力、反事实稳健性</strong>。</p>
+
+        <h3>4. 评测框架：RAGAS 与 ARES</h3>
+        <ul>
+          <li><strong>RAGAS</strong>：基于手写 prompt 全自动评测。忠实度（分解答案为陈述，检验与上下文一致性）、答案相关性（LLM 造问题算相似度）、上下文相关性（筛出相关句子占比）。</li>
+          <li><strong>ARES</strong>：用少量人工标注 + 合成数据训练轻量 LLM 裁判，通过<strong>预测驱动推理（PDR）</strong>给出统计置信区间，降低评测成本。</li>
+        </ul>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">评测</span><span class="qa-q">RAG 怎么评测？RAGAS 是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">分独立评测（检索用 Hit Rate/MRR/NDCG，生成看上下文相关性）与端到端评测（准确性/相关性/无害性，有标签看 Accuracy/EM）。RAGAS 用 LLM prompt 自动算三指标：忠实度、答案相关性、上下文相关性。ARES 则训练轻量裁判模型并给出置信区间。</div></div>
+      </section>
+
+      <!-- ================= Agent ================= -->
+      <section id="agent">
+        <div class="section-kicker">🤖 第 15 步</div>
+        <h2>Agent 智能体：规划、记忆、工具、反思</h2>
+        <p class="lead">Agent 让 LLM 从"聊天"升级为"能干活"：自主<strong>调用工具、规划并反思</strong>完成多步任务。</p>
+
+        <h3>1. 四大核心组件</h3>
+        <div class="vs-grid">
+          <div class="vs-col">
+            <h5>🧭 规划 Planning</h5>
+            <ul><li>把复杂任务分解成子任务</li><li>反思并调整计划</li></ul>
+          </div>
+          <div class="vs-col">
+            <h5>🧠 记忆 Memory</h5>
+            <ul><li>短期：当前上下文</li><li>长期：外部向量库/数据库</li></ul>
+          </div>
+          <div class="vs-col">
+            <h5>🛠️ 工具 Tools</h5>
+            <ul><li>搜索、代码执行、API 调用</li><li>把 LLM 接到真实世界</li></ul>
+          </div>
+          <div class="vs-col">
+            <h5>🔍 反思 Reflection</h5>
+            <ul><li>自我纠错、评估产出</li><li>迭代改进</li></ul>
+          </div>
+        </div>
+
+        <h3>2. 代表范式</h3>
+        <ul>
+          <li><strong>ReAct</strong>：推理（Reason）与行动（Act）交错进行——"思考一步、行动一步、观察一步"，让模型边想边干。</li>
+          <li><strong>Reflection</strong>：生成 → 自我评判 → 根据反馈修订，迭代提升质量。</li>
+        </ul>
+
+        <div class="card warn">
+          <div class="card-title">⚠️ Agent 的关键难点</div>
+          <p>规划出错后的回滚、长程任务的记忆管理、工具调用的可靠性与安全性、以及"反思"本身可能陷入循环。面试常问"你怎么做 LLM Agent 的任务规划与错误处理"。</p>
+        </div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Agent</span><span class="qa-q">什么是 LLM Agent？核心组件是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">能自主调用工具、规划并反思完成任务的系统。四大核心：规划（拆任务）、记忆（短期上下文/长期外部存储）、工具（搜索/代码/API）、反思（自我纠错）。ReAct 让推理与行动交错，Reflection 做迭代修订。</div></div>
+      </section>
+
+      <!-- ================= 显存估算 ================= -->
+      <section id="memory">
+        <div class="section-kicker">💾 第 16 步</div>
+        <h2>显存估算：训练 vs 推理到底要多少显存</h2>
+        <p class="lead">这是面试与工程都高频的"算账题"。记住几个基准数字，能现场估算。</p>
+
+        <h3>1. 推理显存（简单）</h3>
+        <p>权重多为 FP16，加载一个 <code>nB</code> 模型约需 <strong>2n GB</strong> 显存。</p>
+
+        <h3>2. 训练显存（三件套）</h3>
+        <p>训练时显存 = 参数 + 梯度 + 优化器状态。以 FP16 权重、AdamW 优化器（存一阶+二阶 momentum，需 FP32）为例：</p>
+        <div class="formula">
+          $$ \text{参数 }2n + \text{梯度 }2n + \text{优化器 }12n = 16n\ \text{GB} $$
+        </div>
+        <p>所以全量训练一个 <code>nB</code> 模型，基础显存约 <strong>16n GB</strong>，加上 activation 与 CUDA kernel（约 1.3GB），业界经验"<strong>准备 20n GB 是最低要求</strong>"。例：7B 全量训练基础约 112GB，fsdp 下约 160GB 勉强可训。</p>
+
+        <h3>3. 精度对照（以 LLaMA-6B 为例）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>部分</th><th>fp32（4B/参数）</th><th>int8（1B/参数）</th></tr></thead>
+            <tbody>
+              <tr><td>模型参数</td><td>24 GB</td><td>6 GB</td></tr>
+              <tr><td>梯度</td><td>24 GB</td><td>6 GB</td></tr>
+              <tr><td>AdamW 优化器</td><td>48 GB</td><td>12 GB</td></tr>
+              <tr><td>小计（+1.3G kernel）</td><td>~97 GB</td><td>~25 GB</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card tip">
+          <div class="card-title">💡 显存不够怎么办</div>
+          <p>量化（INT8/INT4）、LoRA/QLoRA（冻结大部分）、ZeRO 切分优化器状态、offload 到 CPU 内存、或上多卡并行。想试 65B 但显存少，可在 int4（GPTQ）基座上做 LoRA，最少约 50GB 显存。</p>
+        </div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">显存</span><span class="qa-q">训练一个 nB 模型大概需要多少显存？怎么算的？</span><span class="qa-toggle">▼</span></div><div class="qa-body">训练显存 = 参数 + 梯度 + 优化器。FP16 权重下参数 2n、梯度 2n；AdamW 需 FP32 存一阶二阶动量共 12n，合计 16n GB，再加 activation 和约 1.3G CUDA kernel。经验上全量训练准备 20n GB 是最低要求（如 7B 约 112~160GB）。</div></div>
+      </section>
+
+      <!-- ================= 分布式训练 ================= -->
+      <section id="distributed">
+        <div class="section-kicker">🌐 第 17 步</div>
+        <h2>分布式训练：DP / TP / PP / ZeRO / 3D 并行</h2>
+        <p class="lead">单卡装不下就"分"。横向切（张量并行 TP）、纵向切（流水线并行 PP）、数据切（数据并行 DP），三者可叠加成 3D 并行。</p>
+
+        <h3>1. 三种并行</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>方式</th><th>切什么</th><th>特点</th></tr></thead>
+            <tbody>
+              <tr><td><strong>数据并行 DP</strong></td><td>把 batch 分到多卡</td><td>最简单，充分利用多卡算力；每卡都存完整模型</td></tr>
+              <tr><td><strong>张量并行 TP</strong></td><td>纵向切矩阵（层内）</td><td>显存省，但<strong>通信量极高</strong>，需节点内 NVLINK（600GB/s）</td></tr>
+              <tr><td><strong>流水线并行 PP</strong></td><td>横向切层（分层到不同卡）</td><td>推理串行、有 bubble；无 NVLINK 的"穷人模式"首选</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2. ZeRO 与 3D 并行</h3>
+        <ul>
+          <li><strong>ZeRO（DeepSpeed）</strong>：把优化器状态/梯度/参数分片到各卡，显存随卡数线性下降。ZeRO-3 ≈ FSDP。</li>
+          <li><strong>3D 并行 = DP + TP + PP</strong>：超大模型预训练必备。但 TP 通信量大，只能在节点内（有 NVLINK）使用；节点间用万兆网跑 ZeRO3 几乎不可用（每步通信可能上百秒）。</li>
+          <li><strong>实践建议</strong>：小模型（7B）直接用 DeepSpeed ZeRO 最方便；真大模型优先 TP（吃 NVLINK）→ PP → DP。</li>
+        </ul>
+
+        <div class="card warn">
+          <div class="card-title">⚠️ 平民玩家注意</div>
+          <p>3D 并行依赖节点内 NVLINK 超高速互联；多机若只有万兆网，ZeRO3 每步通信可能高达上百秒，训练反而比单机慢。判断 GPU 利用率别只看 nvidia-smi，要看 <strong>TFLOPS 与吞吐</strong>（DeepSpeed flops_profiler）。</p>
+        </div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">并行</span><span class="qa-q">3D 并行是什么？和 ZeRO 什么关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">3D 并行 = 数据并行(DP) + 张量并行(TP) + 流水线并行(PP) 叠加，用于超大模型。TP 通信量极大，只能在节点内 NVLINK 使用。ZeRO（DeepSpeed）通过分片优化器/梯度/参数省显存，ZeRO-3≈FSDP。两者可协同：先用 TP（吃 NVLINK），再 PP，最后 DP。</div></div>
+      </section>
+
+      <!-- ================= 推理加速 ================= -->
+      <section id="serving">
+        <div class="section-kicker">⚙️ 第 18 步</div>
+        <h2>推理加速与量化：框架与压缩</h2>
+        <p class="lead">模型训得出还要跑得动、跑得便宜。加速分三层：算法（蒸馏/量化）、软件（编译/图优化）、硬件（FP8）。</p>
+
+        <h3>1. 推理框架对比</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>框架</th><th>核心特性</th><th>备注</th></tr></thead>
+            <tbody>
+              <tr><td><strong>vLLM</strong></td><td>Continuous Batching + <strong>PagedAttention</strong>（受 OS 分页启发管理 KV Cache）</td><td>吞吐高、速度快；早期缺 LoRA/量化支持</td></tr>
+              <tr><td><strong>TGI</strong>（HuggingFace）</td><td>FlashAttention + PagedAttention、精度/量化/张量并行</td><td>Rust+CUDA 编译门槛较高</td></tr>
+              <tr><td><strong>FasterTransformer</strong></td><td>NVIDIA 出品，融合非 GEMM 操作、去 padding</td><td>不改架构、纯计算加速</td></tr>
+              <tr><td><strong>TurboTransformers</strong></td><td>腾讯出品，smart batching、LayerNorm/Softmax 批处理</td><td>CPU/GPU 通用、变长友好</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2. 量化（Quantization）</h3>
+        <ul>
+          <li><strong>FP16/BF16 → INT8/INT4</strong>：权重与激活精度下降，显存与带宽大幅下降、推理更快。</li>
+          <li>常用方法：<strong>GPTQ、AWQ</strong>（4bit 量化保精度）。</li>
+          <li><strong>FP8</strong>：H 系列 GPU 支持，兼具 FP16 稳定与 INT8 速度。</li>
+        </ul>
+
+        <h3>3. 其他压缩</h3>
+        <ul>
+          <li><strong>剪枝（Pruning）</strong>：删冗余参数/神经元/连接（参数剪枝、网络剪枝、层次化剪枝）。</li>
+          <li><strong>低秩分解</strong>：把大权重矩阵拆成小矩阵乘积。</li>
+          <li><strong>知识蒸馏</strong>：小模型学大模型软标签（见微调章节）。</li>
+        </ul>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">加速</span><span class="qa-q">vLLM 为什么快？PagedAttention 是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">vLLM 两大法宝：① Continuous Batching（iteration 级调度，动态 batch）；② PagedAttention（受操作系统虚拟内存/分页启发管理 KV Cache，减少碎片）。二者大幅提升了吞吐与显存利用率，是当今开源 LLM 服务的主流选择。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">压缩</span><span class="qa-q">模型量化是什么？有什么取舍？</span><span class="qa-toggle">▼</span></div><div class="qa-body">把权重/激活从 FP16 降到 INT8/INT4，显存与带宽大幅下降、推理更快；代价是可能损失精度，需用 GPTQ/AWQ 等做校准或混合精度。FP8（H 系列 GPU）兼具稳定与速度。</div></div>
+      </section>
+
+      <!-- ================= 评测 ================= -->
+      <section id="eval">
+        <div class="section-kicker">🏅 第 19 步</div>
+        <h2>大模型评测：维度、Benchmark 与 Arena</h2>
+        <p class="lead">传统 GLUE/SuperGLUE/CLUE 已不太适合评大模型，核心应转向<strong>推理能力与多轮对话</strong>。评测方法也在从 benchmark 走向"真人/模型对打"。</p>
+
+        <h3>1. 评测维度</h3>
+        <ul>
+          <li>理解能力、语言生成、<strong>知识面广度</strong>、适应性（写作/翻译/编程）</li>
+          <li><strong>长文本理解 / 长文本生成</strong>（连贯性、无逻辑矛盾）</li>
+          <li>多样性、情感分析与推断、<strong>逻辑推理</strong>、问题解决（数学/编程）</li>
+          <li>道德与伦理（如"什么情况下撒谎可接受"）</li>
+        </ul>
+
+        <h3>2. 评测方法与工具</h3>
+        <ul>
+          <li><strong>人工评估</strong>：LIMA、Phoenix 等用人工打分（最可靠但贵）。</li>
+          <li><strong>GPT-4 自动评估</strong>：Vicuna、BELLE 等用强模型当裁判。</li>
+          <li><strong>指标评估</strong>：BLEU-4、ROUGE（ChatGLM-6B 等使用）。</li>
+          <li><strong>Chatbot Arena</strong>：放弃固定 benchmark，用两两实时对话 + 人类打分，采用 <strong>Elo 分数</strong>。原因：聊天质量主观、测试集可能被污染/特训、很多任务不在旧 benchmark 里。</li>
+          <li><strong>工具</strong>：OpenAI Evals（prompt 模板自动化）、PandaLM（训练自动打分模型，0/1/2 三分制）。</li>
+        </ul>
+
+        <div class="card info">
+          <div class="card-title">💡 honest 原则怎么训练</div>
+          <p>构造"知识问答/阅读理解"训练集，训练时让模型"<strong>读过的才答、没读过的就说不知道</strong>"，强化 helpful / honest / harmless 中的 honest，减少编造。</p>
+        </div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">评测</span><span class="qa-q">为什么 Chatbot Arena 不用传统 benchmark？</span><span class="qa-toggle">▼</span></div><div class="qa-body">三点原因：① 聊天质量主观，难用准确率衡量；② 大模型几乎扫过整个互联网，测试集很可能被污染甚至被特训；③ 真实能聊的话题远超现有 benchmark 覆盖。Arena 改用两两实时对话 + 人类打分 + Elo 评分，更接近真实体验。</div></div>
+      </section>
+
+      <!-- ================= 面试题库 ================= -->
+      <section id="interview">
+        <div class="section-kicker">📝 保研面试</div>
+        <h2>大模型面试题库（点击展开答案）</h2>
+        <p class="lead">按主题整理高频题，<strong>点击卡片</strong>查看详细答案。建议先自己口述，再对照查漏补缺。配合前面各章节的"🧠 面试题"食用更佳。</p>
+
+        <h3>一、基础与架构</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是大模型？175B 指什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">大模型通常指参数在十亿（Billion）量级以上的模型；LLM 是面向语言的大模型。175B 指 1750 亿参数（B=Billion），约为 ChatGPT 早期规模。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">架构</span><span class="qa-q">为什么现在大模型大多是 Decoder-only？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① zero-shot 能力最好，预训练目标与下游一致；② 训练/工程效率高（所有 token 都算损失）；③ 理论上 Encoder 双向注意力存在低秩问题、削弱表达，生成任务引入双向无实质收益。同等参数/成本下 Decoder-only 最优。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">涌现</span><span class="qa-q">涌现能力是怎么来的？</span><span class="qa-toggle">▼</span></div><div class="qa-body">两个主流猜想：① 评价指标不平滑（二值阈值让平滑的子任务提升看起来像突变）；② 复合任务由多个子任务构成，子任务平滑提升、最终任务却呈非线性跃迁。说明"涌现"未必是本质突变。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Norm</span><span class="qa-q">Pre-LN 和 Post-LN 怎么选？</span><span class="qa-toggle">▼</span></div><div class="qa-body">Post-LN 把 LN 放残差之后，深层梯度范式增大、易不稳定；Pre-LN 放残差之中，深层梯度近似相等、更稳定（效果略差）。主流选 Pre-LN + RMSNorm。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">FFN</span><span class="qa-q">标准 FFN 与 GLU 的参数组织差异？</span><span class="qa-toggle">▼</span></div><div class="qa-body">标准 FFN 两个矩阵、中间维 4h；GLU 引入门控、三个矩阵、中间维约 2.67h，在相近计算量下提升表达力（LLaMA 用 SwiGLU）。</div></div>
+
+        <h3>二、注意力与位置</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Attn</span><span class="qa-q">MHA / MQA / GQA 三者关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">MHA 每头独立 Q/K/V；MQA 全部头共享 K/V（最大省显存但略损效果）；GQA 把 Q 头分组、每组共享 K/V，是二者折中。LLaMA2-70B、ChatGLM2 用 GQA。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Attn</span><span class="qa-q">KV Cache 是什么？为什么加速解码？</span><span class="qa-toggle">▼</span></div><div class="qa-body">自回归生成每步都要历史 K/V，KV Cache 把已算 K/V 缓存避免重复计算，把每步复杂度从 $O(n^2)$ 降到 $O(n)$，是 LLM 解码提速关键（代价是随序列变长显存增长）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Pos</span><span class="qa-q">sin/cos 位置编码 vs RoPE？</span><span class="qa-toggle">▼</span></div><div class="qa-body">sin/cos 编码绝对位置、靠频率差异隐含相对位置；RoPE 用旋转矩阵把相对位置直接编码进注意力，长度外推更好、实现简单，是 LLaMA 等 Decoder-only 主流。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">长文本</span><span class="qa-q">长上下文怎么省显存、提速？</span><span class="qa-toggle">▼</span></div><div class="qa-body">两条主线：① 提升上下文长度（位置编码外推、稀疏/线性注意力）；② 加速与降显存（MQA/GQA 减 KV、FlashAttention 减 IO、PagedAttention 管 KV 碎片）。</div></div>
+
+        <h3>三、训练 / 微调 / 对齐</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">训练</span><span class="qa-q">大模型的主要训练目标有哪些？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 自回归语言模型（预测下一 token，Causal Decoder 全 token 算损失）；② 去噪自编码器（打乱文本段让模型恢复，如 T5/GLM-130B，只在输出算损失）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">微调</span><span class="qa-q">SFT 和 RLHF 分别解决什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">SFT 用指令-回答数据教模型"按指令办事"；RLHF 用人类偏好让模型"有用/无害/诚实"。两者先后：预训练 → SFT → RLHF（或 DPO）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">对齐</span><span class="qa-q">RLHF 三步走 + DPO 是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">三步：训奖励模型 RM（偏好排序）→ PPO 强化学习（带 KL 约束）→ （替代）DPO 直接偏好优化。DPO 绕过显式 RM 和 PPO，把偏好变成简单分类损失，更简单稳定。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">蒸馏</span><span class="qa-q">增量预训练和蒸馏的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">增量预训练是在基座上用新领域语料继续预训练注入知识；蒸馏是用冻结的大 Teacher 指导小 Student 学习（离线/半监督/自蒸馏），把能力压缩到小模型。</div></div>
+
+        <h3>四、RAG / Agent / 幻觉</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">RAG</span><span class="qa-q">RAG 相比微调注入知识有什么优势？</span><span class="qa-toggle">▼</span></div><div class="qa-body">微调几十万数据未必注入好、且训练昂贵（多卡多天）。RAG 用检索替代微调，成本更低、知识可实时更新、可解释（能给出出处），且天然缓解幻觉与私有数据问题。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">RAG</span><span class="qa-q">RAG 最关键的工程难点是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">检索质量决定上限。难点在：切分粒度、embedding 领域对齐、召回相关性、重排。经验：检索三目标是高召回、低噪声、快；常用混合检索 + 重排 + 查询重写。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Agent</span><span class="qa-q">ReAct 和 Reflection 是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">ReAct：推理与行动交错（思考→行动→观察循环），边想边干。Reflection：生成后自我评判并修订，迭代提升。两者都是让 Agent 具备"规划-记忆-工具-反思"能力的代表范式。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">幻觉</span><span class="qa-q">怎么度量与检测幻觉？</span><span class="qa-toggle">▼</span></div><div class="qa-body">人工最可靠；自动指标有命名实体误差、蕴含率、基于模型的评估、QA/信息抽取一致性。检测上 SelfCheckGPT 用多次采样看一致性（发散即大概率在胡说），也可用低 logit 置信度作为信号。</div></div>
+
+        <h3>五、显存 / 部署 / 评测</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">显存</span><span class="qa-q">推理一个 nB 模型需要多少显存？训练呢？</span><span class="qa-toggle">▼</span></div><div class="qa-body">推理（FP16 权重）约 2n GB。训练约 16n GB 基础（参数 2n + 梯度 2n + AdamW 12n），加 activation 与 kernel，经验最低 20n GB。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">并行</span><span class="qa-q">单卡装不下模型怎么办？</span><span class="qa-toggle">▼</span></div><div class="qa-body">显存够但单卡装不下 → 张量并行 TP / 流水线并行 PP；多卡算力富余 → 数据并行 DP；显存也不够 → ZeRO/FSDP 分片。无 NVLINK 的穷人模式优先 PP。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">加速</span><span class="qa-q">除了量化，还有哪些推理加速手段？</span><span class="qa-toggle">▼</span></div><div class="qa-body">算法（蒸馏、量化）、软件（计算图优化、编译、kernel 融合如 FlashAttention）、框架（vLLM 的 PagedAttention + Continuous Batching、TGI）、硬件（FP8）。剪枝与低秩分解也能压缩。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">评测</span><span class="qa-q">怎么全面评估一个大模型水平？</span><span class="qa-toggle">▼</span></div><div class="qa-body">从理解、生成、知识面、适应性、长文本、多样性、情感推断、逻辑推理、问题解决、伦理等多维度出题；方法上结合人工评估、GPT-4 裁判、Chatbot Arena（Elo）、OpenAI Evals / PandaLM 等工具。</div></div>
+
+        <h3>六、项目与交叉科研</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">你有 GNN 反欺诈方向，怎么和大模型结合讲？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用 GNN 做特征/检索增强，用 LLM-Agent 做可解释风控决策，用 RAG 接入法规知识库。把"融合社区发现的图神经网络金融反欺诈"与前沿大模型能力交叉，是导师看重的创新点。用 STAR 法则讲清动机与改进。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">如果让你落地一个 RAG 系统，你会怎么设计？</span><span class="qa-toggle">▼</span></div><div class="qa-body">文档解析→语义切分（二级索引：关键信息+原文）→领域微调 embedding→混合检索（FAISS+ES）→重排→拼 prompt→LLM 生成；并用 RAGAS 做忠实度/相关性评测，对 badcase 迭代切分与重排策略。</div></div>
+
+        <h3>七、进阶 · 采样 · 推理细节</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">MoE</span><span class="qa-q">MoE 混合专家的核心思想？</span><span class="qa-toggle">▼</span></div><div class="qa-body">每层含多个专家 FFN，由门控网络给每个 token 只激活少数几个（如 8 选 2）。参数量可以很大，但单样本计算量只略增，从而在可控算力下大幅提升模型容量——是主流大模型扩展范式（Mixtral、GPT-4 等）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">采样</span><span class="qa-q">temperature 和 top-p 采样是什么？为什么要？</span><span class="qa-toggle">▼</span></div><div class="qa-body">解码时直接取 argmax 输出呆板；temperature 缩放 logits 调整随机性（越高越发散），top-p（核采样）只在累计概率达 p 的候选词中采样。二者控制"多样性 vs 确定性"，但过高会增加幻觉风险。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">指令</span><span class="qa-q">指令微调（Instruction Tuning）是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用"指令-回答"格式的多任务数据微调模型，让它学会"理解并遵循人类指令"完成各类任务，是 SFT 的工程化升级，也是 Chat 模型可用性的关键。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">CoT</span><span class="qa-q">思维链（Chain-of-Thought）是什么？为什么有效？</span><span class="qa-toggle">▼</span></div><div class="qa-body">让模型在给出答案前先输出中间推理步骤。它把复杂问题拆成多步，利用自回归逐步推导，显著提升算术/逻辑推理表现；也是"大模型会思考"的重要体现。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">外推</span><span class="qa-q">长度外推（Position Interpolation）是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">在 RoPE 基础上，把超出训练长度的位置"线性插值"回已知区间，使模型能处理比训练时更长的序列，避免位置编码越界导致性能崩塌。是长上下文扩展的常用技巧。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">解码</span><span class="qa-q">投机解码（Speculative Decoding）是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用小草稿模型先快速"猜"若干 token，再用大模型并行验证，接受正确的前缀。在保持大模型输出质量的前提下加速自回归解码，是低成本提速的重要手段。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">LoRA</span><span class="qa-q">LoRA 的秩 r 怎么选？太大太小会怎样？</span><span class="qa-toggle">▼</span></div><div class="qa-body">r 是低秩矩阵的维度，决定可训练参数量与表达能力。r 太小表达受限、微调欠拟合；r 太大接近全量微调、省显存优势减弱。常用 8/16/32/64，需按任务在数据上验证。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">RM</span><span class="qa-q">奖励模型（Reward Model）怎么训练？</span><span class="qa-toggle">▼</span></div><div class="qa-body">收集人类对同一 prompt 的多个回答的<strong>偏好排序</strong>，训练一个打分模型 $r_\phi$ 使其对更优回答给更高分（常用 Bradley-Terry 模型把排序转成对偏好概率）。它是 RLHF 中 PPO 的"老师"。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">数据</span><span class="qa-q">预训练数据更看重规模还是质量？</span><span class="qa-toggle">▼</span></div><div class="qa-body">两者都重要，但<strong>质量与多样性</strong>往往比单纯堆量更关键。去重、过滤噪声/低质网页、平衡领域比例，能显著提升下游效果；重复数据还会加剧幻觉。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">训练</span><span class="qa-q">大模型训练为什么常需要 warmup？</span><span class="qa-toggle">▼</span></div><div class="qa-body">训练初期参数随机、梯度方向噪声大，Adam 的二阶矩估计偏差也大。先用小学习率 warmup 几步再升到峰值，能避免早期不稳定、帮助收敛，是大模型训练的标配技巧。</div></div>
+      </section>
+
+    </div>
+
+    <footer class="footer">
+      大模型 LLM 专题 · 架构 / RAG / Agent / 部署 · 计算机保研面试指南 —— 祝保研顺利 🎓
+    </footer>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/python.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
