@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>深度学习 · 从基础到 Transformer —— 保研面试指南</title>
+  <meta name="description" content="面向计算机保研人的深度学习完整教程：从感知机到 Transformer，配套高频面试题库与学习路线。" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="read-progress" id="readProgress"></div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <a class="brand" href="#top">
+        <span class="brand-logo">DL</span>
+        <span>
+          <span class="brand-name">深度学习指南</span><br />
+          <span class="brand-sub">保研导航 · 深度学习</span>
+        </span>
+      </a>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-group-label">前置基础</div>
+      <a class="nav-link" href="#python"><span class="nav-icon">🐍</span> Python 基础</a>
+      <a class="nav-link" href="#ml"><span class="nav-icon">📊</span> 机器学习基础</a>
+      <div class="nav-group-label">教程 · 基础篇</div>
+      <a class="nav-link" href="#overview"><span class="nav-icon">🧭</span> 学习总览</a>
+      <a class="nav-link" href="#basics"><span class="nav-icon">🧠</span> 神经网络基础</a>
+      <a class="nav-link" href="#backprop"><span class="nav-icon">🔁</span> 反向传播</a>
+      <a class="nav-link" href="#optimizer"><span class="nav-icon">⚙️</span> 优化器</a>
+      <a class="nav-link" href="#cnn"><span class="nav-icon">👁️</span> CNN 卷积网络</a>
+      <a class="nav-link" href="#rnn"><span class="nav-icon">🔗</span> RNN · LSTM</a>
+      <div class="nav-group-label">教程 · 进阶篇</div>
+      <a class="nav-link" href="#attention"><span class="nav-icon">🎯</span> 注意力机制</a>
+      <a class="nav-link" href="#transformer"><span class="nav-icon">🚀</span> Transformer 详解</a>
+      <a class="nav-link" href="#llm"><span class="nav-icon">🤖</span> BERT · GPT</a>
+      <a class="nav-link" href="#diffusion"><span class="nav-icon">🌈</span> 生成式与扩散模型</a>
+      <a class="nav-link" href="#llm-adv"><span class="nav-icon">🧠</span> 大模型进阶</a>
+      <a class="nav-link" href="#engine"><span class="nav-icon">⚡</span> 工程优化</a>
+      <div class="nav-group-label">🔥 大模型专题</div>
+      <a class="nav-link" href="llm.html"><span class="nav-icon">🤖</span> 架构 / RAG / Agent</a>
+      <div class="nav-group-label">保研面试</div>
+      <a class="nav-link" href="#interview"><span class="nav-icon">📝</span> 面试题库</a>
+      <a class="nav-link" href="#roadmap"><span class="nav-icon">🗺️</span> 学习路线</a>
+    </nav>
+    <div class="sidebar-foot">为计算机保研人整理 · 持续更新</div>
+  </aside>
+
+  <!-- ============ 主内容 ============ -->
+  <div class="content" id="top">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="菜单">☰</button>
+      <span class="topbar-title" id="topbarTitle">深度学习 · 保研面试指南</span>
+      <div class="topbar-actions">
+        <a class="btn btn-ghost" href="../index.html" style="padding:8px 14px;font-size:13px;">🏠 导航首页</a>
+        <button class="icon-btn" id="themeBtn" aria-label="切换主题">🌙</button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge">🎓 计算机保研 · 深度学习备考</span>
+        <h1>从零基础到 Transformer<br />一条清晰的深度学习进阶之路</h1>
+        <p>面向计算机保研人系统梳理：神经网络基础、CNN、RNN/LSTM、注意力机制到 Transformer 的完整脉络，配套高频面试题库与标准答案，助你在面试中拉开差距。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#overview">开始学习 →</a>
+          <a class="btn btn-ghost" href="#interview">直接刷面试题</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">9</div><div class="stat-label">核心章节</div></div>
+          <div class="stat"><div class="stat-num">40+</div><div class="stat-label">面试题详解</div></div>
+          <div class="stat"><div class="stat-num">1 条</div><div class="stat-label">完整学习路线</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+
+      <!-- ================= Python 基础 ================= -->
+      <section id="python">
+        <div class="section-kicker">🐍 前置第 1 步</div>
+        <h2>Python 基础（深度学习的前置）</h2>
+        <p class="lead">深度学习几乎都用 Python 生态（NumPy / PyTorch）。先掌握最核心的语法和工具，再进入神经网络。</p>
+
+        <h3>1. 为什么是 Python</h3>
+        <ul>
+          <li><strong>生态完善</strong>：NumPy（数值计算）、PyTorch / TensorFlow（深度学习框架）几乎都是 Python 接口。</li>
+          <li><strong>上手快</strong>：语法简洁，科研社区都用它，论文复现代码绝大多数是 Python。</li>
+        </ul>
+
+        <h3>2. 核心语法速览</h3>
+        <pre><code class="language-python"># 变量与基本类型
+x = 3
+name = "transformer"
+flag = True
+
+# 列表 / 字典 / 元组 / 集合
+nums = [1, 2, 3, 4]                    # 列表（可变）
+info = {"name": "attention", "year": 2017}  # 字典（键值对）
+point = (2, 3)                         # 元组（不可变）
+uniq = {1, 2, 2, 3}                    # 集合 -> {1, 2, 3}
+
+# 列表推导式 + 循环
+squares = [i**2 for i in range(5)]     # [0, 1, 4, 9, 16]
+for n in nums:
+    print(n)
+
+# 函数与类
+def relu(x):
+    return max(0, x)
+
+class Model:
+    def __init__(self, name):
+        self.name = name
+    def forward(self, x):
+        return x</code></pre>
+
+        <h3>3. NumPy 数组（深度学习的"矩阵语言"）</h3>
+        <pre><code class="language-python">import numpy as np
+
+a = np.array([[1, 2], [3, 4]])   # 2x2 矩阵
+print(a.shape)                   # (2, 2)
+
+b = np.ones((2, 2))
+c = a @ b                        # 矩阵乘法（深度学习里最常用）
+d = a * b                        # 逐元素乘法
+
+a + 10                           # 广播：每个元素都 +10
+
+# 随机初始化（神经网络权重初始化就是它）
+w = np.random.randn(4, 8) * 0.01</code></pre>
+
+        <h3>4. PyTorch 入门：自动求导</h3>
+        <p>PyTorch 的核心是<strong>张量（tensor）</strong>和<strong>自动求导（autograd）</strong>——后者其实就是自动帮你做反向传播：</p>
+        <pre><code class="language-python">import torch
+
+x = torch.tensor([[1.0, 2.0]], requires_grad=True)
+w = torch.tensor([[3.0], [4.0]], requires_grad=True)
+
+y = x @ w                        # 1*3 + 2*4 = 11
+loss = y.sum()
+
+loss.backward()                  # 自动求梯度（反向传播！）
+print(w.grad)                    # dloss/dw = x^T = [[1],[2]]</code></pre>
+        <div class="card tip">
+          <div class="card-title">💡 和深度学习的联系</div>
+          <p>你后面学的"反向传播"，在 PyTorch 里只需一行 <code>loss.backward()</code>。理解原理 + 会用框架，两者都要有。</p>
+        </div>
+      </section>
+
+      <!-- ================= 机器学习基础 ================= -->
+      <section id="ml">
+        <div class="section-kicker">📊 前置第 2 步</div>
+        <h2>机器学习基础</h2>
+        <p class="lead">深度学习是机器学习的一个子集。先建立机器学习的大框架，知道"问题长什么样"。</p>
+
+        <h3>1. 什么是机器学习</h3>
+        <p>传统编程是"人写规则"，机器学习是"<strong>从数据中自动学出规则</strong>"：给模型大量数据和一个目标（损失函数），它自己调参数。</p>
+
+        <h3>2. 三大类学习</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>类型</th><th>特点</th><th>例子</th></tr></thead>
+            <tbody>
+              <tr><td><strong>监督学习</strong></td><td>有标签 (x, y)</td><td>分类（垃圾邮件）、回归（房价预测）</td></tr>
+              <tr><td><strong>无监督学习</strong></td><td>无标签</td><td>聚类（K-Means）、降维（PCA）</td></tr>
+              <tr><td><strong>强化学习</strong></td><td>通过奖励学习</td><td>游戏 AI、机器人控制</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>3. 训练 / 验证 / 测试集</h3>
+        <ul>
+          <li><strong>训练集</strong>：用于训练模型参数。</li>
+          <li><strong>验证集</strong>：调超参数、选模型、早停。</li>
+          <li><strong>测试集</strong>：只在最后评一次，模拟真实泛化能力（<strong>绝不能碰</strong>）。</li>
+        </ul>
+
+        <h3>4. 经典算法速览</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>算法</th><th>类型</th><th>一句话理解</th></tr></thead>
+            <tbody>
+              <tr><td>线性回归</td><td>回归</td><td>拟合一条直线，最小化 MSE</td></tr>
+              <tr><td>逻辑回归</td><td>分类</td><td>线性 + sigmoid，输出概率，用交叉熵</td></tr>
+              <tr><td>决策树</td><td>分类/回归</td><td>按特征不断 if-else 划分</td></tr>
+              <tr><td>SVM</td><td>分类</td><td>找最大间隔超平面，核技巧处理非线性</td></tr>
+              <tr><td>KNN</td><td>分类</td><td>看最近的 K 个邻居投票</td></tr>
+              <tr><td>K-Means</td><td>聚类</td><td>迭代分组，最小化类内距离</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：线性回归怎么拟合</div>
+          <p>目标：找一条直线 $\hat{y} = wx + b$ 使预测尽量接近真实值。损失用 MSE：</p>
+          <div class="formula">$$ L = \frac{1}{n}\sum_{i}(y_i - \hat{y}_i)^2 = \frac{1}{n}\sum_{i}\big(y_i - (wx_i + b)\big)^2 $$</div>
+          <p>用<strong>梯度下降</strong>求解：对 $w$ 求梯度得 $\dfrac{\partial L}{\partial w} = \dfrac{2}{n}\sum x_i(\hat{y}_i - y_i)$，然后 $w \leftarrow w - \eta\dfrac{\partial L}{\partial w}$。</p>
+          <p>特例：最小二乘法有<strong>解析解</strong>（令导数为 0 直接解出 $w,b$），而梯度下降是迭代逼近——数据量大时梯度下降更常用。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：逻辑回归怎么做分类</div>
+          <p>线性回归输出连续值，不适合分类。逻辑回归在线性输出上套一层 <strong>sigmoid</strong>，把它压成 0~1 的概率：</p>
+          <div class="formula">$$ p = \sigma(wx+b) = \frac{1}{1+e^{-(wx+b)}} $$</div>
+          <p>$p \ge 0.5$ 判为正类，$p &lt; 0.5$ 判为负类。损失用<strong>交叉熵</strong>：$L = -[y\log p + (1-y)\log(1-p)]$。</p>
+          <p>为什么叫"回归"却做分类？因为它拟合的是"对数几率" $\log\dfrac{p}{1-p} = wx+b$——本质是<strong>线性分类器</strong>，只能分线性可分的数据。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：决策树怎么选划分特征</div>
+          <p>决策树的核心是"每次选哪个特征切分最有效"，用<strong>信息增益</strong>（ID3）衡量：</p>
+          <div class="formula">$$ \text{信息增益} = \text{划分前熵} - \text{划分后加权熵} $$</div>
+          <p>熵衡量"混乱程度"：$H = -\sum p_k\log_2 p_k$。增益越大说明切分后子集越"纯"，越值得选这个特征。</p>
+          <p>例：10 个样本 6 正 4 负，熵 $H = -\frac{6}{10}\log_2\frac{6}{10} - \frac{4}{10}\log_2\frac{4}{10} \approx 0.97$。若按某特征切分后两边都变纯，熵降到接近 0，增益就大。</p>
+          <p>其他准则：C4.5 用<strong>信息增益率</strong>（避免偏好取值多的特征），CART 用<strong>基尼指数</strong>。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：K-Means 聚类怎么迭代</div>
+          <p>把数据分成 K 组（设 K=2），过程：</p>
+          <ol class="steps">
+            <li><div class="step-title">随机选 K 个中心</div><p>随机选 2 个点作为初始质心。</p></li>
+            <li><div class="step-title">分配</div><p>每个点归到<strong>最近的质心</strong>那一类。</p></li>
+            <li><div class="step-title">更新</div><p>每类的质心更新为该类所有点的<strong>均值</strong>。</p></li>
+            <li><div class="step-title">重复 2、3</div><p>直到质心不再变化（或达到最大轮数）。</p></li>
+          </ol>
+          <p>缺点：K 要预先指定、对初始点敏感（可能陷入局部最优）、对异常值敏感。改进：K-Means++（更好的初始化）。</p>
+        </div>
+
+        <h3>5. 评估指标</h3>
+        <ul>
+          <li><strong>准确率 Accuracy</strong>：预测对的占比（类别不均衡时会失真）。</li>
+          <li><strong>精确率 Precision</strong>：预测为正的里面真正为正的比例。</li>
+          <li><strong>召回率 Recall</strong>：真正为正的里面被找出来的比例。</li>
+          <li><strong>F1</strong>：精确率和召回率的调和平均，综合衡量。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：混淆矩阵</div>
+          <p>二分类的四种结果：</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th></th><th>预测为正</th><th>预测为负</th></tr></thead>
+              <tbody>
+                <tr><td><strong>实际为正</strong></td><td>TP（真正例）</td><td>FN（假负例，漏报）</td></tr>
+                <tr><td><strong>实际为负</strong></td><td>FP（假正例，误报）</td><td>TN（真负例）</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="formula">
+            $$ \text{Precision} = \frac{TP}{TP+FP},\qquad \text{Recall} = \frac{TP}{TP+FN},\qquad F1 = \frac{2\times P\times R}{P+R} $$
+          </div>
+          <p>场景选择：垃圾邮件过滤要求<strong>精确率高</strong>（别误删正常邮件）；疾病筛查要求<strong>召回率高</strong>（别漏掉病人）。二者往往此消彼长。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：偏差、方差与正则化</div>
+          <p>模型误差可分解为三部分：<strong>偏差</strong>（欠拟合，模型太简单）、<strong>方差</strong>（过拟合，对训练数据太敏感）、<strong>噪声</strong>（不可避免）。</p>
+          <div class="formula">$$ \text{总误差} = \text{偏差}^2 + \text{方差} + \text{噪声} $$</div>
+          <p>模型简单 → 高偏差低方差；模型复杂 → 低偏差高方差。<strong>目标是找到平衡点</strong>。</p>
+          <p>正则化抑制过拟合：损失加惩罚项 $\text{Loss} + \lambda R(w)$，其中：</p>
+          <ul>
+            <li><strong>L1</strong>：$R(w)=\sum|w_i|$，产生<strong>稀疏解</strong>（很多权重为 0，可做特征选择）。</li>
+            <li><strong>L2</strong>：$R(w)=\sum w_i^2$，让权重整体变小但不为 0（权重衰减）。</li>
+          </ul>
+        </div>
+
+        <h3>6. 机器学习 vs 深度学习</h3>
+        <div class="vs-grid">
+          <div class="vs-col">
+            <h5>传统机器学习</h5>
+            <ul>
+              <li>需要<strong>人工设计特征</strong>（feature engineering）</li>
+              <li>数据量较小时也有效</li>
+              <li>可解释性强</li>
+            </ul>
+          </div>
+          <div class="vs-col">
+            <h5>深度学习</h5>
+            <ul>
+              <li><strong>自动学特征</strong>（特征表示学习）</li>
+              <li>需要大量数据 + 算力</li>
+              <li>端到端、效果好但可解释性弱</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 学习总览 ================= -->
+      <section id="overview">
+        <div class="section-kicker">🧭 第 0 步</div>
+        <h2>学习总览：抓住深度学习的主线</h2>
+        <p class="lead">深度学习本质是：<span class="key">用多层神经网络拟合从输入到输出的映射，通过梯度下降自动学习参数</span>。</p>
+
+        <div class="card">
+          <div class="card-title">🧩 三大核心要素（记住这条主线，后面全是细节填充）</div>
+          <ol class="steps">
+            <li>
+              <div class="step-title">模型（Model）</div>
+              <p>神经网络长什么样——它决定了"函数空间"有多大、能表达多复杂的映射。从感知机到 Transformer 都是模型结构的演进。</p>
+            </li>
+            <li>
+              <div class="step-title">损失函数（Loss）</div>
+              <p>怎么衡量"学得好不好"——定义了一个可优化的目标，把"学得好"变成一个数值。</p>
+            </li>
+            <li>
+              <div class="step-title">优化算法（Optimizer）</div>
+              <p>怎么更新参数让损失变小——梯度下降及其变体，是模型"学"起来的动力。</p>
+            </li>
+          </ol>
+        </div>
+
+        <div class="card info">
+          <div class="card-title">📌 学习建议</div>
+          <p>不要一上来背公式，先建立"模型 → 损失 → 优化"的骨架，遇到任何新模型都往这三个框里套，你会发现自己理解速度明显变快。</p>
+        </div>
+      </section>
+
+      <!-- ================= 神经网络基础 ================= -->
+      <section id="basics">
+        <div class="section-kicker">🧠 第 1 步</div>
+        <h2>神经网络基础：神经元、激活函数、损失</h2>
+        <p class="lead">一切模型的起点。理解单个神经元如何工作，以及"非线性"为什么至关重要。</p>
+
+        <h3>1.1 神经元与感知机</h3>
+        <p>单个神经元对输入 <code>x</code> 加权求和加偏置，再过激活函数：</p>
+        <div class="formula">$$ y = f(Wx + b) $$</div>
+        <ul>
+          <li><strong>感知机（Perceptron）</strong>：最原始的线性分类器，只能解决<strong>线性可分</strong>问题。经典反例是 <strong>XOR 问题</strong>——感知机无法拟合，这直接推动了多层网络（MLP）的诞生。</li>
+          <li><strong>MLP（多层感知机）</strong>：输入层 → 隐藏层 → 输出层，中间必须有<strong>非线性激活函数</strong>，否则多层线性叠加仍是线性变换，堆多深都没意义。</li>
+        </ul>
+
+        <div class="card warn">
+          <div class="card-title">⚠️ 面试考点</div>
+          <p><strong>为什么需要激活函数？</strong> 引入非线性，否则无论堆多少层，整体仍是输入的线性函数，表达能力受限（等价于单层）。</p>
+        </div>
+
+        <h3>1.2 常用激活函数对比</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>函数</th><th>公式</th><th>优点</th><th>缺点</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Sigmoid</strong></td><td>$\dfrac{1}{1+e^{-x}}$</td><td>平滑、可解释为概率</td><td>饱和区梯度消失、输出非零中心</td></tr>
+              <tr><td><strong>Tanh</strong></td><td>$\dfrac{e^x-e^{-x}}{e^x+e^{-x}}$</td><td>零中心</td><td>仍有饱和问题</td></tr>
+              <tr><td><strong>ReLU</strong></td><td>$\max(0,x)$</td><td>计算快、缓解梯度消失、稀疏激活</td><td>神经元死亡（负区间梯度为 0）</td></tr>
+              <tr><td><strong>Leaky ReLU</strong></td><td>$x\lt0$ 给个小斜率</td><td>解决死亡问题</td><td>需调参数</td></tr>
+              <tr><td><strong>GELU</strong></td><td>概率式加权</td><td>Transformer 默认激活</td><td>计算稍贵</td></tr>
+              <tr><td><strong>Softmax</strong></td><td>归一化为概率分布</td><td>多分类输出层必备</td><td>不用于隐藏层</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>1.3 损失函数</h3>
+        <ul>
+          <li>回归任务：<strong>MSE</strong> $\quad L = \dfrac{1}{n}\sum_i (y_i - \hat{y}_i)^2$</li>
+          <li>分类任务：<strong>交叉熵</strong> $\quad L = -\sum_i y_i \log \hat{y}_i$</li>
+        </ul>
+        <div class="card info">
+          <div class="card-title">💡 为什么分类用交叉熵而不用 MSE？</div>
+          <p>Softmax + 交叉熵组合的梯度形式非常漂亮（$\hat{y} - y$），不会因输出接近 0/1 而梯度消失；而 MSE + Sigmoid 在饱和区梯度趋近 0，训练极慢。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：softmax 为什么要减去最大值</div>
+          <p>设某样本的 logits 为 <code>[1000, 1001, 1002]</code>，直接算 $e^{1000}$ 会溢出成 <code>inf</code>（超出浮点范围），结果变成 <code>nan</code>。</p>
+          <p>解法：先减掉最大值 1002，得到 <code>[-2, -1, 0]</code>，再算：</p>
+          <div class="formula">$$ e^{-2}=0.135,\quad e^{-1}=0.368,\quad e^{0}=1.0 \quad\Rightarrow\quad \text{softmax} \approx [0.09,\ 0.245,\ 0.665] $$</div>
+          <p>因为 softmax 是"比例"，分子分母同除以 $e^{1002}$ 不改变结果，却把指数压到安全范围。<strong>这就是"数值稳定版 softmax"的原理</strong>。</p>
+        </div>
+      </section>
+
+      <!-- ================= 反向传播 ================= -->
+      <section id="backprop">
+        <div class="section-kicker">🔁 第 2 步</div>
+        <h2>反向传播：深度学习的发动机</h2>
+        <p class="lead">核心就是<strong>链式法则</strong>：损失对某层参数的梯度，等于从输出层一路乘回来的梯度乘积。<span class="pill-row"><span class="pill core">必考手推</span></span></p>
+
+        <h3>2.1 手推流程（两层网络为例）</h3>
+        <ol class="steps">
+          <li><div class="step-title">前向传播</div><p>算出每层的线性输出 $z^{(l)}$ 和激活值 $a^{(l)}$。</p></li>
+          <li><div class="step-title">输出层误差</div><p>$\delta^{(L)} = \nabla_a L \odot f'(z^{(L)})$</p></li>
+          <li><div class="step-title">逐层回传</div><p>$\delta^{(l)} = (W^{(l+1)T}\delta^{(l+1)}) \odot f'(z^{(l)})$</p></li>
+          <li><div class="step-title">参数梯度与更新</div><p>$\dfrac{\partial L}{\partial W^{(l)}} = \delta^{(l)} a^{(l-1)T}$，然后 $W \leftarrow W - \eta \dfrac{\partial L}{\partial W}$</p></li>
+        </ol>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：一个数值例子看懂反向传播</div>
+          <p>设最简单的网络：输入 $x=2$，目标 $y=4$，初始权重 $w_1=1,\ w_2=1$，损失用 MSE。</p>
+          <ol class="steps">
+            <li><div class="step-title">前向</div><p>隐藏层 $z_1 = w_1 x = 2$，激活 $a_1 = \text{ReLU}(z_1)=2$；输出 $\hat{y}=w_2 a_1=2$；损失 $L=(\hat{y}-y)^2=(2-4)^2=4$。</p></li>
+            <li><div class="step-title">输出层梯度</div><p>$\dfrac{\partial L}{\partial \hat{y}}=2(\hat{y}-y)=-4$，于是 $\dfrac{\partial L}{\partial w_2}=\dfrac{\partial L}{\partial \hat{y}}\cdot a_1=-4\times 2=-8$。</p></li>
+            <li><div class="step-title">隐藏层梯度</div><p>$\dfrac{\partial L}{\partial a_1}=\dfrac{\partial L}{\partial \hat{y}}\cdot w_2=-4\times 1=-4$；又因 $z_1>0$ 有 $\text{ReLU}'(z_1)=1$，故 $\dfrac{\partial L}{\partial w_1}=\dfrac{\partial L}{\partial a_1}\cdot 1\cdot x=-8$。</p></li>
+            <li><div class="step-title">更新</div><p>设学习率 $\eta=0.1$：$w_1 \leftarrow 1.8,\ w_2 \leftarrow 1.8$。权重都变大，输出从 2 逼近目标 4。</p></li>
+          </ol>
+          <p><strong>关键直觉</strong>：梯度为负说明"输出偏小，要把权重调大"；每个参数的梯度都是"它对损失的影响"逐层用链式法则累乘而来。</p>
+        </div>
+
+        <h3>2.2 梯度消失 / 梯度爆炸（高频）</h3>
+        <p>链式法则连乘：若每层梯度 &lt; 1，深网络梯度<strong>指数衰减</strong> → <strong>梯度消失</strong>（深层参数几乎不更新）；若 &gt; 1，<strong>指数爆炸</strong> → <strong>梯度爆炸</strong>。</p>
+        <div class="card">
+          <div class="card-title">🛡️ 缓解手段</div>
+          <p>ReLU 激活、<span class="key">残差连接</span>、BatchNorm / LayerNorm、梯度裁剪（clip）、合理初始化（<span class="key">Xavier / He</span>）。</p>
+        </div>
+      </section>
+
+      <!-- ================= 优化器 ================= -->
+      <section id="optimizer">
+        <div class="section-kicker">⚙️ 第 3 步</div>
+        <h2>优化器：让模型"学"起来</h2>
+        <p class="lead">梯度算出来了，怎么用它更新参数？不同优化器决定收敛速度与稳定性。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>优化器</th><th>更新方式</th><th>特点</th></tr></thead>
+            <tbody>
+              <tr><td><strong>SGD</strong></td><td>$W \leftarrow W - \eta g$</td><td>简单，但收敛慢、易震荡</td></tr>
+              <tr><td><strong>Momentum</strong></td><td>累积历史梯度方向</td><td>物理惯性，加速收敛、抑制震荡</td></tr>
+              <tr><td><strong>Adam</strong></td><td>一阶矩 + 二阶矩</td><td>每个参数自适应学习率，工程最常用（Transformer 标配）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：梯度下降一步步怎么走</div>
+          <p>设损失 $L(w)=w^2$，初始 $w=3$，学习率 $\eta=0.1$。梯度 $\dfrac{dL}{dw}=2w$，更新 $w \leftarrow w - \eta\cdot 2w = 0.8w$：</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>步数</th><th>当前 w</th><th>梯度 2w</th><th>更新后 w</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>3.0</td><td>6.0</td><td>2.4</td></tr>
+                <tr><td>1</td><td>2.4</td><td>4.8</td><td>1.92</td></tr>
+                <tr><td>2</td><td>1.92</td><td>3.84</td><td>1.536</td></tr>
+                <tr><td>…</td><td>…</td><td>…</td><td>→ 0</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>每次沿负梯度方向走一小步，$w$ 逐步逼近最小值 0。若学习率太大（如 $\eta=1$），$w$ 会在 3 和 -3 间震荡发散——这就是"学习率要合适"的原因。</p>
+        </div>
+
+        <div class="card tip">
+          <div class="card-title">💡 Adam 的 warmup</div>
+          <p>Adam 前期需要 <strong>warmup</strong>（学习率先小后大），因为二阶矩估计初期偏差较大。这是 Transformer 训练的重要细节。</p>
+        </div>
+      </section>
+
+      <!-- ================= CNN ================= -->
+      <section id="cnn">
+        <div class="section-kicker">👁️ 第 4 步</div>
+        <h2>CNN 卷积神经网络：理解 Transformer 的重要背景</h2>
+        <p class="lead">CNN 是"局部 + 权重共享"思想的典范，它的残差结构被 Transformer 原样继承。</p>
+
+        <h3>4.1 核心概念</h3>
+        <ul>
+          <li><strong>卷积</strong>：卷积核在输入上滑动做内积，<span class="key">参数共享</span>（一个核到处用）+ <span class="key">局部连接</span>（只看感受野内），大幅减少参数量。</li>
+          <li><strong>池化</strong>：MaxPool / AvgPool，降维、扩大感受野、提升平移不变性。</li>
+          <li><strong>经典网络</strong>：LeNet → AlexNet（ReLU + Dropout）→ VGG（小卷积核堆深）→ <span class="key">ResNet（残差连接）</span>。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：卷积怎么算</div>
+          <p>3×3 输入、2×2 卷积核，步长 1、无填充，输出是 2×2：</p>
+          <pre>输入：          核：
+1 2 3         1 0
+4 5 6         0 1
+7 8 9
+
+第一个输出 = 1×1 + 2×0 + 4×0 + 5×1 = 6
+滑到下一格 = 2×1 + 3×0 + 5×0 + 6×1 = 8
+以此类推得输出：  6   8
+               12  14</pre>
+          <p>卷积核在输入上"滑动"做内积，同一个核扫遍整张图——这就是<strong>参数共享</strong>：无论输入多大，参数只有核里那 4 个。</p>
+        </div>
+
+        <h3>4.2 ResNet 残差</h3>
+        <div class="formula">$$ y = F(x) + x $$</div>
+        <p>让网络至少能学"恒等映射"，解决深层网络退化问题。这个"加一条短路"的思想，正是 Transformer 里残差连接的来源。</p>
+      </section>
+
+      <!-- ================= RNN ================= -->
+      <section id="rnn">
+        <div class="section-kicker">🔗 第 5 步</div>
+        <h2>RNN → LSTM → Seq2Seq：Transformer 的直接前身</h2>
+        <p class="lead">处理序列数据的经典路线，理解它的缺陷才能理解 Transformer 为什么被发明。</p>
+
+        <h3>5.1 RNN</h3>
+        <p>每个时刻共享同一套权重：</p>
+        <div class="formula">$$ h_t = \tanh(W_{hh}h_{t-1} + W_{xh}x_t + b) $$</div>
+        <ul>
+          <li>训练用 <strong>BPTT（随时间反向传播）</strong>，本质还是链式法则。</li>
+          <li>致命问题：长序列梯度连乘 → <strong>梯度消失</strong>，学不会长距离依赖。</li>
+        </ul>
+
+        <h3>5.2 LSTM（记熟，面试常考）</h3>
+        <p>引入<strong>细胞状态 $C_t$</strong>（信息高速公路）和三个门：</p>
+        <div class="formula">
+          $$ f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \qquad \text{遗忘门} $$
+          $$ i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \qquad \text{输入门} $$
+          $$ \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) $$
+          $$ C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t $$
+          $$ o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o), \quad h_t = o_t \odot \tanh(C_t) \qquad \text{输出门} $$
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>门</th><th>作用</th></tr></thead>
+            <tbody>
+              <tr><td><strong>遗忘门 $f_t$</strong></td><td>决定丢掉多少旧信息</td></tr>
+              <tr><td><strong>输入门 $i_t$</strong></td><td>决定写入多少新信息</td></tr>
+              <tr><td><strong>输出门 $o_t$</strong></td><td>决定输出多少当前状态</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：用"记笔记"类比三个门</div>
+          <p>把细胞状态 $C_t$ 想成一本"长期笔记"，每个时刻 LSTM 做三件事：</p>
+          <ul>
+            <li><strong>遗忘门 $f_t$</strong>：翻看旧笔记，决定<strong>划掉</strong>哪些不再重要的内容（$f_t$ 接近 0 表示遗忘）。</li>
+            <li><strong>输入门 $i_t$</strong>：把当前新信息（候选 $\tilde{C}_t$）<strong>写进</strong>笔记多少。</li>
+            <li><strong>输出门 $o_t$</strong>：从笔记中<strong>提取</strong>多少内容作为当前输出 $h_t$。</li>
+          </ul>
+          <p>例子：句子「我昨天去了北京，___」。预测空格时，LSTM 需要"记住" <code>北京</code> 和 <code>昨天</code>（保留在 $C_t$），同时遗忘无关信息。正是这条贯穿始终的"高速公路" $C_t$，让信息能跨越长距离而不像 RNN 那样衰减。</p>
+        </div>
+
+        <h3>5.3 Seq2Seq（编码器-解码器）</h3>
+        <p>Encoder 把整个源序列压成一个<strong>固定长度向量</strong>，Decoder 再逐步生成。</p>
+        <div class="card danger">
+          <div class="card-title">⚠️ 瓶颈问题</div>
+          <p>所有信息挤在一个向量里，长句子信息丢失——这正是注意力机制要解决的痛点。</p>
+        </div>
+      </section>
+
+      <!-- ================= 注意力 ================= -->
+      <section id="attention">
+        <div class="section-kicker">🎯 第 6 步</div>
+        <h2>注意力机制：一切的转折点</h2>
+        <p class="lead">与其只依赖最后一个向量，不如让 Decoder 每一步<strong>直接"看"源序列的每个位置</strong>，按相关性加权取信息。</p>
+
+        <h3>缩放点积注意力（核心公式）</h3>
+        <div class="formula">$$ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V $$</div>
+        <ul>
+          <li><strong>Query（查询）</strong>："我要找什么"</li>
+          <li><strong>Key（键）</strong>："我有什么可被匹配"</li>
+          <li><strong>Value（值）</strong>："匹配后给什么内容"</li>
+        </ul>
+        <p>流程：Q 与每个 K 点积求相似度 → 除以 $\sqrt{d_k}$ → softmax 归一成权重 → 对 V 加权求和。</p>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：一个翻译例子</div>
+          <p>翻译「我 喜欢 猫」→ 生成英文 <code>I</code> 时，Decoder 当前词是 <code>I</code>：</p>
+          <ul>
+            <li><strong>Query</strong> = <code>I</code> 的查询向量（"我在找什么信息"）。</li>
+            <li><strong>Keys</strong> = 「我」「喜欢」「猫」三个词的键向量。</li>
+            <li>点积算相似度（示意值）：与"我" = 0.8，与"喜欢" = 0.3，与"猫" = 0.1。</li>
+            <li>softmax 归一成权重：[0.60, 0.30, 0.10]。</li>
+            <li>加权求和：<code>0.60×v(我) + 0.30×v(喜欢) + 0.10×v(猫)</code>。</li>
+          </ul>
+          <p>结果里"我"占大头，所以模型输出 <code>I</code> 而不是 <code>like</code> 或 <code>cat</code>。<strong>这就是注意力：不依赖固定向量，而是按相关性动态聚焦</strong>。</p>
+        </div>
+
+        <div class="card warn">
+          <div class="card-title">⚠️ 面试必问：为什么要除以 $\sqrt{d_k}$？</div>
+          <p>当 $d_k$ 很大时点积数值变大，softmax 进入饱和区（梯度趋近 0）。理论上若 q、k 各分量独立且均值为 0、方差为 1，则点积方差为 $d_k$，除以 $\sqrt{d_k}$ 后方差归一为 1，让 softmax 保持合适梯度。</p>
+        </div>
+      </section>
+
+      <!-- ================= Transformer ================= -->
+      <section id="transformer">
+        <div class="section-kicker">🚀 第 7 步</div>
+        <h2>Transformer 详解（核心）</h2>
+        <p class="lead">2017 年《Attention Is All You Need》提出，彻底改变 NLP 格局。<span class="pill-row"><span class="pill core">必考核心</span><span class="pill hot">最高频</span></span></p>
+
+        <h3>7.1 整体架构</h3>
+        <p>Encoder-Decoder 结构：</p>
+        <div class="vs-grid">
+          <div class="vs-col">
+            <h5>📥 Encoder（N 层）</h5>
+            <ul>
+              <li>多头自注意力（Multi-Head Self-Attention）</li>
+              <li>前馈网络（FFN）</li>
+              <li>各带残差 + LayerNorm</li>
+            </ul>
+          </div>
+          <div class="vs-col">
+            <h5>📤 Decoder（N 层）</h5>
+            <ul>
+              <li>Masked 多头自注意力</li>
+              <li>交叉注意力（Q 来自 Decoder，K/V 来自 Encoder）</li>
+              <li>FFN</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>7.2 多头注意力（Multi-Head Attention）</h3>
+        <p>把 $d_{model}$ 维的 Q/K/V 切成 $h$ 个头（原论文 $h=8$），每个头独立做注意力，最后拼接再过 $W^O$：</p>
+        <div class="formula">$$ \text{MultiHead}(Q,K,V) = \text{Concat}(head_1, \dots, head_h)\, W^O $$</div>
+        <p><strong>作用</strong>：每个头关注不同表示子空间（语法、指代、位置等），相当于多个注意力视角的集成；每个头维度减半，计算量不显著增加。</p>
+
+        <h3>7.3 位置编码（Positional Encoding）</h3>
+        <p>自注意力是<strong>集合操作</strong>（打乱顺序输出不变），不含顺序信息，必须显式注入位置：</p>
+        <div class="formula">
+          $$ PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d_{model}}}\right) $$
+          $$ PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{model}}}\right) $$
+        </div>
+        <p><strong>为什么用 sin/cos？</strong> 不同频率让不同维度编码不同尺度位置；$PE_{pos+k}$ 可由 $PE_{pos}$ 线性变换得到，<span class="key">利于学相对位置</span>；数值有界、可外推到更长序列。</p>
+        <div class="pill-row">
+          <span class="pill plus">加分：可学习位置嵌入（BERT）</span>
+          <span class="pill plus">加分：RoPE 旋转位置编码（LLaMA）</span>
+          <span class="pill plus">加分：ALiBi</span>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：位置编码长什么样</div>
+          <p>取 $d_{model}=4$（4 个维度），位置 pos=0 和 pos=1 的编码：</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>位置</th><th>维度0</th><th>维度1</th><th>维度2</th><th>维度3</th></tr></thead>
+              <tbody>
+                <tr><td>pos=0</td><td>sin(0)=0</td><td>cos(0)=1</td><td>sin(0)=0</td><td>cos(0)=1</td></tr>
+                <tr><td>pos=1</td><td>sin(1)≈0.84</td><td>cos(1)≈0.54</td><td>sin(0.01)≈0.01</td><td>cos(0.01)≈1.0</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>可以看到：<strong>越靠前的维度变化越快（高频），越靠后的维度变化越慢（低频）</strong>。这些编码向量直接加在词向量上，让模型感知到词的位置；不同维度不同频率，使近距离和远距离的位置差异都能被区分。</p>
+        </div>
+
+        <h3>7.4 FFN + 残差 + LayerNorm</h3>
+        <ul>
+          <li><strong>FFN</strong>：$FFN(x) = W_2 \cdot \text{GELU}(W_1 x + b_1) + b_2$，中间维度放大 4 倍，逐位置共享，提供非线性与更大参数空间。</li>
+          <li><strong>残差连接</strong>：解决深层梯度消失，梯度直通。</li>
+          <li><strong>LayerNorm</strong>：对<strong>每个样本</strong>的特征维做归一化。</li>
+        </ul>
+        <div class="card warn">
+          <div class="card-title">⚠️ 为什么用 LayerNorm 而不用 BatchNorm？</div>
+          <p>① BN 依赖 batch 统计量，序列长度可变时不稳定，训练/推理不一致；② LN 每样本独立归一化，不受 batch 大小与序列长度影响；③ 自注意力对数值尺度敏感，LN 稳定训练、允许更大学习率。</p>
+        </div>
+
+        <h3>7.5 Decoder 的两个 Mask（常考）</h3>
+        <ul>
+          <li><strong>Padding Mask</strong>：遮掉 padding 位置，避免无效位置参与注意力。</li>
+          <li><strong>Look-ahead Mask（因果掩码）</strong>：生成第 $t$ 个词时只能看到前 $t-1$ 个位置，防止"偷看未来"。实现：上三角置 $-\infty$，softmax 后概率为 0。</li>
+        </ul>
+
+        <h3>7.6 Transformer vs RNN（高频对比）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>维度</th><th>RNN / LSTM</th><th>Transformer</th></tr></thead>
+            <tbody>
+              <tr><td>并行性</td><td>必须逐时刻串行</td><td><strong>完全并行</strong>（一次看到全部输入）</td></tr>
+              <tr><td>长距离依赖</td><td>梯度消失，难捕捉</td><td>注意力直接连任意两位置，$O(1)$ 路径</td></tr>
+              <tr><td>计算复杂度</td><td>单步 $O(d^2)$，串行 $n$ 步</td><td>自注意力 $O(n^2 d)$，可并行</td></tr>
+              <tr><td>位置信息</td><td>天然有时序</td><td>需要位置编码</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card tip">
+          <div class="card-title">💡 长序列的痛点与解法</div>
+          <p>自注意力 $O(n^2)$ 是长序列瓶颈 → 衍生出稀疏注意力、线性注意力、<span class="key">FlashAttention</span>（IO 优化，LLM 标配）等。</p>
+        </div>
+      </section>
+
+      <!-- ================= LLM ================= -->
+      <section id="llm">
+        <div class="section-kicker">🤖 第 8 步</div>
+        <h2>从 Transformer 到 BERT / GPT</h2>
+        <p class="lead">Transformer 之后的两大分支，构成了今天大模型的两大范式。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>模型</th><th>结构</th><th>上下文</th><th>预训练任务</th><th>擅长</th></tr></thead>
+            <tbody>
+              <tr><td><strong>BERT</strong></td><td>只用 Encoder</td><td>双向</td><td>MLM（完形填空）+ NSP</td><td>理解：分类、抽取</td></tr>
+              <tr><td><strong>GPT</strong></td><td>只用 Decoder</td><td>单向（自回归）</td><td>预测下一个 token</td><td>生成：当今 LLM 基石</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">🧬 核心范式转变</div>
+          <p><strong>预训练 + 微调 / 提示学习</strong>：大模型 + 海量数据 + 算力，先学通用表示，再适配下游任务。</p>
+        </div>
+      </section>
+
+      <!-- ================= 面试题库 ================= -->
+      <section id="interview">
+        <div class="section-kicker">📝 保研面试</div>
+        <h2>面试题库（点击展开答案）</h2>
+        <p class="lead">按类别整理高频题，<strong>点击卡片</strong>查看详细答案。建议先自己口述，再对照答案查漏补缺。</p>
+
+        <h3>一、数学基础</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">线代</span><span class="qa-q">特征值 / 特征向量的几何意义是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">$Ax=\lambda x$，特征向量是在 $A$ 变换下<strong>只伸缩、不改变方向</strong>的向量，伸缩倍数即特征值。应用：特征值分解、SVD 在 PCA 降维、矩阵低秩近似中的核心地位。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">微积分</span><span class="qa-q">泰勒展开有什么用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用多项式逼近复杂函数。关键理解：<strong>梯度下降本质是一阶泰勒展开</strong>——沿负梯度方向函数值下降最快。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">优化</span><span class="qa-q">拉格朗日乘子法是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">带等式约束的极值问题，构造 $L = f + \lambda g$，令梯度为 0 求解。它是 <strong>SVM 推导的核心</strong>。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">概率</span><span class="qa-q">极大似然估计（MLE）？为什么 MSE 和交叉熵都能从 MLE 推出？</span><span class="qa-toggle">▼</span></div><div class="qa-body">MLE 是找参数使观测数据出现概率最大。假设误差服从<strong>高斯分布</strong> → 最大化对数似然等价于最小化 MSE；假设类别服从<strong>类别分布</strong> → 等价于最小化交叉熵。这是损失函数的概率视角。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">概率</span><span class="qa-q">大数定律 vs 中心极限定理？</span><span class="qa-toggle">▼</span></div><div class="qa-body">大数定律：样本均值<strong>收敛于</strong>期望；中心极限定理：大量独立同分布随机变量之和<strong>近似正态分布</strong>。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">概率</span><span class="qa-q">条件概率与贝叶斯公式？</span><span class="qa-toggle">▼</span></div><div class="qa-body">$P(A|B)=\dfrac{P(B|A)P(A)}{P(B)}$，刻画先验/后验/似然的关系，是朴素贝叶斯分类器的基础。</div></div>
+
+        <h3>二、机器学习基础</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">泛化</span><span class="qa-q">过拟合是什么？怎么解决？</span><span class="qa-toggle">▼</span></div><div class="qa-body">训练好、测试差。解决：更多数据、正则化（L1/L2）、Dropout、早停、数据增强、降低模型复杂度。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">正则</span><span class="qa-q">L1 和 L2 正则化的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">L1 产生<strong>稀疏解</strong>（把不重要权重压到 0，可做特征选择，几何上是菱形角点）；L2 让权重整体变小但不为 0（圆形，权重衰减 Weight Decay）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">统计</span><span class="qa-q">偏差-方差权衡？</span><span class="qa-toggle">▼</span></div><div class="qa-body">偏差高 = 欠拟合（模型太简单）；方差高 = 过拟合（太复杂）。两者此消彼长，需要找到平衡点。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">评估</span><span class="qa-q">K 折交叉验证怎么做？</span><span class="qa-toggle">▼</span></div><div class="qa-body">数据分 K 份，轮流取 1 份做验证集、其余做训练集，跑 K 次取平均。比单次划分更可靠，充分利用数据。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">模型</span><span class="qa-q">SVM 的核心思想？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>最大化间隔</strong>（找到使两类间隔最大的超平面）；<strong>核技巧</strong>把低维非线性问题映射到高维线性可分。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">模型</span><span class="qa-q">逻辑回归 vs 线性回归？</span><span class="qa-toggle">▼</span></div><div class="qa-body">逻辑回归输出概率、用 sigmoid + 交叉熵，用于<strong>分类</strong>；线性回归输出连续值、用 MSE，用于<strong>回归</strong>。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">数据</span><span class="qa-q">样本不平衡怎么办？</span><span class="qa-toggle">▼</span></div><div class="qa-body">重采样（过采样/欠采样）、调整类别权重、Focal Loss、阈值调整。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">聚类</span><span class="qa-q">K-Means 流程与缺点？K 怎么选？</span><span class="qa-toggle">▼</span></div><div class="qa-body">随机初始化中心 → 分配样本 → 更新中心 → 迭代。缺点：需预设 K、对初始点敏感、非凸。K 选择：肘部法则、轮廓系数。</div></div>
+
+        <h3>三、深度学习基础</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">手推</span><span class="qa-q">手推两层神经网络的反向传播？</span><span class="qa-toggle">▼</span></div><div class="qa-body">见上文"反向传播"章节的 4 步流程：前向 → 输出层误差 → 逐层回传 → 梯度更新。务必能在白板上默写。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">激活</span><span class="qa-q">为什么 ReLU 比 Sigmoid 好？</span><span class="qa-toggle">▼</span></div><div class="qa-body">缓解梯度消失、计算快、稀疏激活；缺点：<strong>神经元死亡</strong>（负区间梯度为 0，可用 Leaky ReLU 缓解）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">优化</span><span class="qa-q">Adam 有什么缺点？</span><span class="qa-toggle">▼</span></div><div class="qa-body">可能不收敛到最优（二阶矩估计问题）、需要 warmup；后期可用 SGD 微调提升泛化。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">正则</span><span class="qa-q">Dropout 的原理？</span><span class="qa-toggle">▼</span></div><div class="qa-body">训练时随机丢弃神经元，相当于训练多个子网络的<strong>集成</strong>；测试时乘 $(1-p)$ 保持期望一致。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">归一化</span><span class="qa-q">BatchNorm 的作用和原理？</span><span class="qa-toggle">▼</span></div><div class="qa-body">对 batch 内样本归一化，缓解内部协变量偏移，允许大学习率；训练用 batch 统计量、推理用滑动平均（这是它与 LN 的重要区别）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">CNN</span><span class="qa-q">CNN 感受野怎么算？</span><span class="qa-toggle">▼</span></div><div class="qa-body">逐层累加：$RF_l = RF_{l-1} + (k-1)\prod_{i \lt l} s_i$，其中 $k$ 为核大小、$s$ 为步长。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">CNN</span><span class="qa-q">1×1 卷积的作用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">通道升降维、跨通道信息融合、减少参数（等价全连接，如 ResNet 瓶颈结构）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">模型</span><span class="qa-q">ResNet 为什么有效？</span><span class="qa-toggle">▼</span></div><div class="qa-body">残差结构让梯度可以"抄近路"直接回传，缓解梯度消失；且网络至少能学恒等映射，避免退化。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">训练</span><span class="qa-q">学习率怎么调？</span><span class="qa-toggle">▼</span></div><div class="qa-body">warmup、阶梯衰减、余弦退火；太大震荡不收敛、太小收敛慢。</div></div>
+
+        <h3>四、Transformer 深度追问（拉开差距的关键）</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">Q、K、V 分别是什么？为什么需要三个？</span><span class="qa-toggle">▼</span></div><div class="qa-body">Q 是当前词的查询，K 是供匹配的键，V 是被提取的内容，三者来自同一输入的不同线性变换。若 Q=K 只有一种匹配模式；三分开让<strong>"匹配方式"与"输出内容"解耦</strong>，才能支持多头多样化的匹配。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">为什么除以 $\sqrt{d_k}$？</span><span class="qa-toggle">▼</span></div><div class="qa-body">点积方差随 $d_k$ 增大，softmax 进入饱和区梯度消失；除以 $\sqrt{d_k}$ 把方差拉回 1，保持合适梯度。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">多头注意力相比单头的优势？</span><span class="qa-toggle">▼</span></div><div class="qa-body">多个子空间、多视角，不显著增加计算量（每头维度减半）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">为什么需要位置编码？</span><span class="qa-toggle">▼</span></div><div class="qa-body">自注意力是置换不变的（排列等变），不含时序信息，必须显式注入位置。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">为什么位置编码用 sin/cos？能否用 one-hot？</span><span class="qa-toggle">▼</span></div><div class="qa-body">sin/cos 有相对位置线性关系、数值有界、可外推。one-hot 能但无法泛化到长序列、维度爆炸。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">Transformer 与 RNN 的复杂度对比？</span><span class="qa-toggle">▼</span></div><div class="qa-body">自注意力 $O(n^2 d)$ 可并行 vs RNN $O(nd^2)$ 串行；Transformer 优势在并行、劣势在超长序列。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">Decoder 为什么要 masked self-attention？</span><span class="qa-toggle">▼</span></div><div class="qa-body">自回归生成时不能看到未来 token，否则信息泄漏。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">LayerNorm vs BatchNorm，为什么 Transformer 选 LN？</span><span class="qa-toggle">▼</span></div><div class="qa-body">LN 每样本独立归一化，不受 batch 大小和序列长度影响，训练/推理一致；BN 依赖 batch 统计量在变长序列下不稳定。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">残差连接的作用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">缓解梯度消失、让深层可训练、信息直通。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">BERT 和 GPT 的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">双向 vs 单向、MLM vs 自回归、理解 vs 生成、Encoder vs Decoder。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">进阶</span><span class="qa-q">【加分】RoPE / KV Cache / FlashAttention / MoE？</span><span class="qa-toggle">▼</span></div><div class="qa-body">
+          <ul>
+            <li><strong>RoPE</strong>：旋转位置编码，通过旋转矩阵把相对位置编码进注意力，LLaMA 等在用。</li>
+            <li><strong>KV Cache</strong>：生成时缓存历史 K/V，避免重复计算，大幅加速解码。</li>
+            <li><strong>FlashAttention</strong>：优化注意力计算的 HBM 读写（IO 优化），不改变数学结果但显著提速省显存。</li>
+            <li><strong>MoE</strong>：混合专家，每次只激活部分专家，扩大参数的同时控制计算量。</li>
+          </ul>
+          能答上任意一个都是大加分项，建议至少准备其中两个。</div></div>
+
+        <h3>五、手撕代码 / 手推题</h3>
+        <div class="card">
+          <div class="card-title">🖥️ 现场考核清单</div>
+          <ul>
+            <li>手写 softmax（注意数值稳定性：减去最大值）。</li>
+            <li>手写 scaled dot-product attention（numpy 版）。</li>
+            <li>手写交叉熵损失（含 softmax 合并版）。</li>
+            <li>手推两层神经网络反向传播（白板默写）。</li>
+            <li>经典算法题：快排、二分、链表反转、二叉树遍历、DP（背包 / LIS / 编辑距离）。</li>
+            <li>给 PyTorch 代码问输出维度 / 报错原因。</li>
+          </ul>
+        </div>
+
+        <h3>六、项目与科研</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">介绍一个你做过的项目？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用 <strong>STAR 法则</strong>：背景（Situation）→ 任务（Task）→ 方案（Action）→ 结果（Result）。重点讲清"为什么这么做"，而不是罗列做了什么。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">项目创新点在哪？</span><span class="qa-toggle">▼</span></div><div class="qa-body">哪怕是复现，也要说清"你比 baseline 改进/理解深在哪"，一个具体的改进点胜过泛泛而谈。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">遇到的最大困难？怎么解决？</span><span class="qa-toggle">▼</span></div><div class="qa-body">典型：模型不收敛 → 排查数据、学习率、归一化、梯度；显存不够 → 减小 batch、梯度累积、混合精度。体现排查问题的思路。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">论文</span><span class="qa-q">读过什么论文？讲讲这篇论文。</span><span class="qa-toggle">▼</span></div><div class="qa-body">强烈建议精读 1-2 篇：<strong>Attention Is All You Need、ResNet、BERT</strong> 任选其一，能讲清动机、方法、实验、局限四个维度。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">你的工作还有什么可改进的地方？</span><span class="qa-toggle">▼</span></div><div class="qa-body">提前准备好"局限 + 改进方向"，展现批判性思维，这是高分回答的关键。</div></div>
+
+        <h3>七、英语环节</h3>
+        <div class="card">
+          <ul>
+            <li>英文自我介绍（1-2 分钟，背熟）。</li>
+            <li>Why do you choose this university / this lab?</li>
+            <li>What is your research interest? Why?</li>
+            <li>用英文简述一个学过的模型（Can you briefly introduce the Transformer?）</li>
+            <li>读一段英文论文摘要并翻译（平时多读摘要练）。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================= 学习路线 ================= -->
+      <section id="roadmap">
+        <div class="section-kicker">🗺️ 保研人专属</div>
+        <h2>学习路线与资源</h2>
+        <p class="lead">从数学热身到 Transformer 落地，一条可执行的进阶路径。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>阶段</th><th>内容</th><th>资源</th></tr></thead>
+            <tbody>
+              <tr><td>1. 数学热身</td><td>线性代数、概率论基础</td><td>3Blue1Brown 线代/微积分系列</td></tr>
+              <tr><td>2. 入门</td><td>神经网络原理、反向传播</td><td>吴恩达《深度学习》专项课程</td></tr>
+              <tr><td>3. 动手</td><td>PyTorch 基础、跑通 MNIST/CIFAR</td><td>李沐《动手学深度学习》(d2l.ai)</td></tr>
+              <tr><td>4. 进阶</td><td>CNN、RNN、经典论文</td><td>CS231n + 精读 ResNet/LSTM</td></tr>
+              <tr><td>5. 重点</td><td>Transformer 原文逐段精读</td><td>《Attention Is All You Need》+ 李沐论文精读</td></tr>
+              <tr><td>6. 落地</td><td>小项目（文本分类 / 简单翻译 / 复现 GPT 小模型）</td><td>HuggingFace 教程</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card tip">
+          <div class="card-title">🎯 给保研人的三个建议</div>
+          <ol>
+            <li><strong>精读 1-2 篇顶会论文</strong>并准备 10 分钟讲解——"讲论文"环节是最大加分项。</li>
+            <li><strong>把 Transformer 每个公式自己推一遍、白板默写一遍</strong>——今年最高频考点。</li>
+            <li>准备一个<strong>能讲清楚的项目</strong>，重点讲"为什么这么做"而不是"做了什么"。</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ================= 生成式模型与扩散模型 ================= -->
+      <section id="diffusion">
+        <div class="section-kicker">🌈 第 9 步</div>
+        <h2>生成式模型与扩散模型</h2>
+        <p class="lead">从 VAE、GAN 到今天统治地位的扩散模型（Diffusion），生成式 AI 是保研 AI 方向的高频加分项。</p>
+
+        <h3>1. 生成式模型谱系</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>模型</th><th>核心思想</th><th>优劣</th></tr></thead>
+            <tbody>
+              <tr><td><strong>VAE</strong></td><td>编码器学潜在分布，解码器重建，ELBO 训练</td><td>稳定、可插值；生成偏模糊</td></tr>
+              <tr><td><strong>GAN</strong></td><td>生成器 vs 判别器极小极大博弈</td><td>清晰锐利；训练不稳定、易模式崩塌</td></tr>
+              <tr><td><strong>扩散 / DDPM</strong></td><td>逐步加噪再学去噪（反转 Markov 链）</td><td>质量高、稳定；采样慢（多步）</td></tr>
+              <tr><td><strong>流模型</strong></td><td>可逆变换精确似然</td><td>似然精确；结构受限</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2. 扩散模型（DDPM）直觉</h3>
+        <ul>
+          <li><strong>前向（加噪）</strong>：按预定方差_schedule 逐步往数据加高斯噪声，约 $T$ 步后变成纯噪声。</li>
+          <li><strong>反向（去噪）</strong>：训练网络 $\epsilon_\theta$ 预测每一步加入的噪声，推理时从噪声出发逐步去噪生成样本。</li>
+          <li><strong>训练目标</strong>：简化为预测噪声的 MSE：$L=\mathbb{E}\big[\|\epsilon-\epsilon_\theta(x_t,t)\|^2\big]$。</li>
+        </ul>
+        <div class="card info">
+          <div class="card-title">💡 为什么扩散模型这么强</div>
+          <p>它把"一次性生成复杂分布"拆成"很多步简单的去噪"，每一步都是易学的回归；配合 U-Net 与良好的噪声 schedule，既稳定又能产出极高保真度样本——这正是 Stable Diffusion / Sora 的底层的思路。</p>
+        </div>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：DDIM 如何加速采样</div>
+          <p>标准 DDPM 需约 1000 步迭代，慢。DDIM 把 Markov 链改成<strong>非马尔可夫的确定性过程</strong>，可在 20~50 步内得到近似同质量样本——用"牺牲随机性换速度"的思路大幅提速，是实用扩散模型的标配。</p>
+        </div>
+
+        <h3>🌈 生成式模型面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">对比</span><span class="qa-q">GAN 和扩散模型的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">GAN 用对抗训练一次生成，快但易不稳定/模式崩塌；扩散模型用"加噪-去噪"多步生成，更稳定、质量更高，但采样慢（需多步迭代，DDIM 等可加速）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">原理</span><span class="qa-q">扩散模型的训练目标是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">前向逐步加高斯噪声，训练网络预测所加噪声，损失是预测噪声与真实噪声的 MSE（等价于变分下界 ELBO 的简化）。推理时从纯噪声出发反复去噪得到样本。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">加速</span><span class="qa-q">怎么加速扩散模型的采样？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① DDIM 用确定性非马尔可夫过程减少步数；② 知识蒸馏（Consistency Models）一步/少步生成；③ 潜空间扩散（如 Stable Diffusion 在 VAE 潜空间而非像素上扩散）降低维度。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">VAE</span><span class="qa-q">VAE 的 ELBO 是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">证据下界 $\log p(x)\ge \mathbb{E}_{q(z|x)}[\log p(x|z)] - KL(q(z|x)\|p(z))$：第一项是重建项（解码像不像），第二项是正则项（潜变量逼近先验）。训练即最大化 ELBO。</div></div>
+      </section>
+
+      <!-- ================= 大模型进阶 ================= -->
+      <section id="llm-adv">
+        <div class="section-kicker">🧠 第 10 步</div>
+        <h2>大模型进阶：RLHF / RAG / Agent</h2>
+        <p class="lead">Transformer 之后，大模型（LLM）的能力来自"预训练 + 对齐 + 工具调用"三件套。</p>
+
+        <h3>1. 预训练与微调</h3>
+        <ul>
+          <li><strong>预训练</strong>：海量语料上自回归预测下一 token，获得通用语言能力。</li>
+          <li><strong>SFT（监督微调）</strong>：用指令-回答数据教模型"按指令办事"。</li>
+          <li><strong>LoRA / QLoRA</strong>：低秩适配，只训练小矩阵即可微调，省显存。</li>
+        </ul>
+
+        <h3>2. RLHF（人类反馈强化学习）</h3>
+        <div class="formula">$$ \max_\pi\; \mathbb{E}_{x\sim D}\big[\,r_\phi(x,y)\,\big] - \beta\, KL(\pi_\theta(y|x)\,\|\,\pi_{ref}(y|x)\big) $$</div>
+        <ol class="steps">
+          <li><div class="step-title">训练奖励模型</div><p>用人类对回答的偏好排序训练 $r_\phi$。</p></li>
+          <li><div class="step-title">PPO 优化</div><p>以奖励模型为信号、KL 约束防跑偏，强化学习微调策略。</p></li>
+          <li><div class="step-title">（替代）DPO</div><p>直接偏好优化，绕过显式奖励模型，更简单稳定。</p></li>
+        </ol>
+
+        <h3>3. RAG（检索增强生成）</h3>
+        <ul>
+          <li>流程：问题 → 向量检索相关文档 → 拼进 prompt → 让 LLM 基于检索内容回答。</li>
+          <li>解决<strong>知识过时、幻觉、私有数据</strong>问题；关键在切分、向量库（如 FAISS）与重排。</li>
+        </ul>
+
+        <h3>4. Agent（智能体）</h3>
+        <ul>
+          <li>让 LLM 调用<strong>工具/函数</strong>、做<strong>规划-反思-执行</strong>循环完成多步任务。</li>
+          <li>组件：规划（任务分解）、记忆（短期/长期）、工具（搜索/代码/API）、反思（自我纠错）。</li>
+          <li>代表范式：ReAct（推理+行动交错）、Reflection（反思迭代）。</li>
+        </ul>
+
+        <div class="card tip">
+          <div class="card-title">💡 和你的科研结合</div>
+          <p>你做<strong>图神经网络金融反欺诈</strong>，可谈：用 GNN 做特征/检索、用 LLM-Agent 做可解释风控决策、用 RAG 接入法规知识库——把前沿大模型能力与你的方向结合，是导师很看重的"交叉创新"点。</p>
+        </div>
+
+        <h3>🧠 大模型进阶面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">对齐</span><span class="qa-q">RLHF 是什么？为什么需要它？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用人类偏好训练奖励模型，再用强化学习（PPO）让模型输出更符合人类期望。预训练只学"像文本"，RLHF 让模型"有用、无害、诚实"。DPO 是更简单的直接偏好优化替代。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">RAG</span><span class="qa-q">RAG 解决了 LLM 的哪些问题？</span><span class="qa-toggle">▼</span></div><div class="qa-body">缓解知识过时（训练截止）、幻觉（无依据的编造）、无法访问私有数据三大痛点。流程是检索相关文档→拼进上下文→生成，依赖好的切分、向量检索与重排。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">微调</span><span class="qa-q">LoRA 为什么省资源？</span><span class="qa-toggle">▼</span></div><div class="qa-body">冻结原权重，只在每层旁插入低秩矩阵 $BA$（$r\ll d$）训练，可训练参数仅约原模型的 0.1%~1%，显存与存储大幅降低，且可多适配器热插拔。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Agent</span><span class="qa-q">什么是 LLM Agent？核心组件？</span><span class="qa-toggle">▼</span></div><div class="qa-body">能自主调用工具、规划并反思完成任务的系统。核心：规划（拆任务）、记忆（上下文/长期）、工具（搜索/代码/API）、反思（自我纠错）。ReAct 让推理与行动交错进行。</div></div>
+      </section>
+
+      <!-- ================= Transformer 工程优化 ================= -->
+      <section id="engine">
+        <div class="section-kicker">⚡ 第 11 步</div>
+        <h2>Transformer 工程优化与推理加速</h2>
+        <p class="lead">模型训得出来还要跑得动。面试常问：长序列怎么省显存？推理怎么提速？MoE 是什么？</p>
+
+        <h3>1. FlashAttention</h3>
+        <p>标准注意力需把 $N\times N$ 注意力矩阵写回 HBM，IO 贵。<strong>FlashAttention 在 SRAM 内分块计算</strong>并<strong>在线归一化</strong>，不显式构造大矩阵，IO 量从 $O(N^2)$ 降到近似线性，显存与速度双优——是当今 LLM 标配。</p>
+
+        <h3>2. KV Cache</h3>
+        <p>自回归生成时，每新生成一个 token 都要重算前面所有 token 的 K/V。<strong>KV Cache 把历史 K/V 缓存</strong>起来，避免重复计算，推理延迟从 $O(n^2)$ 降到 $O(n)$（随序列线性增长），是解码加速的关键。</p>
+
+        <h3>3. 量化与蒸馏</h3>
+        <ul>
+          <li><strong>量化</strong>：FP16/BF16 → INT8/INT4，压缩显存、提速，需兼顾精度（如 GPTQ、AWQ）。</li>
+          <li><strong>知识蒸馏</strong>：用小模型学大模型输出（软标签），在边缘端部署。</li>
+          <li><strong>剪枝</strong>：去掉不重要的权重/头，稀疏化。</li>
+        </ul>
+
+        <h3>4. MoE（混合专家）</h3>
+        <div class="formula">$$ y = \sum_{i=1}^E G(x)_i\, E_i(x),\qquad G \text{ 为稀疏门控} $$</div>
+        <p>每个 token 只激活少数专家（如 8 选 2），<strong>参数量巨大但单次计算量可控</strong>，是 Mixtral、GPT-4 等大模型扩展能力的主流结构。</p>
+
+        <h3>⚡ 工程优化面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">注意力</span><span class="qa-q">FlashAttention 为什么更快更省显存？</span><span class="qa-toggle">▼</span></div><div class="qa-body">标准注意力把 $N\times N$ 矩阵写入 HBM，IO 昂贵。FlashAttention 在高速 SRAM 内分块计算并在线 softmax，不 materialize 大矩阵，IO 从平方级降到近线性，既省显存又提速，且数学结果一致。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">推理</span><span class="qa-q">KV Cache 是什么？为什么能加速解码？</span><span class="qa-toggle">▼</span></div><div class="qa-body">自回归生成每步都要历史 K/V，KV Cache 把已算的 K/V 缓存，免去重复计算。虽随序列变长显存增长，但把每步复杂度从 $O(n^2)$ 降到 $O(n)$，是 LLM 解码提速的关键。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">压缩</span><span class="qa-q">模型量化是什么？有什么取舍？</span><span class="qa-toggle">▼</span></div><div class="qa-body">把权重/激活从 FP16 降到 INT8/INT4，显存与带宽大幅下降、推理更快，但可能损失精度（需校准/混合精度）。常用 GPTQ、AWQ 等保持可接受精度。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">MoE</span><span class="qa-q">MoE 混合专家模型的核心思想？</span><span class="qa-toggle">▼</span></div><div class="qa-body">每层含多个专家前馈网络，由门控网络给每个 token 只选激活少数几个（如 8 选 2）。参数量可以很大，但单样本计算量只略增，从而在可控算力下大幅提升模型容量——是主流大模型扩展范式。</div></div>
+      </section>
+
+    </div>
+
+    <footer class="footer">
+      深度学习 · 从基础到 Transformer 与大模型 · 计算机保研面试指南 —— 祝保研顺利 🎓
+    </footer>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/python.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
