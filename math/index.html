@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数学 · 计算机保研复习指南</title>
+  <meta name="description" content="计算机保研人专属数学复习：线性代数、概率统计、微积分、离散数学核心知识点 + 高频面试题库。" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="read-progress" id="readProgress"></div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <a class="brand" href="#top">
+        <span class="brand-logo">MATH</span>
+        <span>
+          <span class="brand-name">数学复习指南</span><br />
+          <span class="brand-sub">保研 · 四大数学支柱</span>
+        </span>
+      </a>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-group-label">数学支柱</div>
+      <a class="nav-link" href="#overview"><span class="nav-icon">🧭</span> 复习总览</a>
+      <a class="nav-link" href="#linear"><span class="nav-icon">📐</span> 线性代数</a>
+      <a class="nav-link" href="#prob"><span class="nav-icon">🎲</span> 概率统计</a>
+      <a class="nav-link" href="#calc"><span class="nav-icon">∫</span> 微积分</a>
+      <a class="nav-link" href="#discrete"><span class="nav-icon">🔢</span> 离散数学</a>
+      <a class="nav-link" href="#numerical"><span class="nav-icon">🧮</span> 数值与统计推断</a>
+      <a class="nav-link" href="#stoch"><span class="nav-icon">📈</span> 随机与最优化</a>
+      <div class="nav-group-label">面试</div>
+      <a class="nav-link" href="#interview"><span class="nav-icon">📝</span> 综合面试题</a>
+      <a class="nav-link" href="#roadmap"><span class="nav-icon">🗺️</span> 复习路线</a>
+    </nav>
+    <div class="sidebar-foot">为计算机保研人整理 · 持续更新</div>
+  </aside>
+
+  <!-- ============ 主内容 ============ -->
+  <div class="content" id="top">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="菜单">☰</button>
+      <span class="topbar-title" id="topbarTitle">数学 · 保研复习指南</span>
+      <div class="topbar-actions">
+        <a class="btn btn-ghost" href="../index.html" style="padding:8px 14px;font-size:13px;">🏠 导航首页</a>
+        <button class="icon-btn" id="themeBtn" aria-label="切换主题">🌙</button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge">🎓 计算机保研 · 数学备考</span>
+        <h1>四大数学支柱<br />知识点 + 面试题一站式复习</h1>
+        <p>面向计算机保研人系统梳理：线性代数、概率统计、微积分、离散数学。数学是机器学习与算法的底层语言，面试常从"推导 + 几何直觉"层面深挖，这里帮你把公式背后的"为什么"讲清楚。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#overview">开始复习 →</a>
+          <a class="btn btn-ghost" href="#interview">直接刷面试题</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">4</div><div class="stat-label">数学支柱</div></div>
+          <div class="stat"><div class="stat-num">78</div><div class="stat-label">面试题详解</div></div>
+          <div class="stat"><div class="stat-num">1 条</div><div class="stat-label">完整复习路线</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+
+      <!-- ================= 总览 ================= -->
+      <section id="overview">
+        <div class="section-kicker">🧭 复习总览</div>
+        <h2>计算机保研：数学怎么复习</h2>
+        <p class="lead">保研面试里的数学不是"考计算"，而是考<span class="key">概念理解与几何直觉</span>——尤其会用线性代数和概率刻画机器学习模型。</p>
+
+        <div class="card">
+          <div class="card-title">📊 四门数学的考查权重（保研面试经验）</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>数学分支</th><th>重要度</th><th>核心考点</th></tr></thead>
+              <tbody>
+                <tr><td><strong>线性代数</strong></td><td>⭐⭐⭐⭐⭐</td><td>特征值/特征向量、SVD、正定矩阵、PCA；深度学习矩阵运算基础</td></tr>
+                <tr><td><strong>概率统计</strong></td><td>⭐⭐⭐⭐⭐</td><td>贝叶斯、常见分布、MLE/MAP、信息论、大数/中心极限定理</td></tr>
+                <tr><td><strong>微积分</strong></td><td>⭐⭐⭐⭐</td><td>梯度/Jacobian/Hessian、泰勒展开、拉格朗日乘子、凸优化</td></tr>
+                <tr><td><strong>离散数学</strong></td><td>⭐⭐⭐</td><td>集合与关系、图论、逻辑、组合数学、群论入门</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card info">
+          <div class="card-title">📌 复习方法论</div>
+          <p>① 每个公式问自己"<strong>几何意义是什么</strong>"；② 把数学和机器学习串起来（特征值→PCA，概率→MLE，梯度→优化）；③ 高频题先口述再对答案，重点练"现场推导"。</p>
+        </div>
+      </section>
+
+      <!-- ================= 线性代数 ================= -->
+      <section id="linear">
+        <div class="section-kicker">📐 支柱一</div>
+        <h2>线性代数</h2>
+        <p class="lead">深度学习的"母语"。矩阵乘法、特征值分解、SVD 贯穿整个机器学习。</p>
+
+        <h3>1. 矩阵基础运算</h3>
+        <ul>
+          <li><strong>矩阵乘法</strong>：$(AB)_{ij}=\sum_k A_{ik}B_{kj}$；<span class="key">不满足交换律</span>（一般 $AB\neq BA$），但满足结合律与分配律。</li>
+          <li><strong>转置</strong>：$(AB)^T = B^T A^T$；$(A^T)^T=A$。</li>
+          <li><strong>行列式</strong>：$\det(AB)=\det(A)\det(B)$；$\det(A)=0 \iff A$ 不可逆（列线性相关）。几何意义：线性变换对"体积"的缩放因子。</li>
+          <li><strong>迹</strong>：$\operatorname{tr}(A)=\sum_i A_{ii}$，满足 $\operatorname{tr}(AB)=\operatorname{tr}(BA)$。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：矩阵乘法为什么不能交换</div>
+          <p>设 $A$ 是 $2\times3$（把 3 维映射到 2 维），$B$ 是 $3\times2$（把 2 维映射到 3 维）。$AB$ 是 $2\times2$（合法），但 $BA$ 是 $3\times3$（也"合法"）——两者形状都不同，更不可能相等。即便都是方阵，交换后结果通常也不同。这反映矩阵代表"变换的顺序"，先旋转再缩放 ≠ 先缩放再旋转。</p>
+        </div>
+
+        <h3>2. 逆矩阵与高斯消元</h3>
+        <ul>
+          <li>$A^{-1}$ 存在当且仅当 $A$ 满秩（行列式非零）。</li>
+          <li>$(AB)^{-1} = B^{-1}A^{-1}$（顺序反转）。</li>
+          <li>求解 $Ax=b$ 可用<span class="key">高斯消元</span>（化为上三角再回代），复杂度 $O(n^3)$。</li>
+        </ul>
+
+        <h3>3. 特征值与特征向量（必考）</h3>
+        <div class="formula">$$ Ax = \lambda x,\qquad x\neq 0 $$</div>
+        <p>$x$ 叫特征向量，$\lambda$ 叫特征值。<strong>几何意义</strong>：在变换 $A$ 下，特征向量只被<span class="key">伸缩、不改变方向</span>，伸缩倍数即特征值。</p>
+        <ul>
+          <li><strong>对称矩阵</strong>可正交对角化：$A = Q\Lambda Q^T$，其中 $Q$ 是正交矩阵（列是单位特征向量），$\Lambda$ 是对角元为特征值。</li>
+          <li>$\det(A)=\prod \lambda_i$；$\operatorname{tr}(A)=\sum \lambda_i$。</li>
+          <li>矩阵正定 $\iff$ 所有特征值 $>0$。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：特征值怎么算</div>
+          <p>对 $A=\begin{pmatrix}2&1\\1&2\end{pmatrix}$，解特征方程 $\det(A-\lambda I)=0$：</p>
+          <div class="formula">$$ (2-\lambda)^2 - 1 = 0 \;\Rightarrow\; \lambda_1=3,\ \lambda_2=1 $$</div>
+          <p>对应特征向量：$v_1=(1,1)^T$（被拉长 3 倍），$v_2=(1,-1)^T$（方向不变、长度不变）。这说明该变换沿 $(1,1)$ 方向拉伸、沿 $(1,-1)$ 方向不动——<strong>特征向量揭示了变换的"主轴"</strong>。</p>
+        </div>
+
+        <h3>4. 奇异值分解 SVD</h3>
+        <div class="formula">$$ A = U\Sigma V^T $$</div>
+        <ul>
+          <li>$U,\ V$ 是正交矩阵，$\Sigma$ 是对角矩阵（对角元为<strong>奇异值</strong> $\sigma_1\ge\sigma_2\ge\cdots\ge0$）。</li>
+          <li><strong>任意矩阵</strong>都能做 SVD（不要求方阵或可逆），是特征值分解的推广。</li>
+          <li>应用：PCA 降维、伪逆 $A^+=V\Sigma^+U^T$、低秩近似（保留前 $k$ 个奇异值 = 最优低秩逼近，Eckart–Young 定理）、图像压缩。</li>
+        </ul>
+
+        <h3>5. 正定矩阵与二次型</h3>
+        <ul>
+          <li>对称矩阵 $A$ <strong>正定</strong>：$\forall x\neq0,\ x^T A x>0$。</li>
+          <li>等价判定：特征值全正 / 顺序主子式全正 / Cholesky 分解存在。</li>
+          <li>意义：损失函数的 Hessian 正定 ⇒ 该点是<strong>局部极小</strong>；正定矩阵保证二次函数"开口向上"。</li>
+        </ul>
+
+        <h3>6. PCA 的数学原理</h3>
+        <p>把数据中心化后，求协方差矩阵 $C=\frac{1}{n}X^TX$，对其做<span class="key">特征值分解</span>，取最大特征值对应的特征向量作为第一主成分——它指向"<strong>数据方差最大</strong>"的方向。等价于对 $X$ 做 SVD，左奇异向量即主成分方向。</p>
+
+        <h3>7. 矩阵的四大分解</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>分解</th><th>形式</th><th>适用</th><th>用途</th></tr></thead>
+            <tbody>
+              <tr><td><strong>LU</strong></td><td>$A=LU$<br>（下三角 × 上三角）</td><td>方阵、顺序主子式非零</td><td>高斯消元矩阵化、一次分解多次解右端</td></tr>
+              <tr><td><strong>QR</strong></td><td>$A=QR$<br>（正交 × 上三角）</td><td>任意 $m\times n$</td><td>最小二乘、数值稳定求解、特征值迭代</td></tr>
+              <tr><td><strong>特征值</strong></td><td>$A=Q\Lambda Q^T$</td><td>对称方阵</td><td>对角化、主成分、二次型判定</td></tr>
+              <tr><td><strong>SVD</strong></td><td>$A=U\Sigma V^T$</td><td>任意矩阵</td><td>降维、伪逆、低秩近似、压缩</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：LU 分解怎么来的</div>
+          <p>高斯消元本质是用一系列初等（消元）矩阵左乘 $A$ 得到上三角 $U$，把这些初等矩阵的逆乘起来就是下三角 $L$。例如对 $A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$，用第一行消去 $(2,1)$ 处的 1，乘数 $l_{21}=1/2$，于是 $L=\begin{pmatrix}1&0\\1/2&1\end{pmatrix}$，$U=\begin{pmatrix}2&1\\0&5/2\end{pmatrix}$，验证 $LU=A$ 成立。LU 的好处：一次分解、多次解 $Ax=b_i$ 只需前向/后向回代。</p>
+        </div>
+
+        <h3>8. 四个基本子空间</h3>
+        <p>对任意 $A\in\mathbb{R}^{m\times n}$，有四个相互关联的子空间：</p>
+        <ul>
+          <li><strong>列空间</strong> $C(A)$：所有 $Ax$ 能张成的向量，维数 = $\operatorname{rank}(A)$。</li>
+          <li><strong>零空间（核）</strong> $N(A)$：$Ax=0$ 的解空间，维数 = $n-\operatorname{rank}(A)$。</li>
+          <li><strong>行空间</strong> $C(A^T)$：行向量张成，维数 = $\operatorname{rank}(A)$。</li>
+          <li><strong>左零空间</strong> $N(A^T)$：$A^Ty=0$ 的解，维数 = $m-\operatorname{rank}(A)$。</li>
+        </ul>
+        <div class="card info">
+          <div class="card-title">💡 正交补与可解性</div>
+          <p>关键关系：$N(A)\perp C(A^T)$，$N(A^T)\perp C(A)$。<strong>方程组 $Ax=b$ 有解 ⇔ $b\in C(A)$</strong>；若 $b$ 落在 $C(A)$ 的正交补（即 $N(A^T)$）里，则无解。这是"最小二乘"要解决的矛盾方程情形——找 $C(A)$ 中离 $b$ 最近的点。</p>
+        </div>
+
+        <h3>9. Gram–Schmidt 正交化</h3>
+        <p>把一组线性无关向量变成正交（再单位化即标准正交）基：</p>
+        <div class="formula">$$ u_1=v_1,\quad u_k=v_k-\sum_{j<k}\frac{\langle v_k,u_j\rangle}{\|u_j\|^2}u_j,\quad e_k=\frac{u_k}{\|u_k\|} $$</div>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体例子</div>
+          <p>对 $v_1=(1,1)^T,\ v_2=(1,0)^T$：$u_1=(1,1)^T$；$\langle v_2,u_1\rangle=1,\ \|u_1\|^2=2$，故 $u_2=(1,0)^T-\frac12(1,1)^T=(\tfrac12,-\tfrac12)^T$。单位化得 $e_1=(1/\sqrt2,1/\sqrt2)^T,\ e_2=(1/\sqrt2,-1/\sqrt2)^T$——正好是前面特征值例子里的主轴方向，并非巧合：对称矩阵的特征向量天然正交。</p>
+        </div>
+
+        <h3>10. PCA 全流程计算（带数字）</h3>
+        <p>用 3 个样本、2 维特征演示：数据点 $(1,2),(2,1),(3,3)$。</p>
+        <ul>
+          <li><strong>① 中心化</strong>：均值 $\bar x=(2,2)$，去中心后 $X_c=(-1,0),\,(0,-1),\,(1,1)$。</li>
+          <li><strong>② 协方差矩阵</strong>：$C=\frac13 X_c^TX_c=\begin{pmatrix}2/3&-1/3\\-1/3&2/3\end{pmatrix}$。</li>
+          <li><strong>③ 特征值</strong>：解 $\det(C-\lambda I)=0\Rightarrow \lambda_1=1,\ \lambda_2=1/3$。</li>
+          <li><strong>④ 特征向量</strong>：对应 $(1,1)^T$ 与 $(1,-1)^T$，单位化。</li>
+          <li><strong>⑤ 降维</strong>：取 $\lambda_1$ 对应方向投影，第一主成分保留方差比例 $1/(1+1/3)=75\%$。</li>
+        </ul>
+        <div class="card tip">
+          <div class="card-title">💡 为什么 PCA 要"先中心化"</div>
+          <p>协方差矩阵 $X^TX/n$ 只在均值归零时才度量"方差/协方差"。不中心化会得到被均值主导、偏离主轴的方向，降维失去意义。中心化不改变方向轴（只平移），但让协方差正确刻画散布。</p>
+        </div>
+
+        <h3>11. 矩阵微积分速查（深度学习必备）</h3>
+        <p>把标量对向量/矩阵的求导规则记住，反向传播就是它的链式展开：</p>
+        <div class="formula">$$ \frac{\partial}{\partial x}(a^Tx)=a,\quad \frac{\partial}{\partial x}(x^TAx)=(A+A^T)x\ (\text{对称 }A\Rightarrow 2Ax) $$</div>
+        <div class="formula">$$ \frac{\partial}{\partial x}\|Ax-b\|^2=2A^T(Ax-b),\quad \frac{\partial}{\partial W}\operatorname{tr}(W^TX)=X $$</div>
+        <ul>
+          <li><strong>关键直觉</strong>：$\|Ax-b\|^2$ 对 $x$ 的梯度是 $2A^T(Ax-b)$——最小二乘正规方程 $A^TAx=A^Tb$ 正是令其为 0。</li>
+          <li><strong>链式法则（矩阵版）</strong>：若 $L=f(g(x))$，则 $\nabla_x L = (J_g)^T\nabla_g f$，逐层转置相乘即反向传播。</li>
+        </ul>
+
+        <h3>12. 相似、合同与等价：三大矩阵关系辨析（必考易混）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>关系</th><th>定义</th><th>保持的不变量</th><th>适用对象</th></tr></thead>
+            <tbody>
+              <tr><td><strong>等价</strong></td><td>$B=PAQ$（$P,Q$ 可逆）</td><td>秩</td><td>任意同型矩阵，经初等变换可达</td></tr>
+              <tr><td><strong>相似</strong></td><td>$B=P^{-1}AP$</td><td>秩、迹、行列式、特征值</td><td>方阵；同一变换在不同基下</td></tr>
+              <tr><td><strong>合同</strong></td><td>$B=P^{T}AP$</td><td>秩、正负惯性指数</td><td>对称方阵；二次型变换</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：三者的包含关系</div>
+          <p>相似、合同都蕴含等价（都是"可逆变换"下的关系），但相似用 $P^{-1}$、合同用 $P^T$，方向不同。当变换矩阵 $P$ 是<strong>正交矩阵</strong>（$P^{-1}=P^T$）时，相似与合同重合——这正是<strong>实对称矩阵正交相似对角化</strong>：$Q^TAQ=\Lambda$ 既是相似也是合同，对角元是特征值，同时把二次型化成了标准形。</p>
+        </div>
+
+        <h3>13. 二次型、惯性定理与正定判定</h3>
+        <ul>
+          <li><strong>二次型</strong>：$f=x^TAx$（$A$ 为实对称矩阵）。<strong>标准形</strong>只含平方项（系数即特征值）；<strong>规范形</strong>的平方项系数只取 $\pm1$ 与 $0$。</li>
+          <li><strong>惯性定理</strong>：化标准形时，正平方项个数（<span class="key">正惯性指数 $p$</span>）与负平方项个数（<strong>负惯性指数 $q$</strong>）唯一确定，$p+q=$ 秩，$p-q=$ 符号差。</li>
+          <li><strong>正定判定（四条等价）</strong>：① 特征值全 $>0$；② 正惯性指数 $=n$；③ 各阶顺序主子式 $>0$（Sylvester 准则）；④ $A$ 与单位阵合同（$A=C^TC$）。</li>
+        </ul>
+
+        <h3>📐 线性代数面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是矩阵？矩阵和向量是什么关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">矩阵是 $m\times n$ 个数排成的矩形数表，可看作一个<strong>线性变换</strong>（把向量映射成新向量）。向量可看作特殊的矩阵：列向量是 $n\times1$、行向量是 $1\times n$。矩阵乘法 $Ax$ 即"用变换 $A$ 作用在向量 $x$ 上"。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是行列式？几何意义是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">行列式 $\det(A)$ 是把方阵映射成一个<strong>数</strong>的函数。几何意义：线性变换对"面积/体积"的<strong>缩放因子</strong>；$\det(A)=0$ 表示变换把空间压缩到更低维度（不可逆）。$\det(AB)=\det(A)\det(B)$，$\det(A)=\prod\lambda_i$。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是线性相关和线性无关？</span><span class="qa-toggle">▼</span></div><div class="qa-body">若存在一组<strong>不全为 0</strong> 的系数使 $\sum c_i v_i=0$，则这组向量线性相关；否则线性无关。几何上，线性相关意味着某个向量可由其余向量线性表示、张成的空间不会因此变大；线性无关的 $n$ 个 $n$ 维向量张成整个 $n$ 维空间。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是线性变换？</span><span class="qa-toggle">▼</span></div><div class="qa-body">把向量映射成向量的函数，且满足两条：① 直线映射后仍是直线；② 原点保持不动。等价于满足 $T(au+bv)=aT(u)+bT(v)$。矩阵乘法就是线性变换的代数表示，这也是"矩阵=变换"这一直觉的来源。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">概念</span><span class="qa-q">矩阵的秩有哪几种理解？满秩意味着什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">三种：① 最高阶非零子式的阶数；② 行（列）向量组极大无关组所含向量个数；③ 化为行阶梯形后的非零行数。满秩 $\iff$ 可逆 $\iff$ 非奇异 $\iff$ 特征值全不为 0 $\iff$ 行列式不为 0 $\iff$ 可表为有限个初等矩阵的乘积。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">性质</span><span class="qa-q">矩阵的迹是什么？和特征值什么关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">迹是对角线元素之和 $\operatorname{tr}(A)=\sum_i A_{ii}$，等于所有特征值之和（含重根）。$\operatorname{tr}(AB)=\operatorname{tr}(BA)$，$\det(A)=\prod \lambda_i$。迹在 PCA 方差解释、矩阵微分中大量应用。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">辨析</span><span class="qa-q">等价、相似、合同三种矩阵关系有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">等价 $B=PAQ$ 保秩（任意矩阵）；相似 $B=P^{-1}AP$ 保秩/迹/行列式/特征值（方阵，同一变换不同基）；合同 $B=P^TAP$ 保秩与正负惯性指数（对称矩阵，二次型变换）。相似、合同都蕴含等价；当 $P$ 正交时相似=合同。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">二次型</span><span class="qa-q">什么是二次型、标准形、惯性定理？</span><span class="qa-toggle">▼</span></div><div class="qa-body">二次型 $f=x^TAx$（$A$ 对称）。标准形只含平方项（系数为特征值）；惯性定理指出正/负惯性指数 $p,q$ 唯一（$p+q=$ 秩）。正定判定等价于：特征值全正 / 正惯性指数 $=n$ / 顺序主子式全正 / 与单位阵合同。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">方程</span><span class="qa-q">线性方程组有解、无解、唯一解怎么判定？</span><span class="qa-toggle">▼</span></div><div class="qa-body">记系数矩阵秩 $r(A)$、增广矩阵秩 $r(\tilde A)$、变量数 $n$。$r(A)<r(\tilde A)$ 无解；$r(A)=r(\tilde A)=n$ 唯一解；$r(A)=r(\tilde A)<n$ 无穷多解。齐次方程 $Ax=0$ 有非零解 $\iff r(A)<n$。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">正交</span><span class="qa-q">正交矩阵的定义与几何意义？</span><span class="qa-toggle">▼</span></div><div class="qa-body">$A^TA=AA^T=E$（即 $A^{-1}=A^T$），列向量是两两正交的单位向量组。几何意义：正交矩阵对应<strong>旋转或镜像</strong>，保持长度与夹角不变，$\|Ax\|=\|x\|$。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">概念</span><span class="qa-q">特征值、特征向量的几何意义？</span><span class="qa-toggle">▼</span></div><div class="qa-body">$Ax=\lambda x$ 表示在变换 $A$ 下，特征向量 $x$ 只被伸缩（倍数 $\lambda$）不改变方向。几何上揭示了线性变换的"主轴"与拉伸比例。应用：PCA、矩阵对角化、动力系统稳定性分析。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">分解</span><span class="qa-q">特征值分解和 SVD 的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">特征值分解要求方阵且可对角化；SVD 对任意矩阵都成立（$A=U\Sigma V^T$），且只要求正交矩阵。SVD 更通用，是 PCA、伪逆、低秩近似的基础。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">判定</span><span class="qa-q">怎么判断一个矩阵是否正定？</span><span class="qa-toggle">▼</span></div><div class="qa-body">三种等价方法：① 所有特征值 > 0；② 各阶顺序主子式 > 0（Sylvester 准则）；③ 存在 Cholesky 分解 $A=LL^T$。正定保证二次型 $x^TAx>0$，对应凸函数。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">性质</span><span class="qa-q">$\det(A)=0$ 说明什么？矩阵乘法可交换吗？</span><span class="qa-toggle">▼</span></div><div class="qa-body">$\det(A)=0$ 说明矩阵奇异（不可逆、列线性相关、存在非零零空间向量）。矩阵乘法一般不交换：$AB\neq BA$，转置满足 $(AB)^T=B^TA^T$、$(AB)^{-1}=B^{-1}A^{-1}$。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">应用</span><span class="qa-q">PCA 的数学原理是什么？为什么用协方差矩阵？</span><span class="qa-toggle">▼</span></div><div class="qa-body">PCA 找数据方差最大的正交方向。协方差矩阵 $C=\frac{1}{n}X^TX$ 的特征向量就是这些主方向，最大特征值对应第一主成分。对 $X$ 做 SVD 与对 $C$ 做特征值分解等价。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">复杂度</span><span class="qa-q">矩阵乘法复杂度？有哪些优化？</span><span class="qa-toggle">▼</span></div><div class="qa-body">朴素矩阵乘法 $O(n^3)$。Strassen 算法降到约 $O(n^{2.81})$；深度学习用分块、GPU 并行、低秩近似进一步加速。理解复杂度有助于分析 Transformer 等模型的计算量。</div></div>
+      </section>
+
+      <!-- ================= 概率统计 ================= -->
+      <section id="prob">
+        <div class="section-kicker">🎲 支柱二</div>
+        <h2>概率统计</h2>
+        <p class="lead">机器学习的"语言"。从贝叶斯到信息论，几乎所有损失函数都有概率解释。</p>
+
+        <h3>1. 条件概率与贝叶斯</h3>
+        <div class="formula">$$ P(A\mid B)=\frac{P(A\cap B)}{P(B)},\qquad P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)} $$</div>
+        <ul>
+          <li><strong>全概率公式</strong>：$P(B)=\sum_i P(B\mid A_i)P(A_i)$（$\{A_i\}$ 完备事件组）。</li>
+          <li><strong>贝叶斯</strong>把"先验 $P(A)$"更新为"后验 $P(A\mid B)$"，是朴素贝叶斯分类器、MAP 估计的核心。</li>
+        </ul>
+
+        <h3>2. 期望、方差、协方差</h3>
+        <div class="formula">$$ E[X]=\sum_x xP(x),\quad \operatorname{Var}(X)=E[(X-\mu)^2]=E[X^2]-E[X]^2 $$</div>
+        <div class="formula">$$ \operatorname{Cov}(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]=E[XY]-E[X]E[Y] $$</div>
+        <p>相关系数 $\rho=\dfrac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}\in[-1,1]$，衡量线性相关程度。</p>
+
+        <h3>3. 常见分布</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>分布</th><th>参数</th><th>典型场景</th></tr></thead>
+            <tbody>
+              <tr><td><strong>伯努利</strong></td><td>$p$</td><td>单次二分类（硬币）</td></tr>
+              <tr><td><strong>二项</strong></td><td>$n,p$</td><td>$n$ 次独立实验中成功次数</td></tr>
+              <tr><td><strong>高斯/正态</strong></td><td>$\mu,\sigma^2$</td><td>噪声、中心极限定理的归宿</td></tr>
+              <tr><td><strong>泊松</strong></td><td>$\lambda$</td><td>单位时间内稀有事件发生次数</td></tr>
+              <tr><td><strong>指数</strong></td><td>$\lambda$</td><td>无记忆性的等待时间</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>4. 大数定律与中心极限定理</h3>
+        <ul>
+          <li><strong>大数定律</strong>：样本均值随样本量增大<strong>收敛于</strong>期望（频率稳定于概率）。</li>
+          <li><strong>中心极限定理（CLT）</strong>：大量独立同分布随机变量之和（标准化后）<strong>近似服从标准正态分布</strong>，与原始分布无关。这是"为什么高斯分布无处不在"的根本原因。</li>
+        </ul>
+
+        <h3>5. 极大似然估计 MLE 与 MAP</h3>
+        <div class="formula">$$ \hat{\theta}_{MLE}=\arg\max_\theta \prod_i P(x_i\mid\theta),\quad \hat{\theta}_{MAP}=\arg\max_\theta P(\theta)\prod_i P(x_i\mid\theta) $$</div>
+        <div class="card info">
+          <div class="card-title">💡 MLE 与损失函数的关系</div>
+          <p>假设误差服从<strong>高斯分布</strong> → 最大化对数似然等价于最小化 <strong>MSE</strong>；假设类别服从<strong>类别分布</strong> → 等价于最小化 <strong>交叉熵</strong>。这就是损失函数的概率视角（详见深度学习指南）。</p>
+        </div>
+
+        <h3>6. 信息论基础</h3>
+        <div class="formula">$$ H(X)=-\sum_x P(x)\log P(x),\quad D_{KL}(P\|Q)=\sum_x P(x)\log\frac{P(x)}{Q(x)} $$</div>
+        <ul>
+          <li><strong>熵 $H$</strong>：随机变量的"不确定性"，分布越均匀熵越大。</li>
+          <li><strong>交叉熵</strong>：用 $Q$ 编码 $P$ 的平均代价，分类损失即用此。</li>
+          <li><strong>KL 散度</strong>：衡量两分布差异（非负、不对称）；$D_{KL}(P\|Q)\ge0$，当且仅当 $P=Q$ 取 0。</li>
+          <li><strong>互信息</strong>：$I(X;Y)=H(X)-H(X\mid Y)$，衡量变量间的依赖。</li>
+        </ul>
+
+        <h3>7. 多维随机变量与联合分布</h3>
+        <ul>
+          <li><strong>联合分布</strong>：$P(X=x,Y=y)$ 或密度 $f(x,y)$；边缘分布由求和/积分得到：$P(X=x)=\sum_y P(X=x,Y=y)$。</li>
+          <li><strong>链式法则</strong>：$P(X_1,\dots,X_n)=\prod_i P(X_i\mid X_1,\dots,X_{i-1})$——朴素贝叶斯、隐马尔可夫都靠它拆解。</li>
+          <li><strong>独立性</strong>：$X,Y$ 独立 ⇔ $P(X,Y)=P(X)P(Y)$ ⇔ $f(x,y)=f_X(x)f_Y(y)$，此时 $\operatorname{Cov}(X,Y)=0$（反之不成立）。</li>
+          <li><strong>协方差矩阵</strong>：$\Sigma_{ij}=\operatorname{Cov}(X_i,X_j)$，对称半正定；<strong>多元高斯</strong>由均值向量与协方差矩阵完全决定。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：独立一定不相关，不相关未必独立</div>
+          <p>若 $X\sim U(-1,1)$ 且 $Y=X^2$，则 $E[XY]=E[X^3]=0$、$E[X]E[Y]=0$，故 $\operatorname{Cov}=0$（不相关）；但 $Y$ 完全由 $X$ 决定，显然不独立。这说明协方差只能捕捉"线性关系"，非线性依赖躲得开它——这正是互信息比协方差更通用之处。</p>
+        </div>
+
+        <h3>8. 共轭先验（Conjugate Priors）</h3>
+        <p><strong>定义</strong>：若先验分布与后验分布属于同一族，则称该先验是似然的"<strong>共轭先验</strong>"。它让贝叶斯更新变成"更新参数"的解析可算操作，无需数值积分。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>似然</th><th>共轭先验</th><th>后验</th></tr></thead>
+            <tbody>
+              <tr><td>伯努利 / 二项</td><td>Beta$(\alpha,\beta)$</td><td>Beta$(\alpha+s,\beta+f)$（$s$ 成功、$f$ 失败）</td></tr>
+              <tr><td>泊松</td><td>Gamma$(a,b)$</td><td>Gamma$(a+\sum x_i,b+n)$</td></tr>
+              <tr><td>高斯（方差已知）</td><td>高斯</td><td>高斯（精度相加）</td></tr>
+              <tr><td>多项</td><td>Dirichlet</td><td>Dirichlet（计数加先验）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card info">
+          <div class="card-title">💡 直观理解 Beta 先验</div>
+          <p>把 Beta$(\alpha,\beta)$ 想成"先验已见过 $\alpha-1$ 次成功、$\beta-1$ 次失败"。抛硬币 3 次全正面，后验仍是 Beta——参数只做加法就完成更新，这正是共轭的优雅之处，也是 LDA 主题模型用 Dirichlet 的原因。</p>
+        </div>
+
+        <h3>9. 三门问题（Monty Hall）</h3>
+        <p>三扇门后一车两羊。你选 1 号，主持人（知道门后）打开一扇有羊的门（如 3 号），问你是否换到 2 号。用<strong>贝叶斯</strong>算清楚：</p>
+        <ul>
+          <li>设车在 $C_i$，你选 $1$，主持人开 $O=3$。</li>
+          <li>若车就在 1（你初选对）：$P(O=3\mid C_1)=1/2$（主持人随机开 2 或 3）。</li>
+          <li>若车在 2：$P(O=3\mid C_2)=1$（他只能开 3）。</li>
+          <li>若车在 3：主持人不可能开 3，概率 0。</li>
+        </ul>
+        <div class="formula">$$ P(C_1\mid O=3)=\frac{1/2\cdot 1/3}{1/2\cdot1/3+1\cdot1/3+0}=\frac13,\quad P(C_2\mid O=3)=\frac23 $$</div>
+        <p><strong>结论</strong>：换门把胜率从 $1/3$ 提升到 $2/3$。直觉：你初选对的概率是 $1/3$，所以"车在另两扇门"的总概率是 $2/3$，主持人帮你排除了其中一扇羊门，这 $2/3$ 全压到剩下那扇。</p>
+
+        <h3>10. 大数定律的三种表述（切比雪夫 / 伯努利 / 辛钦）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>定律</th><th>条件</th><th>结论</th></tr></thead>
+            <tbody>
+              <tr><td><strong>切比雪夫</strong></td><td>独立、方差有共同上界</td><td>样本均值依概率收敛于期望</td></tr>
+              <tr><td><strong>伯努利</strong></td><td>二项（$n$ 重独立重复）试验</td><td>事件频率收敛于概率</td></tr>
+              <tr><td><strong>辛钦</strong></td><td>独立同分布、期望存在（<span class="key">不要求方差</span>）</td><td>算术均值依概率收敛于期望</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 切比雪夫不等式（不知道分布也能估）</div>
+          <p>只要知道均值 $\mu$ 与方差 $\sigma^2$，对任意 $\varepsilon>0$：$P(|X-\mu|\ge\varepsilon)\le \sigma^2/\varepsilon^2$。它不依赖具体分布，是大数定律证明的关键工具，也是"离均值越远越不可能"的定量表述。</p>
+        </div>
+
+        <h3>11. 经典随机数智力题（面试高频）</h3>
+        <div class="deepdive">
+          <div class="deepdive-title">🎯 用不均匀硬币产生等概率</div>
+          <p>硬币正面概率 $p\neq1/2$，如何得到公平的 0/1？——<strong>抛两次</strong>：$01$ 记作 0、$10$ 记作 1（两者概率都是 $p(1-p)$），$00/11$ 丢弃重来。扩展到等概率 $1/n$ 同理（如三次中恰一个 1 的序列 $001,010,100$ 等概率）。</p>
+        </div>
+        <div class="deepdive">
+          <div class="deepdive-title">🎯 均匀分布生成高斯分布（Box–Muller）</div>
+          <p>取两个独立均匀随机数 $U_1,U_2\sim U(0,1)$，令 $Z_1=\sqrt{-2\ln U_1}\cos(2\pi U_2)$、$Z_2=\sqrt{-2\ln U_1}\sin(2\pi U_2)$，则 $Z_1,Z_2$ 是两个独立的标准正态随机变量。这是许多语言里高斯随机数生成器的底层原理。</p>
+        </div>
+
+        <h3>🎲 概率统计面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是随机变量？和普通变量有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">普通变量取值是确定的（如 $x=3$）；随机变量取值<strong>带概率</strong>，是"把随机试验结果映射到数"的函数，如掷骰子点数 $X$ 可取 1~6 且各有 $1/6$ 概率。分离散型（取有限/可列值）与连续型（取区间值）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是概率？概率有哪些基本性质？</span><span class="qa-toggle">▼</span></div><div class="qa-body">概率是事件发生可能性的度量，取值 $[0,1]$。基本性质：非负性、规范性 $P(\Omega)=1$、可加性（互斥事件概率相加）；加法公式 $P(A\cup B)=P(A)+P(B)-P(AB)$。古典概型 $=$ 有利结果数 ÷ 总结果数。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是概率密度函数？它和概率一样吗？</span><span class="qa-toggle">▼</span></div><div class="qa-body">连续型随机变量取值无穷多、单点概率为 0，用<strong>概率密度函数 $f(x)$</strong> 描述：$f(x)$ 本身不是概率（可大于 1），在区间上<strong>积分</strong>才是概率 $P(a\le X\le b)=\int_a^b f(x)dx$，且 $\int f=1$。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是期望和方差？分别描述什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">期望 $E[X]=\sum xP(x)$ 是随机变量的"加权平均"，描述<strong>集中趋势</strong>；方差 $Var(X)=E[(X-\mu)^2]=E[X^2]-E[X]^2$ 描述<strong>离散程度</strong>（偏离均值的程度）。标准差是方差的平方根，与原始数据同量纲。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">大数定律</span><span class="qa-q">辛钦和切比雪夫大数定律有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">辛钦要求<strong>独立同分布</strong>、期望存在，<strong>不要求方差</strong>；切比雪夫要求独立、方差存在且有共同上界。二者都说明样本均值依概率收敛于期望，伯努利大数定律是频率收敛于概率的特例。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">关系</span><span class="qa-q">独立、互斥、不相关三者什么关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">独立 $P(AB)=P(A)P(B)$ 是"互不影响"；互斥 $AB=\varnothing$ 是"不能同时发生"——若 $P(A),P(B)>0$，互斥则必不独立、独立则必不互斥。不相关只指协方差为 0（无线性关系）：独立 $\Rightarrow$ 不相关，反之不成立（如 $Y=X^2$）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">概型</span><span class="qa-q">古典概型和几何概型有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">古典概型：<strong>有限</strong>个等可能结果（概率 = 有利结果数 / 总数，如掷骰子）；几何概型：<strong>无限</strong>个等可能结果（概率 = 测度之比，如布丰投针、随机落点）。区别在于样本空间是否有限。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">分布</span><span class="qa-q">独立高斯随机变量的和/乘积是什么分布？</span><span class="qa-toggle">▼</span></div><div class="qa-body">独立高斯变量之和仍是高斯（均值、方差分别相加）：$X_i\sim N(\mu_i,\sigma_i^2)\Rightarrow \sum X_i\sim N(\sum\mu_i,\sum\sigma_i^2)$；乘积一般<strong>不是</strong>高斯（是高斯乘以修正贝塞尔分布），不能想当然。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">智力题</span><span class="qa-q">一枚不均匀硬币，如何产生等概率的 0/1？</span><span class="qa-toggle">▼</span></div><div class="qa-body">抛两次：$01\to0$、$10\to1$（概率均 $p(1-p)$ 相等），$00$、$11$ 丢弃重抛。原理是利用对称序列等概率；扩展到等概率 $1/n$ 同理。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">不等式</span><span class="qa-q">切比雪夫不等式是什么？有什么用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">$P(|X-\mu|\ge\varepsilon)\le\sigma^2/\varepsilon^2$。它<strong>不需要知道分布</strong>，只要均值方差就能给"偏离均值"的概率上界，是大数定律的证明工具，也是"远离均值的极端情况很罕见"的泛化。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">贝叶斯</span><span class="qa-q">贝叶斯公式讲的是什么？有什么应用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用新证据 $B$ 把先验概率 $P(A)$ 更新为后验 $P(A\mid B)$。应用：朴素贝叶斯分类器、垃圾邮件过滤、医学检测（灵敏性/特异性）、MAP 估计。关键在于"先验 + 似然 → 后验"。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">定理</span><span class="qa-q">大数定律和中心极限定理的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">大数定律说样本均值<strong>收敛到</strong>期望（频率稳定）；中心极限定理说大量独立变量之和<strong>近似正态</strong>（不论原分布）。前者谈"趋近于什么值"，后者谈"分布形状"。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">估计</span><span class="qa-q">MLE 和 MAP 的区别？为什么交叉熵能从 MLE 推出？</span><span class="qa-toggle">▼</span></div><div class="qa-body">MLE 只最大化似然（数据驱动）；MAP 额外乘先验 $P(\theta)$（正则化的概率解释，如 L2 对应高斯先验）。假设类别服从类别分布时，负对数似然正是交叉熵。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">信息论</span><span class="qa-q">熵、交叉熵、KL 散度分别是什么？关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">熵度量不确定性；交叉熵是用 $Q$ 编码 $P$ 的代价；KL 散度度量分布差异。$H(P,Q)=H(P)+D_{KL}(P\|Q)$，所以最小化交叉熵等价于最小化 KL 散度（当 $P$ 固定时）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">分布</span><span class="qa-q">高斯分布为什么这么重要？泊松分布适用什么场景？</span><span class="qa-toggle">▼</span></div><div class="qa-body">高斯分布由中心极限定理支撑，且数学性质好（共轭、可加）；常用于建模噪声。泊松描述单位时间内稀有独立事件的发生次数（如网站访问、基因突变），均值=方差=$\lambda$。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">统计</span><span class="qa-q">什么是 p 值？第一类/第二类错误？</span><span class="qa-toggle">▼</span></div><div class="qa-body">p 值是在"原假设成立"下观察到当前或更极端结果的概率。第一类错误（弃真，$\alpha$）、第二类错误（取伪，$\beta$）。想要同时减小两者需增大样本量。</div></div>
+      </section>
+
+      <!-- ================= 微积分 ================= -->
+      <section id="calc">
+        <div class="section-kicker">∫ 支柱三</div>
+        <h2>微积分</h2>
+        <p class="lead">优化的数学基础。梯度、Hessian、泰勒展开、拉格朗日乘子，构成了机器学习的"求解引擎"。</p>
+
+        <h3>1. 导数与链式法则</h3>
+        <div class="formula">$$ \frac{d}{dx}f(g(x))=f'(g(x))\cdot g'(x) $$</div>
+        <p>链式法则是<strong>反向传播</strong>的数学本质：复合函数求导逐层相乘。多元情形写成梯度与雅可比。</p>
+
+        <h3>2. 梯度、Jacobian、Hessian</h3>
+        <ul>
+          <li><strong>梯度</strong>：$\nabla f=(\partial f/\partial x_1,\dots,\partial f/\partial x_n)^T$，指向<strong>函数增长最快</strong>的方向，模长表示变化率。</li>
+          <li><strong>Jacobian</strong>：$J\in\mathbb{R}^{m\times n}$，$J_{ij}=\partial f_i/\partial x_j$，描述向量值函数的局部线性近似。</li>
+          <li><strong>Hessian</strong>：$H=\nabla^2 f\in\mathbb{R}^{n\times n}$，二阶导矩阵，判定极值与凸性。</li>
+        </ul>
+        <div class="card info">
+          <div class="card-title">💡 梯度下降与一阶泰勒</div>
+          <p>一阶泰勒展开 $f(x+\Delta x)\approx f(x)+\nabla f^T\Delta x$。要使函数值下降，取 $\Delta x=-\eta\nabla f$，于是 $f$ 减少约 $\eta\|\nabla f\|^2$——这就是梯度下降"沿负梯度走"的来源。</p>
+        </div>
+
+        <h3>3. 泰勒展开</h3>
+        <div class="formula">$$ f(x+h)=f(x)+f'(x)h+\frac{1}{2}f''(x)h^2+\cdots+\frac{f^{(n)}(x)}{n!}h^n+R_n $$</div>
+        <p>用多项式局部逼近复杂函数。二阶泰勒是牛顿法、凸二阶近似的基础。</p>
+
+        <h3>4. 拉格朗日乘子法与 KKT</h3>
+        <div class="formula">$$ \max/\min f(x)\ \text{s.t.}\ g(x)=0 \;\Rightarrow\; \mathcal{L}=f(x)+\lambda g(x),\ \nabla\mathcal{L}=0 $$</div>
+        <p>等式约束极值：$(x^*,\lambda^*)$ 满足 $\nabla f=-\lambda\nabla g$（目标梯度与约束梯度共线）。不等式约束扩展为 <strong>KKT 条件</strong>（SVM 推导的核心）。</p>
+
+        <h3>5. 凸优化基础</h3>
+        <ul>
+          <li><strong>凸函数</strong>：$f(\lambda x+(1-\lambda)y)\le \lambda f(x)+(1-\lambda)f(y)$。</li>
+          <li>性质：<span class="key">局部极小即全局极小</span>；若可微，则 $\nabla f(x^*)=0$ 即为全局最优。</li>
+          <li>判定：二阶可导时 $H\succ 0$（正定）⇒ 严格凸。</li>
+        </ul>
+
+        <h3>6. Hessian 极值判定实战</h3>
+        <p>对二元函数，设临界点处 $f_x=f_y=0$，记 $D=f_{xx}f_{yy}-f_{xy}^2$：</p>
+        <ul>
+          <li>$D>0$ 且 $f_{xx}>0$ ⇒ <span class="key">局部极小</span>；$D>0$ 且 $f_{xx}<0$ ⇒ 局部极大。</li>
+          <li>$D<0$ ⇒ <span class="key">鞍点</span>（一方向极大、另一方向极小）。</li>
+          <li>$D=0$ ⇒ 判别失效，需更高阶项。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 经典鞍点：$f(x,y)=x^2-y^2$</div>
+          <p>梯度 $(2x,-2y)=0$ 仅在 $(0,0)$；Hessian $H=\begin{pmatrix}2&0\\0&-2\end{pmatrix}$，$D=2\cdot(-2)-0=-4<0$，故 $(0,0)$ 是鞍点。沿 $x$ 轴它是极小（开口向上），沿 $y$ 轴却是极大（开口向下）——这就是"鞍"的形状，也是高维非凸优化里梯度下降容易卡住的地方（鞍点比局部极小更常见）。</p>
+        </div>
+
+        <h3>7. 牛顿法与梯度下降：收敛速度</h3>
+        <ul>
+          <li><strong>梯度下降</strong>（一阶）：更新 $x_{k+1}=x_k-\eta\nabla f$。在强凸、L-smooth 条件下<strong>线性收敛</strong>，步长 $\eta$ 太大震荡、太小慢。</li>
+          <li><strong>牛顿法</strong>（二阶）：$x_{k+1}=x_k-H^{-1}\nabla f$。在极值点附近<strong>二次收敛</strong>——误差平方级缩小，极快。</li>
+        </ul>
+        <div class="card info">
+          <div class="card-title">💡 一个对比直觉</div>
+          <p>想象找碗底：梯度下降像"闭眼摸坡度一步步挪"，方向对但步子粗；牛顿法像"先估算整个碗的曲率再一步跳到估计最低点"，在抛物线型目标上一次就中。代价：牛顿法每步要算并求逆 Hessian（$O(d^3)$），百万维参数下不可行，于是有了拟牛顿、自然梯度、Adam 这类"用一阶信息近似二阶"的折中。</p>
+        </div>
+
+        <h3>8. 微分中值定理（费马 → 罗尔 → 拉格朗日 → 柯西）</h3>
+        <p>四个定理层层递进，是泰勒展开与函数性质分析的基石：</p>
+        <ul>
+          <li><strong>费马引理</strong>：可导函数的极值点处导数 $=0$。</li>
+          <li><strong>罗尔定理</strong>：$f$ 在 $[a,b]$ 连续、$(a,b)$ 可导、$f(a)=f(b)$ ⇒ 存在 $\xi$ 使 $f'(\xi)=0$。</li>
+          <li><strong>拉格朗日中值定理</strong>：存在 $\xi\in(a,b)$ 使 $f'(\xi)=\dfrac{f(b)-f(a)}{b-a}$（某点切线斜率 = 割线斜率）。</li>
+          <li><strong>柯西中值定理</strong>：$\dfrac{f(b)-f(a)}{g(b)-g(a)}=\dfrac{f'(\xi)}{g'(\xi)}$（参数形式，洛必达法则的理论来源）。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 证明链：为什么罗尔能推出拉格朗日</div>
+          <p>构造辅助函数 $g(x)=f(x)-f(a)-\dfrac{f(b)-f(a)}{b-a}(x-a)$，几何意义是"函数值减去割线高度"。易验证 $g(a)=g(b)=0$，由罗尔定理存在 $\xi$ 使 $g'(\xi)=0$，即 $f'(\xi)=\dfrac{f(b)-f(a)}{b-a}$。这种"构造差值函数"的思路在证明题里反复出现。</p>
+        </div>
+
+        <h3>9. 数量场与向量场：梯度 / 散度 / 旋度</h3>
+        <ul>
+          <li><strong>梯度</strong>（作用于数量场）：$\nabla f$ 是向量，指向增长最快方向、模为最大变化率；方向导数 $=$ 梯度与单位方向向量的内积。</li>
+          <li><strong>散度</strong>（作用于向量场）：$\nabla\cdot F$ 是标量，衡量"源/汇的强度"（$>0$ 有正源、$<0$ 有汇、$=0$ 无源）。</li>
+          <li><strong>旋度</strong>（作用于向量场）：$\nabla\times F$ 是向量，衡量"旋转/环流强度"。</li>
+        </ul>
+        <div class="card tip">
+          <div class="card-title">💡 与机器学习的关系</div>
+          <p>梯度是优化与反向传播的核心（负梯度方向下降最快）；散度/旋度在物理仿真、流体、电磁场求解（如 PDE 神经算子）中频繁出现。把"场论三件套"与 $\nabla$ 算子的三种运算（点乘/叉乘/直作用）对应记忆最省力。</p>
+        </div>
+
+        <h3>∫ 微积分面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是极限？它为什么重要？</span><span class="qa-toggle">▼</span></div><div class="qa-body">极限描述"函数值无限趋近某个值"（但不必真正取到）。它是<strong>导数、积分、连续性</strong>的共同基础：导数定义为差商的极限、积分定义为黎曼和的极限。没有极限就没有微积分。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是导数？几何意义是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">导数 $f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$ 是函数的<strong>瞬时变化率</strong>，几何上是曲线在该点的<strong>切线斜率</strong>。导数为正→上升、为负→下降、为零→可能是极值点。链式法则（复合函数求导）是反向传播的数学本质。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是定积分？几何意义是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">定积分 $\int_a^b f(x)dx$ 是黎曼和的极限，几何上是曲线与 $x$ 轴之间围成的<strong>（带符号）面积</strong>。微积分基本定理（牛顿-莱布尼茨公式）把"求面积"与"求原函数"联系起来：$\int_a^b f=F(b)-F(a)$。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">连续</span><span class="qa-q">可导、可微、可积三者关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">一元函数：可导 $\iff$ 可微 $\Rightarrow$ 连续 $\Rightarrow$ 可积（闭区间上连续或仅有有限个第一类间断点且有界即可积）。多元：可微 $\Rightarrow$ 可偏导，反之不成立；偏导数连续 $\Rightarrow$ 可微。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">中值定理</span><span class="qa-q">费马、罗尔、拉格朗日、柯西中值定理的关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">费马：极值点导数为 0；罗尔：拉格朗日当 $f(a)=f(b)$ 的特例；拉格朗日：区间内某点切线斜率等于割线斜率；柯西：参数形式推广（两函数之比）。拉格朗日、柯西都可由罗尔定理构造辅助函数证出。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">场论</span><span class="qa-q">梯度、散度、旋度分别是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">梯度作用于数量场，是向量，指向增长最快方向；散度作用于向量场，是标量，衡量"源的强度"（$\nabla\cdot F$）；旋度作用于向量场，是向量，衡量"旋转程度"（$\nabla\times F$）。三者对应 $\nabla$ 算子的直作用、点乘、叉乘。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">梯度</span><span class="qa-q">梯度的方向和意义是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">梯度指向函数值增长最快的方向，模长表示最大变化率。负梯度方向是下降最快的方向，梯度下降据此更新参数。梯度的几何意义是等高线的法线方向。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">泰勒</span><span class="qa-q">泰勒展开有什么用？和梯度下降的关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用多项式局部逼近函数。一阶泰勒说明：沿负梯度方向函数值下降最快，这是梯度下降的理论依据；二阶泰勒是牛顿法的基础（用 Hessian 修正步长）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">约束</span><span class="qa-q">拉格朗日乘子法讲的是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">求解带等式约束的极值：构造 $\mathcal{L}=f+\lambda g$，令 $\nabla\mathcal{L}=0$。几何上最优处目标梯度与约束梯度共线（$\nabla f=-\lambda\nabla g$）。带不等式约束时扩展为 KKT 条件，是 SVM 推导核心。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">凸性</span><span class="qa-q">什么是凸函数？凸优化为什么好？</span><span class="qa-toggle">▼</span></div><div class="qa-body">凸函数满足"弦在图像上方"。好处：<strong>局部极小就是全局极小</strong>，优化算法保证收敛到全局最优；Hessian 正定是严格凸的判定。多数机器学习损失（如带 L2 的 MSE）是凸或可凸优化的。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">二阶</span><span class="qa-q">Hessian 矩阵的作用？牛顿法？</span><span class="qa-toggle">▼</span></div><div class="qa-body">Hessian 是二阶导矩阵，描述曲率和局部形状：正定⇒局部极小，负定⇒局部极大。牛顿法用 $x\leftarrow x-H^{-1}\nabla f$ 二阶收敛，比梯度下降快但每次需算 Hessian（成本高），深度学习中常用其近似（如 RMSProp/二阶优化思路）。</div></div>
+      </section>
+
+      <!-- ================= 离散数学 ================= -->
+      <section id="discrete">
+        <div class="section-kicker">🔢 支柱四</div>
+        <h2>离散数学</h2>
+        <p class="lead">算法与理论计算机的基石。图论、逻辑、组合、群论，决定了你能否"严谨地"思考计算。</p>
+
+        <h3>1. 集合与关系</h3>
+        <ul>
+          <li><strong>笛卡尔积</strong>：$A\times B=\{(a,b)\mid a\in A,b\in B\}$。</li>
+          <li><strong>等价关系</strong>：自反 + 对称 + 传递，把集合分成互不相交的等价类。</li>
+          <li><strong>偏序关系</strong>：自反 + 反对称 + 传递（如 ≤、整除），对应哈斯图。</li>
+          <li><strong>映射/函数</strong>：单射、满射、双射（双射才存在逆映射）。</li>
+        </ul>
+
+        <h3>2. 命题逻辑</h3>
+        <ul>
+          <li>基本联结词：与 $\land$、或 $\lor$、非 $\neg$、蕴含 $\rightarrow$、等价 $\leftrightarrow$。</li>
+          <li><strong>蕴含</strong> $P\rightarrow Q$ 等价于 $\neg P\lor Q$；"只有…才…""除非"要小心翻译。</li>
+          <li><strong>范式</strong>：合取范式 CNF、析取范式 DNF；任何命题可化为范式。</li>
+          <li>推理规则：假言推理（Modus Ponens）、归谬法等。</li>
+        </ul>
+
+        <h3>3. 图论基础（偏理论）</h3>
+        <ul>
+          <li><strong>握手定理</strong>：$\sum\deg(v)=2|E|$（总度数为边数两倍）。</li>
+          <li><strong>欧拉图</strong>：存在经过每条边恰好一次的回路 ⇔ 连通且所有顶点度数为偶。</li>
+          <li><strong>哈密顿图</strong>：经过每个顶点恰好一次（无简洁充要条件，NP 难）。</li>
+          <li><strong>二分图</strong>：顶点可分两集合、边只跨集合；判定：无奇环。</li>
+          <li><strong>树</strong>：$n$ 个顶点的树恰有 $n-1$ 条边，任意两点唯一路径，连通且无环。</li>
+          <li><strong>平面图</strong>：可画在平面上无交叉边；欧拉公式 $|V|-|E|+|F|=2$。</li>
+        </ul>
+        <div class="card tip">
+          <div class="card-title">💡 图论与线代的联系</div>
+          <p>图的<strong>邻接矩阵</strong>特征值蕴含图的结构信息：连通性、二分性（存在负特征值）、正则图的谱等。这是"图信号处理 / 图神经网络"的数学入口。</p>
+        </div>
+
+        <h3>4. 组合数学</h3>
+        <ul>
+          <li><strong>排列</strong>：$P(n,k)=n!/(n-k)!$；<strong>组合</strong>：$C_n^k=\binom{n}{k}=n!/(k!(n-k)!)$。</li>
+          <li><strong>二项式定理</strong>：$(x+y)^n=\sum_{k=0}^n\binom{n}{k}x^ky^{n-k}$。</li>
+          <li><strong>鸽巢原理</strong>：$n+1$ 个物体放入 $n$ 个盒子，必有盒子 ≥ 2 个。</li>
+          <li><strong>容斥原理</strong>：$|A\cup B|=|A|+|B|-|A\cap B|$。</li>
+        </ul>
+
+        <h3>5. 递推与主定理</h3>
+        <p>算法复杂度常写成递推式，<strong>主定理</strong>直接给出解：对 $T(n)=aT(n/b)+f(n)$，比较 $n^{\log_b a}$ 与 $f(n)$ 的阶。</p>
+
+        <h3>6. 群论入门（加分项）</h3>
+        <ul>
+          <li><strong>群</strong>：集合 + 运算，满足封闭、结合律、有单位元、有逆元。例如模 $p$ 非零整数在乘法下构成群（费马小定理基础）。</li>
+          <li><strong>环 / 域</strong>：域同时有加法和乘法逆（如有限域 $\mathbb{F}_p$），是密码学（RSA、椭圆曲线）的代数基础。</li>
+          <li><strong>对称性</strong>：群描述对称操作；在晶体学、量子计算、图同构中有用。</li>
+        </ul>
+
+        <h3>7. 生成函数（母函数）</h3>
+        <p>把数列 $\{a_n\}$ 编码成幂级数，用代数运算解组合计数问题。</p>
+        <ul>
+          <li><strong>普通生成函数（OGF）</strong>：$A(x)=\sum_{n\ge0}a_nx^n$；用于"无序选取"计数，如 $1/(1-x)^k$ 给出可重复 $k$ 类选取方案数。</li>
+          <li><strong>指数生成函数（EGF）</strong>：$A(x)=\sum a_n\frac{x^n}{n!}$；用于"带标号/排列"问题。</li>
+          <li><strong>斐波那契</strong>：$F(x)=\frac{x}{1-x-x^2}$，展开系数即斐波那契数；也可由此推出通项 Binet 公式。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体例子：硬币凑面值</div>
+          <p>用面值 1 与 2 的硬币凑出 $n$ 元的方法数：生成函数 $(1+x+x^2+\cdots)(1+x^2+x^4+\cdots)=\frac{1}{(1-x)(1-x^2)}$，其展开第 $n$ 项系数就是方案数（这正是"爬楼梯每次走 1 或 2 阶"的计数）。</p>
+        </div>
+
+        <h3>8. 错排问题（Derangements）</h3>
+        <p>$n$ 个元素全排列，要求<strong>每个元素都不在原来位置</strong>的排列数，记作 $D_n$。</p>
+        <div class="formula">$$ D_n=(n-1)(D_{n-1}+D_{n-2}),\qquad D_n=n!\sum_{k=0}^{n}\frac{(-1)^k}{k!} $$</div>
+        <ul>
+          <li>递推记忆法："第 1 个元素放到位置 $k$"有 $n-1$ 种；剩下的要么 $k$ 回位置 1（退化为 $n-2$），要么不回（退化为 $n-1$ 错排）。</li>
+          <li><strong>极限</strong>：$\displaystyle\lim_{n\to\infty}\frac{D_n}{n!}=\sum_{k=0}^\infty\frac{(-1)^k}{k!}=e^{-1}\approx 0.3679$。</li>
+        </ul>
+        <div class="card tip">
+          <div class="card-title">💡 概率意义</div>
+          <p>随机重排一叠 $n$ 封信，"没有一封信进对信封"的概率趋近于 $1/e$（约 36.8%），且很快收敛——即使 $n=5$ 也已接近。这是"包含-排除原理"的经典应用，也常用于面试考察容斥。</p>
+        </div>
+
+        <h3>9. 关系的闭包与集合的划分</h3>
+        <ul>
+          <li><strong>自反闭包</strong> $r(R)=R\cup I_A$（补对角）；<strong>对称闭包</strong> $s(R)=R\cup R^{-1}$（补反向）；<strong>传递闭包</strong> $t(R)=R\cup R^2\cup\cdots\cup R^n$（可用 <span class="key">Warshall 算法</span>高效求）。</li>
+          <li><strong>划分</strong>：把集合分成互不相交的非空子集（每个元素恰好属于一块）；<strong>等价关系与划分一一对应</strong>——等价类构成的商集 $A/R$ 就是 $A$ 的一个划分。</li>
+          <li><strong>偏序 / 哈斯图</strong>：自反 + 反对称 + 传递。极大元未必唯一，最大元唯一（若存在）。</li>
+        </ul>
+
+        <h3>10. 代数系统：从广群到域（层级记忆）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>结构</th><th>在"运算封闭"基础上新增的性质</th></tr></thead>
+            <tbody>
+              <tr><td><strong>广群</strong></td><td>运算封闭</td></tr>
+              <tr><td><strong>半群</strong></td><td>+ 结合律</td></tr>
+              <tr><td><strong>独异点</strong></td><td>+ 有幺元</td></tr>
+              <tr><td><strong>群</strong></td><td>+ 每个元素有逆元</td></tr>
+              <tr><td><strong>阿贝尔群</strong></td><td>+ 交换律</td></tr>
+              <tr><td><strong>循环群</strong></td><td>由单个生成元 $a$ 的幂生成（必为阿贝尔群）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 拉格朗日定理与环 / 域</div>
+          <p><strong>拉格朗日定理</strong>：有限群 $G$ 的子群 $H$ 的阶整除 $|G|$（用陪集划分证明）。<strong>环</strong>：加法是阿贝尔群、乘法是半群、满足分配律；<strong>整环</strong>：无零因子的交换含幺环；<strong>域</strong>：非零元素在乘法下构成阿贝尔群（如 $\mathbb{F}_p$）。<span class="key">有限整环必是域</span>。</p>
+        </div>
+
+        <h3>11. 平面图与图的着色</h3>
+        <ul>
+          <li><strong>欧拉公式</strong>：连通平面图 $v-e+f=2$（顶点 − 边 + 面）。</li>
+          <li><strong>平面图必要不等式</strong>：$e\le 3v-6$（$v\ge3$）——由此可证 $K_5$ 非平面；二分平面图 $e\le 2v-4$——可证 $K_{3,3}$ 非平面。</li>
+          <li><strong>着色</strong>：相邻顶点不同色的最少颜色数叫色数；任意平面图最多 <span class="key">5-色</span>（四色定理更强，但证法复杂）。常用贪心的 Powell 算法近似着色。</li>
+        </ul>
+
+        <h3>🔢 离散数学面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是集合、关系、函数？三者什么关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">集合是<strong>无序、不重复</strong>元素组成的整体；关系是笛卡尔积 $A\times B$ 的<strong>子集</strong>（如"小于"关系是若干序偶的集合）；函数是满足"每个 $x$ 对应唯一 $y$"的特殊关系。三者层层特化：函数 ⊆ 关系 ⊆ 集合。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是命题？什么是命题逻辑？</span><span class="qa-toggle">▼</span></div><div class="qa-body">命题是能<strong>判断真假</strong>的陈述句（如"2 是偶数"为真），疑问句/感叹句不是命题。命题逻辑用 $\land,\lor,\neg,\to,\leftrightarrow$ 联结命题研究推理，$P\to Q$ 仅在 $P$ 真 $Q$ 假时为假，等价于 $\neg P\lor Q$。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是图？什么是树？</span><span class="qa-toggle">▼</span></div><div class="qa-body">图 $G=(V,E)$ 由<strong>顶点集 $V$</strong> 与<strong>边集 $E$</strong> 组成（边连接顶点对）。树是<strong>连通且无环</strong>的图，$n$ 个顶点的树恰有 $n-1$ 条边、任意两点间有唯一路径。图是建模网络、社交关系、依赖关系的通用工具。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">关系</span><span class="qa-q">关系的自反/对称/传递闭包怎么求？</span><span class="qa-toggle">▼</span></div><div class="qa-body">自反闭包 $r(R)=R\cup I_A$（补对角）；对称闭包 $s(R)=R\cup R^{-1}$（补反向）；传递闭包 $t(R)=\cup_{k\ge1}R^k$，用 Warshall 算法（对每列，把该列有 1 的行做逻辑相加）高效求解。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">集合</span><span class="qa-q">等价关系、等价类、划分三者什么关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">等价关系（自反+对称+传递）把集合切成互不相交的等价类；所有等价类构成的商集就是一个划分。反过来每个划分也唯一确定一个等价关系——两者一一对应。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">代数</span><span class="qa-q">半群、独异点、群的区别？拉格朗日定理？</span><span class="qa-toggle">▼</span></div><div class="qa-body">封闭+结合=半群；再加幺元=独异点；再加逆元=群；再加交换=阿贝尔群。拉格朗日定理：有限群的子群阶整除群阶。这层层递进的"运算性质累加"是记忆关键。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">代数</span><span class="qa-q">环和域的区别？有限整环为什么是域？</span><span class="qa-toggle">▼</span></div><div class="qa-body">环：加法阿贝尔群 + 乘法半群 + 分配律；整环：无零因子的交换含幺环；域：非零元在乘法下成阿贝尔群。有限整环的"乘法消去律 + 有限性"保证每个非零元都有乘法逆，故必是域。$\mathbb{F}_p$ 是密码学基础。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">图论</span><span class="qa-q">平面图的欧拉公式？如何证 $K_5$、$K_{3,3}$ 非平面？</span><span class="qa-toggle">▼</span></div><div class="qa-body">连通平面图 $v-e+f=2$。由每个面至少 3 条边得 $3f\le2e$，代入得 $e\le3v-6$；而 $K_5$ 有 $v=5,e=10$，$10>9$ 矛盾，故非平面。$K_{3,3}$ 用二分图不等式 $e\le2v-4$（$9>8$）否定。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">图论</span><span class="qa-q">欧拉图和哈密顿图的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">欧拉图走遍"每条边一次"（奇度顶点数为 0 且连通）；哈密顿图走遍"每个顶点一次"。欧拉图有简洁判定，哈密顿图无多项式判定（NP 难）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">图论</span><span class="qa-q">什么是二分图？怎么判定？</span><span class="qa-toggle">▼</span></div><div class="qa-body">顶点可分两集合、边只跨集合。判定：用染色法（BFS/DFS），若无奇环则为二分图。应用：匹配问题、任务分配。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">逻辑</span><span class="qa-q">$P\rightarrow Q$ 的真值表？怎样等价改写？</span><span class="qa-toggle">▼</span></div><div class="qa-body">仅当 $P$ 真 $Q$ 假时为假，其余为真。$P\rightarrow Q \equiv \neg P\lor Q$。常见陷阱："若 P 则 Q" 在 P 假时恒真。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">组合</span><span class="qa-q">鸽巢原理是什么？有什么应用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">$n+1$ 个物体放入 $n$ 个盒子，必有盒子至少 2 个。应用：证明存在性（如抽屉里有两双同色袜子、哈希冲突必然存在）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">代数</span><span class="qa-q">群、环、域分别是什么？和计算机有什么关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">群有封闭/结合/单位元/逆元；环多了加法交换与乘法分配；域还有乘法逆（如有限域 $\mathbb{F}_p$）。这是现代密码学（RSA、AES、椭圆曲线）的代数基础，也是纠错码的理论支撑。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">复杂度</span><span class="qa-q">主定理怎么用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">对 $T(n)=aT(n/b)+f(n)$，比较 $n^{\log_b a}$ 与 $f(n)$：若 $f$ 较小则 $T=\Theta(n^{\log_b a})$；若相等（乘对数）则 $T=\Theta(n^{\log_b a}\log n)$；若 $f$ 主导且满足正则条件则 $T=\Theta(f(n))$。用于分析分治算法。</div></div>
+      </section>
+
+      <!-- ================= 数值分析与统计推断 ================= -->
+      <section id="numerical">
+        <div class="section-kicker">🧮 支柱五</div>
+        <h2>数值分析与统计推断</h2>
+        <p class="lead">把"精确数学"落到"计算机能算、数据能信"的工程层面。保研常结合机器学习问数值稳定性与显著性。</p>
+
+        <h3>1. 数值分析基础</h3>
+        <ul>
+          <li><strong>浮点误差</strong>：计算机用有限位表示实数，存在舍入误差。<strong>相近数相减（catastrophic cancellation）</strong>会严重丢失有效数字——例如 $\sqrt{x+1}-\sqrt{x}$ 当 $x$ 很大时。</li>
+          <li><strong>条件数</strong>：$\kappa(A)=\|A\|\cdot\|A^{-1}\|$（常取 2-范数），衡量问题对输入扰动的敏感度。<span class="key">$\kappa\gg1$ 为病态问题</span>，微小误差被放大。</li>
+          <li><strong>迭代法解线性方程组</strong>：Jacobi / Gauss–Seidel 迭代，适合大型稀疏矩阵（如图、偏微分方程离散）；直接法（高斯消元）适合稠密小型。</li>
+          <li><strong>数值稳定性</strong>：算法在有限精度下误差不随计算步数爆炸。如 softmax 减最大值、避免直接算 $e^x$ 大数。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：为什么 0.1 + 0.2 ≠ 0.3</div>
+          <p>十进制 0.1 在二进制下是无限循环小数，float64 只能存约 52 位尾数，于是 0.1 与 0.2 都被舍入成"最接近但不等于"的二进制数，相加后再舍入，结果约为 <code>0.30000000000000004</code>。教训：<strong>浮点比较要用容差</strong>（如 <code>abs(a-b) &lt; 1e-9</code>），不能写 <code>a == b</code>。</p>
+        </div>
+
+        <h3>2. 统计推断</h3>
+        <ul>
+          <li><strong>抽样分布</strong>：样本均值 $\bar X$ 在 $n$ 大时近似正态；小样本用 <strong>t 分布</strong>（估计均值）、$\chi^2$（方差）、F 分布（两方差比/回归显著性）。</li>
+          <li><strong>置信区间</strong>：均值 CI $\bar x \pm z_{\alpha/2}\,\sigma/\sqrt n$（$\sigma$ 已知）或 $\bar x \pm t_{\alpha/2}\,s/\sqrt n$（未知）。含义：重复抽样下有 $(1-\alpha)$ 比例的区间覆盖真值。</li>
+          <li><strong>假设检验</strong>：原假设 $H_0$ / 备择 $H_1$；<strong>p 值</strong>是在 $H_0$ 成立下观察到当前或更极端结果的概率；显著性水平 $\alpha$ 是"弃真"的容忍度。</li>
+          <li><strong>两类错误</strong>：第一类（弃真，$\alpha$）、第二类（取伪，$\beta$）；功效 $=1-\beta$。同时减小二者需增大样本量。</li>
+          <li><strong>线性回归推断</strong>：系数显著性用 t 检验（$H_0:\beta_j=0$），整体用 F 检验，$R^2$ 衡量解释方差比例。</li>
+        </ul>
+        <div class="card info">
+          <div class="card-title">💡 与机器学习的连接</div>
+          <p>正则化可看作给系数加<strong>先验</strong>（L2 ⇔ 高斯先验 ⇔ 岭回归的贝叶斯解释）；交叉验证近似"模型选择的不确定性"；p 值思想与"模型是否显著优于基线"一脉相承。</p>
+        </div>
+
+        <h3>3. 方程求根：二分与牛顿迭代</h3>
+        <ul>
+          <li><strong>二分法</strong>：在区间 $[a,b]$ 上 $f$ 连续且 $f(a)f(b)<0$，每次取中点缩小区间。<strong>线性收敛</strong>，稳定但慢，保证有根。</li>
+          <li><strong>牛顿迭代</strong>：$x_{k+1}=x_k-\dfrac{f(x_k)}{f'(x_k)}$，几何上是用切线逼近零点。<strong>二次收敛</strong>，但需可导、初值要好，否则可能发散或撞到导数为 0。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体例子：用牛顿法求 $\sqrt{2}$</div>
+          <p>等价于解 $f(x)=x^2-2=0$，迭代式 $x_{k+1}=x_k-\frac{x_k^2-2}{2x_k}=\frac12\left(x_k+\frac{2}{x_k}\right)$。取 $x_0=1$：$x_1=1.5,\ x_2\approx1.4167,\ x_3\approx1.4142$——三次迭代已达 4 位精度。这正是很多芯片/库里开方算法的数学基础。</p>
+        </div>
+
+        <h3>4. 蒙特卡洛方法与重要性采样</h3>
+        <ul>
+          <li><strong>蒙特卡洛</strong>：用随机采样估计积分/期望，如 $\int f(x)dx\approx \frac1N\sum f(x_i)$（$x_i\sim$ 均匀分布）。由<strong>大数定律</strong>保证收敛，误差按 $O(1/\sqrt N)$ 下降。</li>
+          <li><strong>重要性采样</strong>：直接从 $p$ 采样难时，改写为 $\int f(x)\frac{p(x)}{q(x)}q(x)dx$，从易采的 $q$ 采样并加权 $\frac{p}{q}$，降低方差。</li>
+          <li><strong>应用</strong>：强化学习策略评估、贝叶斯 MCMC、渲染（路径追踪）、深度学习中的期望损失估计。</li>
+        </ul>
+        <div class="card info">
+          <div class="card-title">💡 为什么误差是 $1/\sqrt N$</div>
+          <p>蒙特卡洛估计的方差被样本数 $N$ 稀释，标准差 $\propto 1/\sqrt N$。这意味着想把精度提高 10 倍，样本要增加 100 倍——这是蒙特卡洛"慢但稳、维度无关"的特征，高维积分时远优于网格法（网格法随维度指数爆炸）。</p>
+        </div>
+
+        <h3>🧮 数值与统计面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是误差？什么是数值稳定性？</span><span class="qa-toggle">▼</span></div><div class="qa-body">误差是"近似值 − 真值"，来源有模型误差、截断误差、<strong>舍入误差</strong>（有限位浮点表示实数产生，如 0.1 二进制无限循环）。数值稳定性指算法在有限精度下误差不随计算步数爆炸；不稳定例子：相近大数相减、直接算 $e^x$ 大数溢出。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是样本和总体？为什么要抽样？</span><span class="qa-toggle">▼</span></div><div class="qa-body">总体是研究对象的全体，样本是从总体抽取的部分观测。通常总体太大或不可全知，只能通过<strong>样本统计量</strong>（均值、方差）去推断总体参数，这就是统计推断。样本均值的方差为 $\sigma^2/n$，样本量越大越稳定。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">数值</span><span class="qa-q">什么是条件数？病态问题是什么意思？</span><span class="qa-toggle">▼</span></div><div class="qa-body">条件数 $\kappa=\|A\|\|A^{-1}\|$ 衡量输出对输入扰动的放大倍数。$\kappa$ 接近 1 良态，远大于 1 病态——输入的微小误差会被放大成输出的巨大误差，此时即使算法精确也难以得到可靠结果（如接近奇异的矩阵求逆）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">误差</span><span class="qa-q">为什么浮点数不能直接判等？</span><span class="qa-toggle">▼</span></div><div class="qa-body">很多十进制小数（如 0.1）在二进制下无限循环，float 只能截断，导致 0.1+0.2 不等于 0.3（约为 0.30000000000000004）。比较应判绝对值差小于容差（如 1e-9），或用整数/定点、decimal 类型。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">检验</span><span class="qa-q">p 值是什么？两类错误如何权衡？</span><span class="qa-toggle">▼</span></div><div class="qa-body">p 值是在原假设成立时观察到当前或更极端结果的概率，越小越有理由拒绝原假设。第一类错误（弃真，$\alpha$）与第二类错误（取伪，$\beta$）通常此消彼长：减小 $\alpha$ 会增大 $\beta$；要同时压低需增大样本量。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">区间</span><span class="qa-q">置信区间怎么理解？和预测区间区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">置信区间是对"参数（如均值）"的区间估计，含义是重复抽样下覆盖真值的比例。预测区间是对"下一次单个观测值"的范围，更宽（含个体随机波动）。两者别混。</div></div>
+      </section>
+
+      <!-- ================= 随机过程与最优化进阶 ================= -->
+      <section id="stoch">
+        <div class="section-kicker">📈 支柱六</div>
+        <h2>随机过程与最优化进阶</h2>
+        <p class="lead">从"单个随机变量"走向"随时间演化的随机系统"，以及更强大的优化工具箱。</p>
+
+        <h3>1. 随机过程入门</h3>
+        <ul>
+          <li><strong>定义</strong>：一族依赖于参数（常是时间）的随机变量 $\{X_t\}$。</li>
+          <li><strong>马尔可夫性质</strong>：未来只依赖当前、与过去无关（无记忆）。离散情形用<strong>状态转移矩阵</strong> $P$ 描述。</li>
+          <li><strong>平稳分布</strong>：若分布 $\pi$ 满足 $\pi P = \pi$，则系统到达后保持不变；遍历链必有唯一平稳分布。</li>
+          <li><strong>泊松过程</strong>：计数过程，独立平稳增量，到达间隔服从指数分布——建模"随机到达事件"（请求、突变）。</li>
+        </ul>
+        <div class="card tip">
+          <div class="card-title">💡 应用：PageRank 与 MCMC</div>
+          <p>PageRank 把网页链接看成马尔可夫链的随机游走，其重要性分数就是平稳分布；MCMC（如 Metropolis–Hastings）用马尔可夫链从复杂分布采样，是贝叶斯推断的引擎。</p>
+        </div>
+
+        <h3>2. 最优化进阶</h3>
+        <ul>
+          <li><strong>对偶性</strong>：每个原问题对应一个对偶问题，弱对偶保证对偶值 ≤ 原问题值，满足约束规格时强对偶（相等）。对偶常用于 SVM 与凸优化理论。</li>
+          <li><strong>KKT 条件</strong>：约束优化的充要条件：① 平稳性 $\nabla f+\sum\lambda_i\nabla g_i+\sum\mu_j\nabla h_j=0$；② 原始/对偶可行；③ 互补松弛 $\lambda_i g_i=0$。</li>
+          <li><strong>牛顿法</strong>：用 Hessian 修正步长 $x\leftarrow x-H^{-1}\nabla f$，二次收敛，但每步成本高、需正定。</li>
+          <li><strong>拟牛顿（BFGS）</strong>：用梯度差近似 Hessian，避免显式求逆。</li>
+          <li><strong>随机梯度下降（SGD）</strong>：用 mini-batch 估计梯度，引入噪声但每步极快，是深度学习的默认优化范式。</li>
+          <li><strong>ADMM</strong>：把复杂问题拆成易解子问题交替求解，常用于大规模/分布式优化。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：SGD 为什么有效又"吵"</div>
+          <p>全批量梯度用全部数据算精确梯度，方向准但慢；SGD 每次只用一个小批量，梯度是<strong>带噪声的估计</strong>——方向未必最优，但每秒能走很多步，且噪声有助于跳出尖锐极小、找到更泛化的平坦极小。代价是需要调学习率与批次大小，并用动量/Adam 稳定。</p>
+        </div>
+
+        <h3>3. 马尔可夫链：状态分类与平稳分布求解</h3>
+        <ul>
+          <li><strong>状态分类</strong>：从 $i$ 出发能再到 $i$ 则称 <em>常返</em>，否则 <em>非常返（transient）</em>；返回步数的最大公约数叫 <em>周期</em>，周期为 1 称 <em>非周期</em>。全连通且无周期 ⇒ <strong>不可约非周期 ⇒ 存在唯一平稳分布且从任意初态都收敛</strong>。</li>
+          <li><strong>平稳分布求解</strong>：解线性方程组 $\pi P=\pi$ 且 $\sum_i\pi_i=1$。</li>
+        </ul>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体例子：两状态链手算</div>
+          <p>转移矩阵 $P=\begin{pmatrix}0.7&0.3\\0.4&0.6\end{pmatrix}$（行是"从当前状态转移到下一状态"的概率）。设平稳分布 $\pi=(\pi_1,\pi_2)$，由 $\pi P=\pi$ 得 $0.7\pi_1+0.4\pi_2=\pi_1\Rightarrow -0.3\pi_1+0.4\pi_2=0\Rightarrow \pi_2=0.75\pi_1$；再 $\pi_1+\pi_2=1\Rightarrow \pi_1=4/7\approx0.571,\ \pi_2=3/7\approx0.429$。即长期约 57% 时间停留在状态 1。可验证 $(4/7,3/7)P=(4/7,3/7)$。</p>
+        </div>
+
+        <h3>4. KKT 条件手解实例</h3>
+        <p>以约束优化为例：$\min\ f(x)=x_1^2+x_2^2\ \text{s.t.}\ x_1+x_2=1$。引入乘子 $\lambda$，拉格朗日 $\mathcal{L}=x_1^2+x_2^2+\lambda(1-x_1-x_2)$。</p>
+        <ul>
+          <li>平稳性：$\partial\mathcal{L}/\partial x_1=2x_1-\lambda=0$，$\partial\mathcal{L}/\partial x_2=2x_2-\lambda=0$ ⇒ $x_1=x_2=\lambda/2$。</li>
+          <li>等式约束：$x_1+x_2=1$ ⇒ $\lambda/2+\lambda/2=1$ ⇒ $\lambda=1$，$x_1=x_2=1/2$。</li>
+        </ul>
+        <div class="formula">$$ \min f= (1/2)^2+(1/2)^2=\tfrac12\quad\text{（在约束线上离原点最近的点）} $$</div>
+        <div class="card tip">
+          <div class="card-title">💡 不等式约束的互补松弛</div>
+          <p>若约束是 $g(x)\le0$，则 KKT 要求 $\lambda\ge0$ 且 $\lambda g(x)=0$：<strong>约束 inactive（$g<0$）时 $\lambda=0$，约束 active（$g=0$）时乘子才非零</strong>。这是 SVM 支持向量只对应边界样本的由头——非支持向量的乘子为 0。</p>
+        </div>
+
+        <h3>📈 随机与优化面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是随机过程？</span><span class="qa-toggle">▼</span></div><div class="qa-body">随机过程是一族随时间（或参数）演化的随机变量 $\{X_t\}$，描述"状态随时间随机变化"的系统，如股价、队列长度、信号。马尔可夫过程是"未来只依赖当前"的特例，泊松过程建模随机到达事件。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是优化问题？目标函数、约束是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">优化问题是在约束下求目标函数的最小/最大值：$\min f(x)\ \text{s.t.}\ g(x)\le0$。$f$ 是目标函数（如损失），$g$ 是约束。无约束用梯度下降；有约束用拉格朗日乘子/KKT；凸优化保证局部最优即全局最优。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">随机</span><span class="qa-q">马尔可夫链是什么？平稳分布怎么求？</span><span class="qa-toggle">▼</span></div><div class="qa-body">满足"无记忆"的随机过程：未来只依赖当前状态。平稳分布 $\pi$ 满足 $\pi P=\pi$（左特征向量，特征值 1），遍历链存在唯一平稳分布。应用：PageRank、MCMC 采样。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">对偶</span><span class="qa-q">什么是对偶问题？强弱对偶是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">每个优化原问题可构造对偶问题（常更易于求解或提供下界）。弱对偶：对偶值 ≤ 原问题值恒成立；强对偶：二者相等（凸问题在约束规格下成立）。SVM 的对偶形式引出核技巧。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">优化</span><span class="qa-q">牛顿法和梯度下降的区别？优缺点？</span><span class="qa-toggle">▼</span></div><div class="qa-body">梯度下降只用一阶信息（梯度），线性收敛、每步便宜；牛顿法用二阶信息（Hessian），二次收敛、步长更准，但每步需算/存 Hessian 并求逆，成本高且要求正定。深度学习中常用其近似（拟牛顿/二阶优化思路）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">SGD</span><span class="qa-q">SGD 相比全批量梯度下降有什么优缺点？</span><span class="qa-toggle">▼</span></div><div class="qa-body">优点：每步只用小批量，速度快、内存省，噪声有助于逃离尖锐极小、提升泛化。缺点：梯度有方差、收敛有波动，需仔细调学习率/批次，常用动量或 Adam 稳定训练。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">KKT</span><span class="qa-q">KKT 条件包含哪几条？什么时候是充要条件？</span><span class="qa-toggle">▼</span></div><div class="qa-body">四条：原始可行、对偶可行、平稳性、互补松弛。当问题是凸优化且满足约束规格（如 Slater 条件）时，KKT 是全局最优的充要条件——这正是 SVM 等推导的理论基础。</div></div>
+      </section>
+
+      <!-- ================= 面试题库 ================= -->
+      <section id="interview">
+        <div class="section-kicker">📝 保研面试</div>
+        <h2>跨科目综合题（点击展开答案）</h2>
+        <p class="lead">这些题把多门数学串起来，<strong>先自己口述</strong>再对照，最能检验"是否真懂"。</p>
+
+        <h3>一、数学 ↔ 机器学习</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">线代</span><span class="qa-q">为什么 PCA 要做特征值分解而不是普通矩阵分解？</span><span class="qa-toggle">▼</span></div><div class="qa-body">PCA 要找"方差最大方向"，而方差最大方向正是协方差矩阵最大特征值对应的特征向量。特征值分解直接给出这些主方向与对应的"方差大小"（特征值），天然契合"按重要性排序降维"的需求。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">概率</span><span class="qa-q">从概率角度解释为什么分类用交叉熵、回归用 MSE？</span><span class="qa-toggle">▼</span></div><div class="qa-body">把模型输出当作对数据分布的假设：回归假设高斯噪声 ⇒ 最大化似然 ⇔ 最小化 MSE；分类假设类别分布 ⇒ 最大似然 ⇔ 最小化交叉熵。两者都是"让数据在该模型下最可能"。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">优化</span><span class="qa-q">梯度为零一定是极小值吗？怎么判断？</span><span class="qa-toggle">▼</span></div><div class="qa-body">不一定，还可能是极大值或鞍点。用 Hessian 判断：正定⇒局部极小，负定⇒局部极大，不定⇒鞍点。凸函数下梯度为零即全局最小。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">线代</span><span class="qa-q">矩阵求逆在深度学习里为什么很少直接用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">$O(n^3)$ 计算贵、数值不稳定、大矩阵可能不可逆。深度学习中"解方程"通常用迭代法（如共轭梯度）或隐式求解（如用链式法则+BPTT），避免显式求逆。</div></div>
+
+        <h3>二、推导题</h3>
+        <div class="card">
+          <div class="card-title">🖥️ 现场推导清单</div>
+          <ul>
+            <li>推导 $Ax=\lambda x$ 对一个 2×2 矩阵的特征值与特征向量。</li>
+            <li>推导贝叶斯公式（从条件概率定义出发）。</li>
+            <li>写出一维梯度下降的更新并说明收敛条件。</li>
+            <li>推导出两个高斯分布 KL 散度的闭式解（加分）。</li>
+            <li>用主定理求 $T(n)=2T(n/2)+n$ 的复杂度。</li>
+          </ul>
+        </div>
+
+        <h3>三、项目结合</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">你的科研项目里用到了哪些数学知识？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用 STAR 法则讲清：图神经网络用到了<strong>线性代数（矩阵乘法/特征值）</strong>与<strong>图论</strong>；损失优化用到了<strong>梯度/凸优化</strong>；不确定性估计用到了<strong>概率统计</strong>。把数学工具和实际效果挂钩，比空谈公式更打动老师。</div></div>
+
+        <h3>四、数值 / 统计 / 最优化</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">数值</span><span class="qa-q">模型训练中的数值稳定性要注意什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">关键点：softmax 减最大值防溢出；用交叉熵而非 MSE+sigmoid 避免饱和区梯度消失；归一化（BN/LN）稳定激活尺度；注意浮点累加顺序与混合精度范围。本质是"别让中间量过大/过小或相近数相减"。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">统计</span><span class="qa-q">怎么判断模型提升是"显著"还是"碰巧"？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用统计检验：对多次实验的指标做配对 t 检验或 McNemar 检验，看 p 值是否低于显著性水平；同时看置信区间而非单点。深度学习中常用多次随机种子取均值±标准差来体现稳定性。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">优化</span><span class="qa-q">为什么深度学习多用 SGD/Adam 而不是牛顿法？</span><span class="qa-toggle">▼</span></div><div class="qa-body">参数规模达百万级，牛顿法需存/求逆 Hessian（$O(d^2)$ 甚至 $O(d^3)$）不可行；SGD/Adam 只需一阶梯度、内存 $O(d)$、且噪声有利于泛化。二阶信息通过 Adam 的动量/尺度近似获得。</div></div>
+      </section>
+
+      <!-- ================= 学习路线 ================= -->
+      <section id="roadmap">
+        <div class="section-kicker">🗺️ 保研人专属</div>
+        <h2>数学复习路线与资源</h2>
+        <p class="lead">先建立直觉，再练推导，最后和机器学习打通。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>阶段</th><th>内容</th><th>资源</th></tr></thead>
+            <tbody>
+              <tr><td>1. 线代直觉</td><td>向量空间、特征值、SVD 的几何意义</td><td>3Blue1Brown《线性代数本质》</td></tr>
+              <tr><td>2. 概率入门</td><td>贝叶斯、分布、期望方差、信息论</td><td>《概率论与数理统计》教材</td></tr>
+              <tr><td>3. 微积分与优化</td><td>梯度、泰勒、拉格朗日、凸优化</td><td>《凸优化》（Boyd）前几章</td></tr>
+              <tr><td>4. 离散与理论</td><td>图论、逻辑、组合、群论入门</td><td>《离散数学及其应用》（Rosen）</td></tr>
+              <tr><td>5. 打通 ML</td><td>把数学套进 PCA / MLE / 反向传播</td><td>本导航「深度学习」篇</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card tip">
+          <div class="card-title">🎯 给保研人的三个建议</div>
+          <ol>
+            <li><strong>每个公式都要能说清几何/概率意义</strong>，这是面试区分度最高的地方。</li>
+            <li><strong>把数学和你的项目/科研绑定</strong>——老师最爱问"你用的模型数学原理是什么"。</li>
+            <li>准备 1~2 个<strong>现场推导</strong>（特征值/SVD、贝叶斯、梯度下降），白板写清楚步骤。</li>
+          </ol>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="footer">
+      数学 · 保研复习指南 —— 与「计算机基础」「深度学习」构成计算机保研导航三大支柱 🎓
+    </footer>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/python.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
