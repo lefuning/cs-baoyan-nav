@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>计算机专业课 · 保研复习指南</title>
+  <meta name="description" content="计算机保研人专属：数据结构、操作系统、计算机网络、计算机组成原理、数据库、C/C++ 六大专业课知识点梳理 + 高频面试题库。" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="read-progress" id="readProgress"></div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <a class="brand" href="#top">
+        <span class="brand-logo">CS</span>
+        <span>
+          <span class="brand-name">专业课复习指南</span><br />
+          <span class="brand-sub">保研导航 · 计算机基础</span>
+        </span>
+      </a>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-group-label">专业课</div>
+      <a class="nav-link" href="#overview"><span class="nav-icon">🧭</span> 复习总览</a>
+      <a class="nav-link" href="#ds"><span class="nav-icon">🌲</span> 数据结构与算法</a>
+      <a class="nav-link" href="#os"><span class="nav-icon">💻</span> 操作系统</a>
+      <a class="nav-link" href="#network"><span class="nav-icon">🌐</span> 计算机网络</a>
+      <a class="nav-link" href="#co"><span class="nav-icon">🔧</span> 计算机组成原理</a>
+      <a class="nav-link" href="#db"><span class="nav-icon">🗄️</span> 数据库</a>
+      <a class="nav-link" href="#cpp"><span class="nav-icon">⚙️</span> C/C++ 语言基础</a>
+      <a class="nav-link" href="#se"><span class="nav-icon">🛠️</span> 软件工程与系统设计</a>
+      <a class="nav-link" href="#compile"><span class="nav-icon">🔩</span> 编译原理基础</a>
+      <div class="nav-group-label">面试</div>
+      <a class="nav-link" href="#interview"><span class="nav-icon">📝</span> 综合面试题</a>
+      <a class="nav-link" href="#roadmap"><span class="nav-icon">🗺️</span> 复习路线</a>
+    </nav>
+    <div class="sidebar-foot">为计算机保研人整理 · 持续更新</div>
+  </aside>
+
+  <!-- ============ 主内容 ============ -->
+  <div class="content" id="top">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="菜单">☰</button>
+      <span class="topbar-title" id="topbarTitle">计算机专业课 · 保研复习指南</span>
+      <div class="topbar-actions">
+        <a class="btn btn-ghost" href="../index.html" style="padding:8px 14px;font-size:13px;">🏠 导航首页</a>
+        <button class="icon-btn" id="themeBtn" aria-label="切换主题">🌙</button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge">🎓 计算机保研 · 专业课备考</span>
+        <h1>六大核心专业课<br />知识点 + 面试题一站式复习</h1>
+        <p>面向计算机保研人系统梳理：数据结构与算法、操作系统、计算机网络、计算机组成原理、数据库、C/C++ 语言基础，每科配高频面试题与标准答案，助你从容应对机试与面试。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#overview">开始复习 →</a>
+          <a class="btn btn-ghost" href="#interview">直接刷面试题</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">6</div><div class="stat-label">核心专业课</div></div>
+          <div class="stat"><div class="stat-num">188</div><div class="stat-label">面试题详解</div></div>
+          <div class="stat"><div class="stat-num">1 条</div><div class="stat-label">完整复习路线</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+
+      <!-- ================= 总览 ================= -->
+      <section id="overview">
+        <div class="section-kicker">🧭 复习总览</div>
+        <h2>计算机保研：专业课怎么复习</h2>
+        <p class="lead">计算机保研（含考研 408 的四门课）的考核重点是<strong>"基础扎实 + 原理讲得清"</strong>，面试很少考偏题怪题，但会追问"为什么"。</p>
+
+        <div class="card">
+          <div class="card-title">📊 六门课的考查权重（保研面试经验）</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>课程</th><th>重要度</th><th>核心考点</th></tr></thead>
+              <tbody>
+                <tr><td><strong>数据结构与算法</strong></td><td>⭐⭐⭐⭐⭐</td><td>排序、树、图、哈希、复杂度分析；机试必考</td></tr>
+                <tr><td><strong>操作系统</strong></td><td>⭐⭐⭐⭐⭐</td><td>进程线程、死锁、内存管理、虚拟内存</td></tr>
+                <tr><td><strong>计算机网络</strong></td><td>⭐⭐⭐⭐⭐</td><td>TCP/UDP、三次握手、HTTP、拥塞控制</td></tr>
+                <tr><td><strong>计算机组成原理</strong></td><td>⭐⭐⭐⭐</td><td>存储层次、Cache、流水线、补码、中断</td></tr>
+                <tr><td><strong>数据库</strong></td><td>⭐⭐⭐⭐</td><td>事务、索引、隔离级别、范式</td></tr>
+                <tr><td><strong>C/C++ 语言</strong></td><td>⭐⭐⭐</td><td>指针、内存、虚函数、面向对象</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card info">
+          <div class="card-title">📌 复习方法论</div>
+          <p>① 每科先过"知识点框架"，建立思维导图；② 用面试题检验理解（<strong>先口述再对答案</strong>）；③ 数据结构和算法必须<strong>手写代码</strong>（机试淘汰率高）。</p>
+        </div>
+      </section>
+
+      <!-- ================= 数据结构 ================= -->
+      <section id="ds">
+        <div class="section-kicker">🌲 课程一</div>
+        <h2>数据结构与算法</h2>
+        <p class="lead">面试与机试的<strong>绝对核心</strong>。重点：复杂度分析、排序、树、图、哈希、动态规划。</p>
+
+        <h3>1. 复杂度分析</h3>
+        <ul>
+          <li>时间复杂度：用大 O 表示增长趋势，忽略常数与低阶项。</li>
+          <li>常见复杂度：$O(1)$ &lt; $O(\log n)$ &lt; $O(n)$ &lt; $O(n\log n)$ &lt; $O(n^2)$ &lt; $O(2^n)$。</li>
+          <li>递归复杂度可用<strong>主定理</strong>：$T(n)=aT(n/b)+f(n)$，比较 $n^{\log_b a}$ 与 $f(n)$。</li>
+        </ul>
+
+        <h3>2. 线性结构</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>结构</th><th>特点</th><th>典型复杂度</th></tr></thead>
+            <tbody>
+              <tr><td><strong>数组</strong></td><td>连续内存、随机访问</td><td>查 $O(1)$，插入/删除 $O(n)$</td></tr>
+              <tr><td><strong>链表</strong></td><td>离散内存、指针连接</td><td>查 $O(n)$，插入/删除 $O(1)$（已知位置）</td></tr>
+              <tr><td><strong>栈</strong></td><td>后进先出（LIFO）</td><td>入栈/出栈 $O(1)$</td></tr>
+              <tr><td><strong>队列</strong></td><td>先进先出（FIFO）</td><td>入队/出队 $O(1)$</td></tr>
+              <tr><td><strong>哈希表</strong></td><td>键值映射</td><td>平均 $O(1)$，最坏 $O(n)$</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：开放寻址法（线性探测）怎么解决冲突</div>
+          <p>哈希表大小 7，哈希函数 <code>h(key) = key % 7</code>，依次插入 <code>8, 1, 15, 22</code>：</p>
+          <ul>
+            <li><code>8 % 7 = 1</code> → 存入下标 1。</li>
+            <li><code>1 % 7 = 1</code> → 下标 1 已被占，往后探测到 2，存入下标 2。</li>
+            <li><code>15 % 7 = 1</code> → 1、2 已占，探测到 3，存入下标 3。</li>
+            <li><code>22 % 7 = 1</code> → 1、2、3 已占，探测到 4，存入下标 4。</li>
+          </ul>
+          <pre>下标：0  1  2  3  4  5  6
+值：  -  8  1  15 22 -  -</pre>
+          <p>这些 key 都算得哈希值 1，冲突时按顺序往后找空位。缺点：连续占用会形成"聚集"，使探测越来越长；为此有平方探测等改进。</p>
+        </div>
+
+        <h3>3. 树</h3>
+        <ul>
+          <li><strong>二叉树遍历</strong>：前序（根左右）、中序（左根右）、后序（左右根）、层序（BFS）。中序 + 前序/后序可唯一确定一棵树。</li>
+          <li><strong>BST</strong>：左小右大，查找/插入/删除平均 $O(\log n)$，最坏退化链表 $O(n)$。</li>
+          <li><strong>AVL</strong>：严格平衡（左右子树高度差 ≤ 1），通过<strong>四种旋转</strong>（LL/RR/LR/RL）恢复平衡。</li>
+          <li><strong>红黑树</strong>：近似平衡，5 条性质保证最长路径 ≤ 2× 最短路径，插入删除调整代价比 AVL 低。</li>
+          <li><strong>B+ 树</strong>：多路搜索树，所有数据存叶子节点且叶子连成链表——数据库索引的首选。</li>
+          <li><strong>堆</strong>：完全二叉树，大顶堆/小顶堆，插入 $O(\log n)$、取最值 $O(1)$，用于优先队列、堆排序、TopK。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：二叉树遍历代码</div>
+          <p>前/中/后序遍历只差一行"访问时机"，层序用队列：</p>
+          <pre><code class="language-cpp">// 前序：根左右（中序/后序只调换 visit 位置）
+void preorder(TreeNode* root) {
+    if (!root) return;
+    visit(root);             // 前序：先访问根
+    preorder(root->left);
+    preorder(root->right);
+}
+
+// 层序遍历（BFS，用队列）
+void levelOrder(TreeNode* root) {
+    queue&lt;TreeNode*&gt; q;
+    if (root) q.push(root);
+    while (!q.empty()) {
+        TreeNode* t = q.front(); q.pop();
+        visit(t);
+        if (t->left)  q.push(t->left);
+        if (t->right) q.push(t->right);
+    }
+}</code></pre>
+          <p>非递归前/中序用<strong>显式栈</strong>模拟递归（中序：沿左链一路压栈，弹出时访问再转右子树）；后序非递归较复杂，可用"双栈"或标记法。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：哈夫曼树怎么建</div>
+          <p>权值 <code>{2, 3, 5, 7}</code>，每次取<strong>最小的两个</strong>合并：</p>
+          <ol class="steps">
+            <li><div class="step-title">合并 2 和 3</div><p>得节点 5，森林变 {5, 5, 7}。</p></li>
+            <li><div class="step-title">合并两个 5</div><p>得节点 10，森林变 {7, 10}。</p></li>
+            <li><div class="step-title">合并 7 和 10</div><p>得根 17，建树完成。</p></li>
+          </ol>
+          <pre>        17
+       /    \
+      7     10
+           /  \
+          5    5
+              / \
+             2   3</pre>
+          <p>带权路径长度 <code>WPL = 7×1 + 5×2 + 2×3 + 3×3 = 32</code>。哈夫曼编码就是"频率高的字符用短码"：权值越大越靠近根，编码越短。</p>
+        </div>
+
+        <h3>4. 图</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>算法</th><th>用途</th><th>复杂度</th><th>要点</th></tr></thead>
+            <tbody>
+              <tr><td><strong>DFS</strong></td><td>连通性、路径、拓扑</td><td>$O(V+E)$</td><td>递归/栈，先深后广</td></tr>
+              <tr><td><strong>BFS</strong></td><td>最短路径（无权）、层次</td><td>$O(V+E)$</td><td>队列，层层扩展</td></tr>
+              <tr><td><strong>Dijkstra</strong></td><td>单源最短路径</td><td>$O((V+E)\log V)$</td><td>贪心，<strong>不能有负权</strong></td></tr>
+              <tr><td><strong>Bellman-Ford</strong></td><td>单源最短路径</td><td>$O(VE)$</td><td>可处理负权，检测负环</td></tr>
+              <tr><td><strong>Floyd</strong></td><td>多源最短路径</td><td>$O(V^3)$</td><td>动态规划</td></tr>
+              <tr><td><strong>Prim / Kruskal</strong></td><td>最小生成树</td><td>后者 $O(E\log E)$</td><td>前者加点、后者加边（并查集）</td></tr>
+              <tr><td><strong>拓扑排序</strong></td><td>有向无环图排序</td><td>$O(V+E)$</td><td>入度为 0 入队，BFS/DFS</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：Dijkstra 走一遍图</div>
+          <p>无向图，边权：A-B=4，A-C=2，B-C=1，B-D=5，C-D=3。求从 A 出发的最短路径：</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>步骤</th><th>已确定</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+              <tbody>
+                <tr><td>初始</td><td>—</td><td>0</td><td>∞</td><td>∞</td><td>∞</td></tr>
+                <tr><td>访问 A</td><td>A</td><td>0</td><td>4</td><td>2</td><td>∞</td></tr>
+                <tr><td>访问 C（最小）</td><td>A,C</td><td>0</td><td><strong>3</strong>（经C）</td><td>2</td><td><strong>5</strong>（经C）</td></tr>
+                <tr><td>访问 B</td><td>A,C,B</td><td>0</td><td>3</td><td>2</td><td>5（不更新）</td></tr>
+                <tr><td>访问 D</td><td>全部</td><td>0</td><td>3</td><td>2</td><td>5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>最终：A→C 距离 2，A→C→B 距离 3，A→C→D 距离 5。要点：<strong>每次取"未确定节点中距离最小的"贪心扩展</strong>，一旦确定就不再改变——所以要求边权非负。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：图的两种存储方式</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>方式</th><th>空间</th><th>判断是否有边</th><th>遍历邻接点</th><th>适用</th></tr></thead>
+              <tbody>
+                <tr><td>邻接矩阵</td><td>$O(V^2)$</td><td>$O(1)$</td><td>$O(V)$</td><td>稠密图</td></tr>
+                <tr><td>邻接表</td><td>$O(V+E)$</td><td>$O(\deg)$</td><td>$O(\deg)$</td><td>稀疏图</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>边很多（接近 $V^2$）用邻接矩阵省事；边很少（稀疏）用邻接表省空间。算法题里邻接表更常用。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：拓扑排序过程</div>
+          <p>有向无环图，边表示"先修"关系：A→B、A→C、B→D、C→D、D→E（A 是所有课的前提）。用"入度"法：</p>
+          <ol class="steps">
+            <li><div class="step-title">找入度为 0 的点</div><p>只有 A（入度 0），输出 A。</p></li>
+            <li><div class="step-title">删掉 A 及其出边</div><p>B、C 的入度减 1，都变成 0。</p></li>
+            <li><div class="step-title">继续</div><p>依次输出 B、C（顺序可换），再 D，最后 E。得拓扑序 <code>A→B→C→D→E</code>。</p></li>
+          </ol>
+          <p>用途：<strong>课程安排、任务依赖排序、编译依赖</strong>。注意：<strong>有环图没有拓扑序</strong>（环上的点入度永远不为 0）。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：关键路径（AOE 网）</div>
+          <p>事件 1~6，活动（边）及工期：1→2(3)、1→3(2)、2→4(2)、2→5(3)、3→4(4)、4→6(2)、5→6(1)。</p>
+          <p>先算<strong>最早发生时间 VE</strong>（正向，取最大）：VE(1)=0 → VE(2)=3 → VE(3)=2 → VE(4)=max(3+2, 2+4)=6 → VE(5)=6 → VE(6)=max(6+2, 6+1)=<strong>8</strong>。</p>
+          <p>再算<strong>最迟发生时间 VL</strong>（反向，取最小）：VL(6)=8 → VL(5)=7 → VL(4)=6 → VL(3)=2 → VL(2)=min(6-2, 7-3)=4 → VL(1)=0。</p>
+          <p><strong>关键事件 = VE 与 VL 相等</strong>：1、3、4、6。关键路径 = 1→3→4→6，总工期 <strong>8</strong>。关键活动的时间余量（松弛）为 0，<strong>推迟它就会推迟整个工期</strong>。</p>
+        </div>
+
+        <h3>5. 排序（必背对比表）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>算法</th><th>平均</th><th>最坏</th><th>空间</th><th>稳定性</th></tr></thead>
+            <tbody>
+              <tr><td>冒泡排序</td><td>$O(n^2)$</td><td>$O(n^2)$</td><td>$O(1)$</td><td>✅ 稳定</td></tr>
+              <tr><td>插入排序</td><td>$O(n^2)$</td><td>$O(n^2)$</td><td>$O(1)$</td><td>✅ 稳定</td></tr>
+              <tr><td>选择排序</td><td>$O(n^2)$</td><td>$O(n^2)$</td><td>$O(1)$</td><td>❌ 不稳定</td></tr>
+              <tr><td>归并排序</td><td>$O(n\log n)$</td><td>$O(n\log n)$</td><td>$O(n)$</td><td>✅ 稳定</td></tr>
+              <tr><td>快速排序</td><td>$O(n\log n)$</td><td>$O(n^2)$</td><td>$O(\log n)$</td><td>❌ 不稳定</td></tr>
+              <tr><td>堆排序</td><td>$O(n\log n)$</td><td>$O(n\log n)$</td><td>$O(1)$</td><td>❌ 不稳定</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>记忆口诀</strong>：稳定的是"冒泡、插入、归并"；$O(n\log n)$ 的是"快排、归并、堆排"。</p>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：堆排序两步走</div>
+          <p>数组 <code>[4, 10, 3, 5, 1]</code>，堆排序分两步：</p>
+          <ol class="steps">
+            <li><div class="step-title">建大顶堆</div><p>从最后一个非叶节点自底向上"下沉"调整：4 的两个孩子是 10、3，10 最大，交换 → <code>[10, 4, 3, 5, 1]</code>；继续调整 4 的孩子 5，再交换 → <code>[10, 5, 3, 4, 1]</code>（大顶堆）。</p></li>
+            <li><div class="step-title">反复取堆顶</div><p>把堆顶 10 与末尾 1 交换，堆缩小，重新下沉 → 得 <code>[5, 4, 3, 1, 10]</code>；重复直到全部有序。</p></li>
+          </ol>
+          <p>每次"下沉"是 $O(\log n)$，共 $n$ 次，总复杂度 $O(n\log n)$；原地排序（空间 $O(1)$），但<strong>不稳定</strong>。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：KMP 算法和 next 数组</div>
+          <p>暴力匹配的痛点：失配后主串指针要<strong>回退</strong>，已比较过的字符被重复比较。</p>
+          <p>KMP 核心：先算模式串的 <code>next</code> 数组（<strong>最长相同前后缀长度</strong>），失配时主串指针不回退，只移动模式串。</p>
+          <p>模式串 <code>P = "ABABC"</code> 的 next 数组：</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>位置 j</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+              <tbody>
+                <tr><td>字符</td><td>A</td><td>B</td><td>A</td><td>B</td><td>C</td></tr>
+                <tr><td>next[j]</td><td>0</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><code>next[3]=2</code> 的含义：<code>"ABAB"</code> 的最长相同前后缀是 <code>"AB"</code>（长度 2）。当 P[4] 失配时，说明前面 <code>"ABAB"</code> 已匹配，其中后缀 <code>"AB"</code> 可以直接当前缀继续用，于是模式串右移到该位置接着比，主串指针不动。</p>
+          <p>结果：KMP 匹配复杂度 $O(n+m)$，而暴力是 $O(n \times m)$。</p>
+        </div>
+
+        <h3>6. 算法思想</h3>
+        <ul>
+          <li><strong>分治</strong>：分解 → 求解 → 合并（快排、归并）。</li>
+          <li><strong>动态规划</strong>：<span class="key">最优子结构 + 重叠子问题</span>，用表格存子问题解（背包、LCS、LIS、编辑距离）。</li>
+          <li><strong>贪心</strong>：每步取局部最优，需证明全局最优（Dijkstra、Kruskal）。</li>
+          <li><strong>回溯</strong>：深度优先 + 剪枝（全排列、N 皇后）。</li>
+          <li><strong>双指针 / 滑动窗口</strong>：有序数组、子串问题的高效技巧。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：斐波那契为什么需要动态规划</div>
+          <p>求 <code>fib(5)</code>。朴素递归 <code>fib(5)=fib(4)+fib(3)</code> 中，<code>fib(3)</code> 被算 2 次、<code>fib(2)</code> 被算 3 次——大量<strong>重复计算</strong>，复杂度 $O(2^n)$。</p>
+          <p>动态规划用一个表自底向上，每个子问题只算一次：</p>
+          <pre>fib(0)=0, fib(1)=1
+fib(2)=fib(1)+fib(0)=1
+fib(3)=fib(2)+fib(1)=2
+fib(4)=fib(3)+fib(2)=3
+fib(5)=fib(4)+fib(3)=5</pre>
+          <p>复杂度降到 $O(n)$。这正是 DP 的核心：<strong>识别重叠子问题 + 用表存储避免重复计算</strong>。</p>
+        </div>
+
+        <!-- ===== 扩充：来自「考研复试常问问题·数据结构」 ===== -->
+        <div class="qa"><div class="qa-head"><span class="qa-tag">复杂度</span><span class="qa-q">时间复杂度、大 O 是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">$T(n)$ 是算法所有语句频度之和，时间复杂度取 $T(n)$ 的数量级，记为 $T(n)=O(f(n))$：存在常数 $C,n_0$，当 $n\ge n_0$ 时 $0\le T(n)\le C f(n)$。即保留随 $n$ 增长最快的项、系数置 1（如 $an^3+bn^2+cn$ 为 $O(n^3)$）。<strong>空间复杂度</strong> $S(n)=O(g(n))$；原地工作指辅助空间 $O(1)$。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">栈</span><span class="qa-q">栈有哪些经典应用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① <strong>括号匹配</strong>：遇左括号入栈，遇右括号与栈顶匹配、匹配则出栈，结束栈空即正确；② <strong>后缀表达式（逆波兰）求值</strong>：操作数入栈，遇运算符弹出栈顶两操作数计算后压回，最终栈顶为结果；③ <strong>递归</strong>：递归调用靠系统栈保存现场，非递归实现常借助显式栈；④ 函数调用、撤销（Undo）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">队列</span><span class="qa-q">怎么区分循环队列的队空和队满？</span><span class="qa-toggle">▼</span></div><div class="qa-body">普通循环队列中 `front==rear` 既表示空又表示满。常用两法：① <strong>牺牲一个单元</strong>：`(rear+1)%MaxSize == front` 为满，`front==rear` 为空；② 增设 <strong>size 计数器</strong>：`size==0` 为空、`size==MaxSize` 为满（更直观）。还有设 flag 法。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">串</span><span class="qa-q">KMP 算法的核心思想？</span><span class="qa-toggle">▼</span></div><div class="qa-body">暴力匹配失败就整体右移一位重来，效率低。KMP 利用<strong>模式串自身结构</strong>：当已匹配的前缀中出现"既是前缀又是后缀"的子串时，主串指针 i 不回退，只把模式串向右滑动到与该后缀对齐的位置继续比。滑动位数由 <strong>next 数组</strong>（部分匹配值）决定，最坏 $O(n+m)$，避免了主串指针回溯。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">树</span><span class="qa-q">哈夫曼树和哈夫曼编码？</span><span class="qa-toggle">▼</span></div><div class="qa-body">构造：每次从森林取两棵权值最小的树合成新树（权值=二者之和），重复至只剩一棵树，即得哈夫曼树（无度为 1 的结点，共 $2n-1$ 个结点）。把字符作为叶结点、权值为出现频次，从根到叶的路径（左 0 右 1）即<strong>哈夫曼编码</strong>——高频字符码短、低频码长，是前缀码、平均编码长度最短，用于无损压缩。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">哈希</span><span class="qa-q">常见的哈希函数构造方法？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① <strong>直接定址</strong> $H(key)=a\cdot key+b$（简单但适用范围窄）；② <strong>除留余数</strong> $H(key)=key\bmod p$（$p$ 取不大于表长的最大素数，最常用）；③ <strong>数字分析</strong>（取分布均匀的几位）；④ <strong>平方取中</strong>；⑤ <strong>折叠法</strong>；⑥ <strong>随机数法</strong>。好的哈希函数应让关键字均匀分布、冲突少。（冲突解决见前"哈希"卡）</div></div>
+
+        <h3>7. 字符串匹配：KMP 的 next 数组（带实例）</h3>
+        <p>KMP 相对 BF（暴力）的核心改进是<strong>主串指针不回溯</strong>：利用模式串自身的"最长相等前后缀"信息，失配时把模式串滑动到对齐位置。</p>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 next 数组怎么算（模式串 ababaca）</div>
+          <p>next[i] 表示子串 s[0..i] 的<strong>最长相等前后缀长度减 1</strong>（不存在记 -1）：</p>
+          <div class="formula">$$ \text{ababaca}:\quad next=[-1,-1,0,1,2,-1,0] $$</div>
+          <p>例如 s[0..4]=ababa，最长相等前后缀 "aba" 长为 3，故 next[4]=2。匹配失配时子串滑动到 next 位置、主串指针不动，整体复杂度 $O(n+m)$（BF 为 $O(nm)$）。</p>
+        </div>
+
+        <h3>8. 循环队列判空满 & 线索二叉树（易错细节）</h3>
+        <ul>
+          <li><strong>循环队列</strong>：队空/队满都表现为 <code>front==rear</code>，需区分——① 牺牲一个单元：队满 $(rear+1)\%MaxSize==front$；② 增加 <code>size</code> 字段记录元素个数。元素个数 $=(rear-front+MaxSize)\%MaxSize$。</li>
+          <li><strong>线索二叉树</strong>：$n$ 个结点的二叉树有 <span class="key">$n+1$ 个空指针</span>，把它们指向某遍历序下的直接前驱/后继即得线索二叉树——不增加空间却加速了找前驱/后继。</li>
+        </ul>
+
+        <h3>9. 哈夫曼树与带权路径长度</h3>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 WPL 计算实例</div>
+          <p>权值 $\{7,5,2,4\}$ 构造哈夫曼树：先选最小的 2、4 合成 6；再在 $\{7,5,6\}$ 里选 5、6 合成 11；最后 7、11 合成 18。带权路径长度 $WPL=7\cdot1+5\cdot2+2\cdot3+4\cdot3=28$。哈夫曼编码即"频率越高、码长越短"的<strong>前缀编码</strong>（左 0 右 1）。</p>
+        </div>
+
+        <h3>🌲 数据结构面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是数据结构？逻辑结构和存储结构区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">数据结构是<strong>数据的组织、存储与操作方式</strong>。逻辑结构是数据元素间的抽象关系：线性（表/栈/队列）、树形、图形、集合；存储结构是逻辑结构在内存中的实现：顺序（数组）、链式（指针）、索引、散列。同一逻辑结构可用不同存储结构实现。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是算法？如何评价一个算法？</span><span class="qa-toggle">▼</span></div><div class="qa-body">算法是求解特定问题的<strong>有限步骤</strong>描述，需具备有穷性、确定性、可行性、输入、输出。评价主要看<strong>时间复杂度</strong>（随规模 $n$ 增长的时间，用大 $O$ 表示）与<strong>空间复杂度</strong>，其次看可读性、健壮性。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是栈和队列？有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">都是受限线性表：栈<strong>后进先出</strong>（LIFO，只在一端操作，用于括号匹配、递归、函数调用栈）；队列<strong>先进先出</strong>（FIFO，一端进一端出，用于排队、BFS、消息缓冲）。"栈管递归回退，队列管顺序处理"。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">链表</span><span class="qa-q">头指针和头结点有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">头指针指向第一个结点的存储位置，是链表的<strong>必要元素</strong>（空表也存在）。头结点是放在第一个元素结点之前的附加结点，<strong>可有可无</strong>，作用是在首元素前插入/删除时不必特殊处理。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">栈</span><span class="qa-q">什么是共享栈？有什么用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">让两个顺序栈共用同一块数组空间，两个栈底分别设在两端、栈顶向中间延伸。利用栈底位置固定不变的特性，更充分利用空间、降低溢出概率。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">存储</span><span class="qa-q">稀疏矩阵怎么压缩存储？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用<strong>三元组</strong> $(行,列,值)$ 只存非零元素，节省大量空间。进一步可用十字链表支持快速的行列遍历。稀疏矩阵在图（邻接表）、推荐系统（稀疏评分矩阵）中常见。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">排序</span><span class="qa-q">快排为什么通常比归并排序更优？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 快排是<strong>就地</strong>排序，辅助空间 $O(\log n)$，归并需 $O(n)$ 额外空间；② 快排局部性好、对缓存更友好；③ 随机选支点可避免最坏 $O(n^2)$。但归并是<strong>稳定</strong>的且最坏仍是 $O(n\log n)$，外排序常用归并。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">稳定性</span><span class="qa-q">什么是排序稳定性？哪些算法稳定？</span><span class="qa-toggle">▼</span></div><div class="qa-body">排序后相等元素的相对次序保持不变即为稳定。稳定：冒泡、插入、归并、基数；不稳定：选择、快排、堆、希尔。稳定性在多关键字排序（先按 A 排、再按 B 排）中至关重要。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">线性</span><span class="qa-q">数组和链表区别？各自优缺点？</span><span class="qa-toggle">▼</span></div><div class="qa-body">数组连续内存、支持 $O(1)$ 随机访问，但插入删除需移动元素 $O(n)$、需要连续空间；链表离散、插入删除 $O(1)$（已知位置）、动态扩展，但不支持随机访问（$O(n)$）、额外指针开销、缓存不友好。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">线性</span><span class="qa-q">用两个栈实现一个队列？</span><span class="qa-toggle">▼</span></div><div class="qa-body">入队压入栈 A；出队时若栈 B 空，把 A 全部弹出压入 B（顺序反转），再从 B 弹出。摊还复杂度 $O(1)$。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">哈希</span><span class="qa-q">哈希表原理？哈希冲突怎么解决？</span><span class="qa-toggle">▼</span></div><div class="qa-body">把 key 通过哈希函数映射到数组下标。冲突解决：①<strong>拉链法</strong>（冲突元素存链表）；②<strong>开放寻址法</strong>（线性探测/平方探测找下一个空位）。负载因子 = 元素数/桶数，过大会降低效率，需扩容 rehash。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">树</span><span class="qa-q">二叉树遍历方式？非递归怎么实现？</span><span class="qa-toggle">▼</span></div><div class="qa-body">前序/中序/后序（DFS 三种，区别在访问根节点时机）、层序（BFS）。非递归用<strong>显式栈</strong>模拟递归（前序简单，中序沿左链入栈，后序需标记）。层序用队列。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">树</span><span class="qa-q">BST 退化怎么办？AVL 和红黑树区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">BST 插入有序数据会退化成链表 $O(n)$。AVL 严格平衡（高度差 ≤ 1），查找更快但插入删除旋转多；红黑树近似平衡（最长路径 ≤ 2× 最短），插入删除调整少，工程更常用（STL map、Java TreeMap）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">树</span><span class="qa-q">红黑树的 5 条性质？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 节点红或黑；② 根黑；③ 叶子（NIL）黑；④ 红节点的子节点必黑（不连续红）；⑤ 任一节点到其叶子路径的黑节点数相同（黑高相等）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">树</span><span class="qa-q">B 树和 B+ 树区别？为什么数据库索引用 B+ 树？</span><span class="qa-toggle">▼</span></div><div class="qa-body">B+ 树数据只存叶子节点、叶子连成链表、非叶子只存索引。优点：① 非叶子不存数据，<strong>单节点能存更多索引</strong>，树更矮、磁盘 IO 更少；② 叶子链表支持<strong>范围查询</strong>和顺序遍历；③ 查询稳定（都到叶子）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">堆</span><span class="qa-q">堆是什么？TopK 问题怎么做？</span><span class="qa-toggle">▼</span></div><div class="qa-body">堆是完全二叉树，满足父节点 ≥（或 ≤）子节点。求 TopK 大用<strong>小顶堆</strong>维护 K 个元素：新元素比堆顶大则替换并调整，复杂度 $O(n\log K)$；若直接全排序是 $O(n\log n)$。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">排序</span><span class="qa-q">快排原理、复杂度？为什么最坏 $O(n^2)$？怎么优化？</span><span class="qa-toggle">▼</span></div><div class="qa-body">选基准 pivot，分区使左小右大，递归处理。平均 $O(n\log n)$；当每次 pivot 恰好是极值（如已有序）时退化为 $O(n^2)$。优化：<strong>三数取中</strong>选 pivot、小规模改用插入排序、随机 pivot。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">排序</span><span class="qa-q">快排 vs 归并排序？稳定性？</span><span class="qa-toggle">▼</span></div><div class="qa-body">快排原地、空间 $O(\log n)$、不稳定，平均更快；归并需 $O(n)$ 额外空间、稳定、最坏也是 $O(n\log n)$。需要稳定且时间确定选归并，追求速度和省空间选快排。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">排序</span><span class="qa-q">稳定排序的意义？哪些排序稳定？</span><span class="qa-toggle">▼</span></div><div class="qa-body">稳定性：相等元素排序后相对顺序不变。意义：多关键字排序（先按姓名再按成绩）时，稳定排序能保留上一轮顺序。稳定：冒泡、插入、归并；不稳定：选择、快排、堆排。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">图</span><span class="qa-q">Dijkstra 能处理负权边吗？为什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">不能。Dijkstra 基于贪心，一旦确定某节点最短距离就固定，但负权边可能让"已经确定"的节点被后续更短路径更新，导致错误。负权用 Bellman-Ford，负环需特判。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">图</span><span class="qa-q">Prim 和 Kruskal 区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">Prim 从任意点出发，每次选连接已选集合的最小边（加点，适合稠密图）；Kruskal 按边权排序，用并查集判断成环（加边，适合稀疏图）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">图</span><span class="qa-q">DFS 和 BFS 区别？各自应用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">DFS 用栈（递归），一路走到底，适合连通性、拓扑排序、回溯、找环；BFS 用队列，层层扩展，适合<strong>无权图最短路径</strong>、层序遍历。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">算法</span><span class="qa-q">动态规划和贪心的区别？DP 两大要素？</span><span class="qa-toggle">▼</span></div><div class="qa-body">贪心每步取局部最优（不回溯），DP 考虑所有子问题取全局最优。DP 两大要素：<span class="key">最优子结构</span>（大问题最优解含子问题最优解）+ <span class="key">重叠子问题</span>（子问题重复，用备忘录/表格存）。</div></div>
+      </section>
+
+      <!-- ================= 操作系统 ================= -->
+      <section id="os">
+        <div class="section-kicker">💻 课程二</div>
+        <h2>操作系统</h2>
+        <p class="lead">重点：进程与线程、同步与死锁、内存管理、虚拟内存、调度。</p>
+
+        <h3>1. 进程与线程</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>维度</th><th>进程</th><th>线程</th></tr></thead>
+            <tbody>
+              <tr><td>资源</td><td>资源分配的基本单位（独立地址空间）</td><td>调度的基本单位，共享进程资源</td></tr>
+              <tr><td>隔离性</td><td>强，进程间互不影响</td><td>弱，共享地址空间</td></tr>
+              <tr><td>切换开销</td><td>大（需切换页表等）</td><td>小</td></tr>
+              <tr><td>通信</td><td>需 IPC 机制</td><td>直接读写共享内存</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>进程状态</strong>：就绪 → 运行 → 阻塞，及其转换。</li>
+          <li><strong>IPC 通信方式</strong>：管道、消息队列、共享内存（最快）、信号、信号量、Socket。</li>
+          <li><strong>线程同步</strong>：互斥锁、自旋锁、读写锁、信号量、条件变量。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：生产者-消费者与 PV 操作</div>
+          <p>缓冲区大小 n，生产者放产品、消费者取产品，需保证：缓冲区满时生产者等待、空时消费者等待、互斥访问。</p>
+          <p>三个信号量：<code>mutex = 1</code>（互斥）、<code>empty = n</code>（空位数）、<code>full = 0</code>（产品数）。</p>
+          <pre>生产者：                 消费者：
+P(empty)   // 有空位？    P(full)    // 有产品？
+P(mutex)   // 进入临界区   P(mutex)
+放产品                    取产品
+V(mutex)                  V(mutex)
+V(full)    // 产品+1     V(empty)   // 空位+1</pre>
+          <p>要点：① <strong>先 P 资源信号量、后 P mutex</strong>（顺序反了可能死锁）；② empty + full = n 恒成立；③ <code>P</code> 是"申请资源"（减 1，不够则阻塞），<code>V</code> 是"释放资源"（加 1，唤醒等待者）。</p>
+        </div>
+
+        <h3>2. 死锁</h3>
+        <div class="card warn">
+          <div class="card-title">⚠️ 死锁四个必要条件（缺一不可）</div>
+          <p><strong>① 互斥</strong>（资源独占）、<strong>② 持有并等待</strong>（占有资源又等别的）、<strong>③ 不可剥夺</strong>（不能抢）、<strong>④ 循环等待</strong>（形成环）。</p>
+        </div>
+        <ul>
+          <li><strong>预防</strong>：破坏任一条件（如一次性申请全部资源破"持有并等待"）。</li>
+          <li><strong>避免</strong>：<span class="key">银行家算法</span>——分配前判断是否处于安全状态。</li>
+          <li><strong>检测与解除</strong>：资源分配图找环，剥夺资源或终止进程。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：死锁怎么发生</div>
+          <p>两个进程、两把锁（资源 A 和 B）：</p>
+          <ul>
+            <li>进程 1 持有锁 A，同时请求锁 B。</li>
+            <li>进程 2 持有锁 B，同时请求锁 A。</li>
+            <li>两者都等对方释放，谁也不让步 → <strong>死锁</strong>。</li>
+          </ul>
+          <p>对应四个必要条件：锁是互斥的（①）；都占着自己那把又等另一把（②）；锁不能被抢走（③）；1→A→2→B→1 形成环（④）。<strong>破坏任意一条即可预防</strong>——例如规定所有进程都按"A 再 B"的顺序申请，就不会成环。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：银行家算法例子</div>
+          <p>设系统有资源 A、B、C 各 <code>(3,3,2)</code>，3 个进程的分配与需求：</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>进程</th><th>已分配</th><th>最大需求</th><th>还需</th></tr></thead>
+              <tbody>
+                <tr><td>P1</td><td>(1,0,1)</td><td>(2,1,1)</td><td>(1,1,0)</td></tr>
+                <tr><td>P2</td><td>(1,1,0)</td><td>(2,2,1)</td><td>(1,1,1)</td></tr>
+                <tr><td>P3</td><td>(0,1,1)</td><td>(1,1,2)</td><td>(1,0,1)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>已分配总和 = (2,2,2)，则<strong>可用 = (1,1,0)</strong>。找"还需 ≤ 可用"的进程：P1 还需 (1,1,0) ✓。P1 完成后释放，可用变 (2,1,1)，接着 P2、P3 依次满足。存在安全序列 <code>P1 → P2 → P3</code>，所以当前是<strong>安全状态</strong>，可以安全分配。</p>
+        </div>
+
+        <h3>3. 进程调度算法</h3>
+        <ul>
+          <li><strong>FCFS</strong>：先来先服务，简单但可能长作业阻塞短作业（护航效应）。</li>
+          <li><strong>SJF</strong>：短作业优先，平均等待最短但长作业可能饿死。</li>
+          <li><strong>RR 时间片轮转</strong>：公平，适合交互，时间片大小是关键。</li>
+          <li><strong>优先级调度</strong>：可能低优先级饿死，用"老化"解决。</li>
+          <li><strong>多级反馈队列</strong>：结合以上，实际系统（Linux）常用。</li>
+        </ul>
+
+        <h3>4. 内存管理</h3>
+        <ul>
+          <li><strong>分页</strong>：内存分固定大小页框，逻辑地址分页，用页表映射；无外碎片、有内碎片。</li>
+          <li><strong>分段</strong>：按逻辑单元（代码/数据/栈）分，有逻辑意义、无内碎片、有外碎片。</li>
+          <li><strong>段页式</strong>：先分段再分页，结合两者优点。</li>
+          <li><strong>虚拟内存</strong>：让程序认为有比物理内存更大的空间，按需调入（<strong>局部性原理</strong>）。</li>
+          <li><strong>缺页中断</strong>：访问的页不在内存时触发，调入后重试。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：分页地址怎么转换</div>
+          <p>设页面大小 4KB（$=2^{12}$），逻辑地址 32 位：</p>
+          <ul>
+            <li>低 12 位是<strong>页内偏移</strong>，高 20 位是<strong>页号</strong>。</li>
+            <li>例如逻辑地址 <code>0x12345</code> = 页号 <code>0x12</code>，偏移 <code>0x345</code>。</li>
+            <li>查页表：页号 <code>0x12</code> → 页框号 <code>0xAB</code>。</li>
+            <li>物理地址 = 页框号 <code>0xAB</code> 拼上偏移 <code>0x345</code> = <code>0xAB345</code>。</li>
+          </ul>
+          <p>页表由硬件 <strong>MMU</strong> 完成，为加速还配了 <strong>TLB</strong>（页表缓存）。这就是"虚拟地址 → 物理地址"的核心过程。</p>
+        </div>
+
+        <h3>5. 页面置换算法</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>算法</th><th>思想</th><th>特点</th></tr></thead>
+            <tbody>
+              <tr><td><strong>OPT</strong></td><td>淘汰最久未来不用的页</td><td>最优但不可实现，作基准</td></tr>
+              <tr><td><strong>FIFO</strong></td><td>淘汰最早进入的页</td><td>简单，有 Belady 异常</td></tr>
+              <tr><td><strong>LRU</strong></td><td>淘汰最久未使用的页</td><td>近似 OPT，最常用</td></tr>
+              <tr><td><strong>Clock</strong></td><td>环形扫描，访问位为 0 则淘汰</td><td>LRU 的低成本近似</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>抖动（Thrashing）</strong>：分配给进程的物理页过少，频繁缺页换页，CPU 利用率反而下降。</p>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：LRU 怎么淘汰页面</div>
+          <p>设物理页框只有 3 个，访问序列：<code>1, 2, 3, 2, 1, 4, 2</code>。</p>
+          <ul>
+            <li>访问 1、2、3：依次装入，页框 [1,2,3]（3 次缺页）。</li>
+            <li>访问 2、1：都在内存，命中。</li>
+            <li>访问 4：满了，淘汰<strong>最久未使用</strong>的 3，页框 [1,2,4]（缺页）。</li>
+            <li>访问 2：命中，页框 [1,2,4]。</li>
+          </ul>
+          <p>共 <strong>4 次缺页、3 次命中</strong>。"最近使用过"的页被认为更可能再次被访问（时间局部性），所以优先淘汰最久没用的。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：磁盘调度算法怎么走</div>
+          <p>设磁头当前在 50，请求序列：<code>98, 183, 37, 122, 14, 124, 65, 67</code>。各算法的访问顺序：</p>
+          <ul>
+            <li><strong>FCFS</strong>：按请求顺序来，移动距离大（约 640）。</li>
+            <li><strong>SSTF（最短寻道优先）</strong>：每次去最近的：50→65→67→37→14→98→122→124→183，可能<strong>饿死</strong>远处请求。</li>
+            <li><strong>SCAN（电梯算法）</strong>：朝一个方向扫到头再反向：50→65→67→98→122→124→183→37→14。</li>
+            <li><strong>C-SCAN</strong>：扫到头后快速回到另一端再扫，不反向处理，更均匀。</li>
+          </ul>
+          <p>关键：磁头移动是机械操作（毫秒级），<strong>减少移动距离 = 提速</strong>。SSTF 快但可能饥饿，SCAN 更公平，是电梯的真实模型。</p>
+        </div>
+
+        <!-- ===== 扩充：来自「考研复试常问问题·操作系统」 ===== -->
+        <div class="qa"><div class="qa-head"><span class="qa-tag">架构</span><span class="qa-q">大内核（宏内核）和微内核的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">大内核把进程管理、内存、文件、设备驱动等全部功能紧密耦合在内核态，模块间直接调用、性能高，但内核庞大、一处出错易整体崩溃（Linux、Windows 属此类）。微内核只保留最核心功能（IPC、低层内存、线程调度）运行在内核态，其余服务（文件系统、驱动、网络）作为用户态进程，稳定性与可移植性好，但用户态/内核态频繁切换带来性能开销（如 seL4、Mach、鸿蒙微内核）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">中断</span><span class="qa-q">中断和异常（内中断）的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">中断（外中断）来自 CPU <strong>外部</strong>、与当前指令无关，如 I/O 完成、时钟、键盘；异常（内中断/陷入 Trap）来自 CPU <strong>执行指令本身</strong>，如除零、非法指令、缺页、系统调用（int 0x80 / syscall）。中断可被屏蔽，异常通常与当前现场强相关、不可屏蔽（除零会立即陷入）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">进程</span><span class="qa-q">进程有哪些状态？怎么转换？</span><span class="qa-toggle">▼</span></div><div class="qa-body">经典五态：<strong>新建 → 就绪 ⇄ 运行 → 终止</strong>，运行因等待事件转入<strong>阻塞</strong>，事件完成回到就绪。就绪→运行由调度决定；运行→就绪是时间片用完或被抢占；运行→阻塞是等待 I/O/资源；阻塞→就绪是等待的事件发生。注意阻塞态进程不占用 CPU。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">同步</span><span class="qa-q">临界区管理的四个准则？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① <strong>空闲让进</strong>：无进程在临界区时，允许一个请求进程立即进入；② <strong>忙则等待</strong>：已有进程在临界区，其他必须等待；③ <strong>有限等待</strong>：请求进程应在有限时间内进入，不会饿死；④ <strong>让权等待</strong>：不能进入时释放处理机（不忙等）。实现工具：互斥量 mutex、信号量 semaphore、自旋锁、管程 monitor。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">常见页面置换算法对比？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>OPT</strong>（最佳，淘汰最久不用的，理论下界，需预知未来，实际无法实现）；<strong>FIFO</strong>（淘汰最早进入的，实现简单但可能有 Belady 异常）；<strong>LRU</strong>（淘汰最久未使用，近似 OPT、性能好）；<strong>CLOCK/NRU</strong>（给每帧加使用位，扫描把使用位清 0、遇 0 则置换，近似 LRU、开销小）。实际系统多用 LRU 或 CLOCK 的变体。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">IO</span><span class="qa-q">磁盘调度算法有哪些？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>FCFS</strong>（先来先服务，公平但寻道时间长）；<strong>SSTF</strong>（优先服务离磁头最近的，吞吐高但可能饿死远端磁道）；<strong>SCAN 电梯</strong>（沿一个方向扫到头再折返，避免饿死）；<strong>CSCAN</strong>（单向扫描，到端点立即回到起点，各磁道等待更均匀）。目标是减少平均寻道时间。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">覆盖技术和交换技术？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>覆盖</strong>：把一个大程序拆成若干段，彼此不调用的段共享同一内存区，解决"程序比内存大"的问题，需程序员手工划分，只在单个进程内。<strong>交换</strong>：把暂时不运行的进程整体换出到外存、需要时换入，发生在进程/作业级，由中级调度完成。两者都为扩充内存、打破"全部装入才能运行"的限制。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">IO</span><span class="qa-q">SPOOLing（斯普林）技术是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">假脱机技术：用磁盘上的"输入井/输出井" + 内存缓冲区 + 输入输出进程，把独占的慢速 I/O 设备（如打印机）虚拟成多台"逻辑设备"，让多个进程并发使用。好处：① 提高 I/O 速度；② 把独占设备改造成共享设备；③ 实现虚拟设备。本质是"以磁盘缓冲冒充独占设备"。</div></div>
+
+        <h3>6. 用户态 / 内核态切换的三种途径（高频）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>途径</th><th>触发方</th><th>例子</th></tr></thead>
+            <tbody>
+              <tr><td><strong>系统调用</strong>（Trap）</td><td>程序<strong>主动</strong>请求</td><td>读写文件、申请内存</td></tr>
+              <tr><td><strong>中断</strong>（Interrupt）</td><td>外设<strong>异步</strong>通知</td><td>IO 完成、时钟中断</td></tr>
+              <tr><td><strong>异常</strong>（Exception）</td><td>CPU 执行中<strong>被动</strong>出错</td><td>缺页、除零</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>7. 自旋锁 vs 互斥锁 & 软/硬链接</h3>
+        <ul>
+          <li><strong>自旋锁</strong>：忙等待，拿不到锁就循环检查（占用 CPU）；适合临界区<strong>极短</strong>的场景。</li>
+          <li><strong>互斥锁</strong>：阻塞等待，拿不到锁就挂起让出 CPU（不占处理器）；适合临界区<strong>较长</strong>的场景。</li>
+          <li><strong>硬链接</strong>：与源文件<strong>同一 inode</strong>，完全平等，删任一不影响另一；可防误删。</li>
+          <li><strong>软链接（符号链接）</strong>：一个存"目标路径"的特殊文件，源删除后软链接失效。</li>
+        </ul>
+
+        <h3>8. 动态分区分配算法 & 快表</h3>
+        <ul>
+          <li><strong>首次适应</strong>：从头找第一个够大的空闲区；<strong>最佳适应</strong>：选最小够用分区（产生最多小碎片）；<strong>最坏适应</strong>：选最大分区；<strong>邻近适应</strong>：从上一次结束位置继续找。</li>
+          <li><strong>快表 TLB</strong>：缓存最近访问的页表项的高速缓存。分页地址变换：算页号/偏移 → 查 TLB（命中得块号）→ 未命中查页表并回填 TLB → 由块号+偏移得物理地址。</li>
+        </ul>
+
+        <h3>9. 多级反馈队列调度</h3>
+        <p>设多级就绪队列，优先级从高到低、时间片从小到大；高优先级先运行、同级先来先服务；用完本级时间片降到下一级；新进程进第一级。它综合了<strong>短作业优先</strong>与<strong>时间片轮转</strong>，兼顾响应与吞吐，是多数现代 OS 调度器的原型。</p>
+
+        <h3>💻 操作系统面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是操作系统？它的核心功能有哪些？</span><span class="qa-toggle">▼</span></div><div class="qa-body">操作系统是<strong>管理软硬件资源、向上提供服务的系统软件</strong>。四大管理：处理机管理（进程/线程/调度）、存储器管理（内存分配/映射/保护）、文件管理、设备管理。特征：并发、共享、虚拟、异步。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">程序、进程、线程三者有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">程序是磁盘上的<strong>静态</strong>可执行文件；进程是程序的<strong>一次动态执行</strong>，是资源分配的基本单位；线程是进程内的执行流，是 CPU 调度的最小单位。一个进程可含多线程，线程共享进程的代码/数据/堆，但各有独立栈与寄存器。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是死锁？产生死锁的四个必要条件？</span><span class="qa-toggle">▼</span></div><div class="qa-body">死锁是多个进程因<strong>互相等待对方持有的资源</strong>而永久阻塞。四个必要条件：互斥、持有并等待、不可抢占、循环等待（四个同时成立才可能死锁）。破解只需破坏其中一条：如按序申请资源破坏循环等待。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">并发</span><span class="qa-q">并发和并行有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">并发是多个事件在<strong>同一时间间隔</strong>内发生（宏观同时、微观交替）；并行是多个事件在<strong>同一时刻</strong>同时发生（需多核）。并发是逻辑上的"同时"，并行是物理上的"同时"。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">切换</span><span class="qa-q">用户态切换到内核态有哪几种方式？</span><span class="qa-toggle">▼</span></div><div class="qa-body">三种：① 系统调用（Trap，程序主动请求内核服务）；② 中断（外设异步通知，如 IO 完成）；③ 异常（执行中出错，如缺页、除零）。分两个态是为了保护系统安全、限制用户程序访问硬件。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">锁</span><span class="qa-q">自旋锁和互斥锁有什么区别？怎么选？</span><span class="qa-toggle">▼</span></div><div class="qa-body">自旋锁忙等待（拿不到就循环检查，占 CPU），适合临界区极短、持锁时间短；互斥锁阻塞等待（拿不到挂起让出 CPU），适合临界区较长。选型看"持锁时间"：短用自旋、长用互斥。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">文件</span><span class="qa-q">软链接和硬链接有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">硬链接与原文件<strong>共享同一 inode</strong>，完全平等，删除任一个不影响另一个（可防误删）；软链接是存"目标路径"的独立文件，源文件删除后软链接失效。硬链接不能跨文件系统、不能链接目录。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">快表（TLB）是什么？分页地址变换流程？</span><span class="qa-toggle">▼</span></div><div class="qa-body">TLB 是缓存最近页表项的高速缓存，利用局部性加速地址转换。流程：算页号/偏移 → 查 TLB（命中得内存块号）→ 未命中查页表并回填 TLB → 块号+偏移得物理地址 → 访存。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">分配</span><span class="qa-q">动态分区分配有哪些算法？</span><span class="qa-toggle">▼</span></div><div class="qa-body">首次适应（从头找第一个够大）、最佳适应（选最小够用，碎片最多）、最坏适应（选最大分区）、邻近适应（从上回结束位置继续）。首次适应最简单常用。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">进程</span><span class="qa-q">进程和线程的区别？协程是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">见上表。协程是用户态的轻量"线程"，由程序自己调度切换、不陷入内核，切换开销极小，适合高并发 IO（如 Go 的 goroutine）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">进程</span><span class="qa-q">进程间通信方式有哪些？哪种最快？</span><span class="qa-toggle">▼</span></div><div class="qa-body">管道、消息队列、共享内存、信号、信号量、Socket。<strong>共享内存最快</strong>（无需内核拷贝数据），但需要配合信号量做同步。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">同步</span><span class="qa-q">线程同步机制有哪些？</span><span class="qa-toggle">▼</span></div><div class="qa-body">互斥锁（mutex）、自旋锁（spinlock，忙等适合临界区短）、读写锁（读并发写互斥）、信号量（semaphore，计数）、条件变量（配合锁，等待条件）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">死锁</span><span class="qa-q">死锁四个必要条件？怎么处理？</span><span class="qa-toggle">▼</span></div><div class="qa-body">互斥、持有并等待、不可剥夺、循环等待。处理：预防（破坏条件）、避免（银行家算法）、检测与解除、鸵鸟策略（忽略）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">死锁</span><span class="qa-q">银行家算法的思想？</span><span class="qa-toggle">▼</span></div><div class="qa-body">分配资源前，判断分配后系统是否仍存在一个"安全序列"（所有进程都能完成）。存在才分配，否则等待。本质是避免进入不安全状态。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">调度</span><span class="qa-q">进程调度算法有哪些？</span><span class="qa-toggle">▼</span></div><div class="qa-body">FCFS、SJF、时间片轮转 RR、优先级调度、多级反馈队列。实际系统多用多级反馈队列，兼顾吞吐与响应。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">分页和分段区别？段页式？</span><span class="qa-toggle">▼</span></div><div class="qa-body">分页是固定大小物理块，用户无感知，有内碎片；分段按逻辑单位划分，有逻辑意义、无内碎片但有外碎片。段页式先分段再分页，兼有两者的逻辑清晰与内存利用率。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">虚拟内存是什么？有什么好处？</span><span class="qa-toggle">▼</span></div><div class="qa-body">把磁盘一部分当内存扩展，基于局部性原理按需换入换出。好处：① 运行比物理内存更大的程序；② 每个进程有独立地址空间（隔离保护）；③ 提高内存利用率。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">什么是缺页中断？流程？</span><span class="qa-toggle">▼</span></div><div class="qa-body">访问的页不在内存（页表项无效位标记）时触发中断：① 检查是否合法访问；② 找空闲页框或置换一页；③ 从磁盘读入页面；④ 更新页表；⑤ 重新执行指令。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">LRU 怎么实现？</span><span class="qa-toggle">▼</span></div><div class="qa-body">经典实现：<strong>哈希表 + 双向链表</strong>。哈希表实现 $O(1)$ 查找，链表维护使用顺序（最近使用放头部，淘汰尾部）。访问时移到头部，满了删尾部。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">什么是 Belady 异常？</span><span class="qa-toggle">▼</span></div><div class="qa-body">FIFO 算法中，物理页框增多反而缺页次数增加的现象。LRU 和 OPT 是栈算法，不会出现此异常。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">系统</span><span class="qa-q">用户态和内核态？系统调用过程？</span><span class="qa-toggle">▼</span></div><div class="qa-body">为保护内核，CPU 分特权级。用户程序在用户态跑，访问硬件/内核资源需通过<strong>系统调用</strong>陷入内核态（int 80 / syscall 指令），内核执行完返回用户态。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">系统</span><span class="qa-q">什么是上下文切换？开销在哪？</span><span class="qa-toggle">▼</span></div><div class="qa-body">CPU 从一个进程/线程切到另一个，需保存现场（寄存器、PC、栈指针）并恢复另一个的现场。开销：保存/恢复寄存器、切换页表、刷新 TLB 等。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">IO</span><span class="qa-q">select / poll / epoll 区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">三者都是 IO 多路复用。select 用位图、有 fd 数量上限（1024）、每次拷贝整个集合；poll 用链表无上限但仍需遍历；<strong>epoll</strong>（Linux）基于事件驱动 + 红黑树/就绪链表，只返回就绪 fd，复杂度 $O(1)$，适合大规模连接。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">文件</span><span class="qa-q">硬链接和软链接区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">硬链接指向同一 inode，删除原文件不影响（引用计数），不能跨文件系统、不能给目录建；软链接（符号链接）存的是路径，删除原文件则失效，可跨文件系统。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">进程</span><span class="qa-q">僵尸进程和孤儿进程？</span><span class="qa-toggle">▼</span></div><div class="qa-body">孤儿进程：父进程先退出，子进程被 init 收养。僵尸进程：子进程已退出但父进程未调用 wait 回收，占 PCB 表项；父进程退出后由 init 回收。</div></div>
+      </section>
+
+      <!-- ================= 计算机网络 ================= -->
+      <section id="network">
+        <div class="section-kicker">🌐 课程三</div>
+        <h2>计算机网络</h2>
+        <p class="lead">重点：分层模型、TCP 三次握手/四次挥手、可靠传输、HTTP/HTTPS、拥塞控制。</p>
+
+        <h3>1. 分层模型</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>OSI 七层</th><th>TCP/IP 五层</th><th>作用</th><th>典型协议/设备</th></tr></thead>
+            <tbody>
+              <tr><td>应用层</td><td>应用层</td><td>为应用提供服务</td><td>HTTP、DNS、FTP、SMTP</td></tr>
+              <tr><td>表示层</td><td rowspan="3">（并入应用层）</td><td>数据格式、加密</td><td rowspan="3">—</td></tr>
+              <tr><td>会话层</td><td>会话管理</td></tr>
+              <tr><td>传输层</td><td>传输层</td><td>端到端通信</td><td>TCP、UDP</td></tr>
+              <tr><td>网络层</td><td>网络层</td><td>路由与转发</td><td>IP、ICMP、ARP；路由器</td></tr>
+              <tr><td>数据链路层</td><td>数据链路层</td><td>相邻节点帧传输</td><td>以太网；交换机</td></tr>
+              <tr><td>物理层</td><td>物理层</td><td>比特流传输</td><td>集线器、网线</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：子网划分怎么算</div>
+          <p>经典题：把 <code>192.168.1.0/24</code> 分成 4 个子网，每个子网多少地址？子网掩码是什么？</p>
+          <ol class="steps">
+            <li><div class="step-title">借位</div><p>4 个子网需要 $2^2=4$，从主机位借 2 位 → 网络位 24+2=26 位。</p></li>
+            <li><div class="step-title">子网掩码</div><p>前 26 位为 1 → <code>255.255.255.192</code>。</p></li>
+            <li><div class="step-title">每个子网地址数</div><p>主机位剩 32-26=6 位，共 $2^6=64$ 个地址，去掉网络地址和广播地址，<strong>可用 62 个</strong>。</p></li>
+            <li><div class="step-title">四个子网</div><p><code>192.168.1.0/26</code>、<code>.64/26</code>、<code>.128/26</code>、<code>.192/26</code>。</p></li>
+          </ol>
+          <p>口诀：<strong>借 k 位得 $2^k$ 个子网，每个子网 $2^{(剩余位)}-2$ 个可用地址</strong>。判断两个 IP 是否同网段，比较"IP AND 掩码"的结果是否相等。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：CSMA/CD 怎么工作</div>
+          <p>以太网（共享总线）的访问控制协议，口诀"<strong>先听后说，边听边说，冲突即停，随机重试</strong>"：</p>
+          <ol class="steps">
+            <li><div class="step-title">先听后说</div><p>发送前先监听信道，空闲才发（CSMA 载波监听）。</p></li>
+            <li><div class="step-title">边听边说</div><p>发送的同时继续监听，检测是否发生冲突（CD 冲突检测）。</p></li>
+            <li><div class="step-title">冲突即停</div><p>检测到冲突立即停止发送，并发送冲突强化信号。</p></li>
+            <li><div class="step-title">随机重试</div><p>按<strong>二进制指数退避</strong>等待随机时间后重发（第 k 次冲突等 $0\sim 2^k-1$ 个时间片）。</p></li>
+          </ol>
+          <p>关键：冲突不可避免（信号传播需要时间），CSMA/CD 只是"检测冲突并恢复"。交换式以太网（全双工）出现后冲突域被隔离，CSMA/CD 基本退役。</p>
+        </div>
+
+        <h3>2. TCP 三次握手 / 四次挥手</h3>
+        <div class="formula">
+          $$\text{三次握手：} \quad \text{客户端 SYN=1} \rightarrow \text{服务端 SYN+ACK} \rightarrow \text{客户端 ACK}$$
+          $$\text{四次挥手：} \quad \text{FIN} \rightarrow \text{ACK} \rightarrow \text{FIN} \rightarrow \text{ACK}$$
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：三次握手的具体报文</div>
+          <ol class="steps">
+            <li><div class="step-title">第一次</div><p>客户端发 SYN，随机初始序号 <code>seq = x</code>（如 x=100），进入 SYN_SENT。</p></li>
+            <li><div class="step-title">第二次</div><p>服务端回 SYN+ACK：自己的序号 <code>seq = y</code>，确认号 <code>ack = x+1</code>（=101），进入 SYN_RCVD。</p></li>
+            <li><div class="step-title">第三次</div><p>客户端发 ACK：<code>seq = x+1</code>，<code>ack = y+1</code>，双方进入 ESTABLISHED。</p></li>
+          </ol>
+          <p><strong>确认号的含义</strong>：<code>ack = n</code> 表示"我期望收到序号为 n 的字节"，即前 n-1 个字节已收到。三次握手后，双方各自确认了对面的收发能力都正常。</p>
+        </div>
+
+        <h3>3. TCP 可靠传输</h3>
+        <ul>
+          <li><strong>序号 + 确认应答（ACK）</strong>：每个字节编号，接收方确认。</li>
+          <li><strong>超时重传</strong>：超时未收到 ACK 则重传。</li>
+          <li><strong>滑动窗口</strong>：流量控制（接收方通过窗口大小告知处理能力）。</li>
+          <li><strong>拥塞控制</strong>：慢启动、拥塞避免、快重传、快恢复。</li>
+          <li><strong>校验和</strong>：检测传输错误。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：慢启动为什么叫"慢"却指数增长</div>
+          <p>拥塞窗口 cwnd 从 1 个 MSS 开始，<strong>每收到一轮 ACK 就翻倍</strong>（指数增长）：</p>
+          <pre>轮次(RTT)： 1   2   3   4   5   6
+cwnd：     1   2   4   8   16  32</pre>
+          <p>虽然叫"慢启动"，其实增长很快，只是<strong>起点低</strong>（从 1 而不是很大值开始），目的是先探测网络容量，避免一开始就拥塞。当 cwnd 达到阈值 ssthresh 后，改为<strong>拥塞避免</strong>——每个 RTT 只 +1，线性增长。</p>
+        </div>
+
+        <h3>4. TCP vs UDP</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>维度</th><th>TCP</th><th>UDP</th></tr></thead>
+            <tbody>
+              <tr><td>连接</td><td>面向连接（三次握手）</td><td>无连接</td></tr>
+              <tr><td>可靠性</td><td>可靠（确认重传）</td><td>不可靠，尽力而为</td></tr>
+              <tr><td>顺序</td><td>保证有序</td><td>不保证</td></tr>
+              <tr><td>速度</td><td>慢（有开销）</td><td>快、头部小</td></tr>
+              <tr><td>场景</td><td>文件传输、HTTP、邮件</td><td>音视频、DNS、游戏</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>5. HTTP / HTTPS</h3>
+        <ul>
+          <li><strong>HTTP 状态码</strong>：1xx 信息、2xx 成功（200/204）、3xx 重定向（301 永久/302 临时/304 缓存）、4xx 客户端错误（400/401/403/404）、5xx 服务器错误（500/502/503）。</li>
+          <li><strong>HTTP/1.1</strong>：持久连接（keep-alive）、管道化；<strong>HTTP/2</strong>：多路复用、头部压缩、二进制分帧；<strong>HTTP/3</strong>：基于 QUIC（UDP），减少握手延迟。</li>
+          <li><strong>HTTPS = HTTP + SSL/TLS</strong>：非对称加密协商会话密钥 + 对称加密传输数据，防窃听、防篡改、身份认证。</li>
+        </ul>
+
+        <!-- ===== 扩充：来自「考研复试常问问题·计算机网络」 ===== -->
+        <div class="qa"><div class="qa-head"><span class="qa-tag">交换</span><span class="qa-q">电路交换、报文交换、分组交换区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>电路交换</strong>：建连→通数据→断连，整条比特流独占管道（传统电话），时延固定但建立连接慢、信道利用率低。<strong>报文交换</strong>：整份报文存转存发，无连接但时延大。<strong>分组交换</strong>：把报文切成分组各自路由、存转存发，无需建连、信道利用率高、可动态选路；缺点是分组头开销、可能乱序需重组。因特网采用分组交换。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">性能</span><span class="qa-q">总时延怎么算？时延带宽积是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">总时延 = 排队时延 + 处理时延 + 发送（传输）时延 + 传播时延。传播时延 = 链路长度 / 电磁波速（$\approx c$）。<strong>时延带宽积</strong> = 传播时延 × 带宽，表示"链路中最多能容纳的比特数"，即发送端发出首个比特即将到达终点时，已发出的比特总量，是管道容量的度量。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">分层</span><span class="qa-q">端到端通信和点到点通信的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">物理层、数据链路层、网络层组成通信子网，提供<strong>点到点</strong>服务（相邻结点间传输，不关心进程）。传输层在点到点之上提供<strong>端到端</strong>逻辑通信（进程到进程），用端口号标识应用进程。"端"指的是应用进程的端口，端到端建立在逐段点到点之上。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">可靠</span><span class="qa-q">后退 N 帧（GBN）和选择重传（SR）？</span><span class="qa-toggle">▼</span></div><div class="qa-body">二者都是滑动窗口 + 自动重传（ARQ）。<strong>GBN</strong>：发送窗口 >1、接收窗口 =1，接收方只按序接收，出错则重传该帧及其后所有已发帧（可能重传正确帧）。<strong>SR</strong>：接收窗口 >1，只重传真正出错/超时的帧，接收方缓存乱序到达的帧，效率更高但实现更复杂。窗口大小需满足 $W \le 2^{n-1}$（SR）以避免序号混淆。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">接入</span><span class="qa-q">CSMA/CD 和 CSMA/CA 区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>CSMA/CD</strong>（有线以太网）：载波侦听 + 边发边检测冲突，流程"先听后发、边听边发、冲突停发、随机重发"，用截断二进制指数退避。CD 依赖硬件检测冲突电压。<strong>CSMA/CA</strong>（无线 WiFi）：无法直接检测冲突（隐蔽站问题），故用"避免"——RTS/CTS 预约、ACK 确认、二进制指数退避，尽量降低冲突概率而非检测冲突。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">路由</span><span class="qa-q">RIP、OSPF、BGP 分别是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>RIP</strong>：内部网关、距离向量算法、最大 15 跳、30s 周期广播整张路由表，简单但慢、只适合小网。<strong>OSPF</strong>：内部网关、链路状态算法、用洪泛只传链路状态变化、触发更新收敛快，支持负载均衡。<strong>BGP</strong>：外部网关、路径向量、基于 TCP（端口 179），用于自治系统之间选路，重策略而非最短路。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">寻址</span><span class="qa-q">IP 地址和 MAC 地址的区别与协作？</span><span class="qa-toggle">▼</span></div><div class="qa-body">IP 是网络层<strong>分层、逻辑</strong>地址，用于跨网络寻址；MAC 是数据链路层<strong>平面、物理</strong>地址，用于同一链路内寻址。发送时网络层封装 IP、链路层封装 MAC；路由器转发时改变 MAC 源/目的（但 IP 不变）。跨网通信靠 ARP 把下一跳 IP 解析为 MAC，最终在目标局域网用 MAC 广播寻址。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">拥塞</span><span class="qa-q">TCP 拥塞控制的四种算法？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① <strong>慢开始</strong>：cwnd 从 1 起步，每收到一个 ACK 加 1，每 RTT 翻倍（指数增长）直到 ssthresh；② <strong>拥塞避免</strong>：超过 ssthresh 后每 RTT 加 1（线性增长）；③ <strong>快重传</strong>：连续收到 3 个重复 ACK 立即重传，不等超时；④ <strong>快恢复</strong>：超时后 ssthresh 设为 cwnd 一半，cwnd 从新的 ssthresh 起走拥塞避免（跳过慢开始的 1 起步）。"乘法减小、加法增大"。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">握手的坑</span><span class="qa-q">为什么 TCP 不能用两次握手建立连接？</span><span class="qa-toggle">▼</span></div><div class="qa-body">为防止<strong>已失效的连接请求</strong>突然到达服务器而误建连接。若两次握手：客户 A 发的第一个请求在网络滞留、超时重发后成功建连并通信完毕，之后滞留的旧请求到达 B，B 回确认后即认为连已建立并一直等 A 发数据，而 A 根本无此意图，造成 B 资源白白浪费。三次握手下 B 的确认 A 会不予理睬，连接不会建立。</div></div>
+
+        <h3>6. 四种时延 & 2MSL 等待（细节深挖）</h3>
+        <ul>
+          <li><strong>处理时延</strong>：查头部、检错、选路；<strong>排队时延</strong>：在输出队列等待；<strong>传输时延</strong> $=$ 分组长度 ÷ 链路带宽；<strong>传播时延</strong> $=$ 距离 ÷ 传播速度。</li>
+          <li><strong>为什么等 2MSL</strong>：客户端最后 ACK 可能丢失，服务器会重发 FIN；2MSL = 一次发送+一次回复的最大时长，确保本连接所有报文都已消亡、端口可安全复用。</li>
+        </ul>
+
+        <h3>7. Cookie vs Session & 地址解析协议</h3>
+        <ul>
+          <li><strong>Cookie</strong>：存<strong>客户端</strong>，容量受限、可被篡改；<strong>Session</strong>：存<strong>服务器</strong>，安全但占用服务端资源。</li>
+          <li><strong>ARP</strong>：同局域网内由 IP 求 MAC，靠广播"谁的 IP 是 X"、目标单播回 MAC 并缓存成 ARP 表。</li>
+          <li><strong>DHCP</strong>：即插即用分配 IP（发现→提供→请求→确认）；<strong>ICMP</strong>：差错报告与网络探询（ping）；<strong>IPv6</strong>：地址 32→128 位、去校验和、报文头 20→40 字节。</li>
+        </ul>
+
+        <h3>🌐 计算机网络面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是计算机网络？什么是协议？</span><span class="qa-toggle">▼</span></div><div class="qa-body">计算机网络是<strong>把分散的计算机互联起来、实现资源共享与通信</strong>的系统。协议是通信双方约定的<strong>规则集合</strong>（语法、语义、时序），如 TCP、HTTP。分层把复杂通信拆成各司其职的层，下层为上层提供服务。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">为什么网络要分层？分层的优缺点？</span><span class="qa-toggle">▼</span></div><div class="qa-body">分层把大问题拆成多个易处理的子问题：各层独立、下层只暴露接口（改一层不影响其他层）、易于实现维护、促进标准化（如 RFC）、扩展性好。代价是可能引入额外开销、跨层优化变难。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是 TCP/IP？和 OSI 七层什么关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">TCP/IP 是实际使用的协议族，四层：应用、传输（TCP/UDP）、网络（IP）、链路。OSI 是理论参考模型，七层（多出会话层、表示层）。TCP/IP 是"实现"，OSI 是"标准"。TCP 可靠面向连接，IP 无连接寻址转发。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">时延</span><span class="qa-q">网络传输有哪四种时延？</span><span class="qa-toggle">▼</span></div><div class="qa-body">处理时延（检错选路）、排队时延（等待发送）、传输时延（分组长度/带宽）、传播时延（距离/传播速度）。总时延是四者之和；局域网里传播时延常可忽略，广域网里排队与传播时延占主导。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">DNS</span><span class="qa-q">为什么 DNS 用分布式层次结构而非集中式？</span><span class="qa-toggle">▼</span></div><div class="qa-body">集中式有单点故障、通信容量有限、远距离查询慢、难维护、可扩展性差等问题。分布式层次数据库（根→顶级→权威）分散负载、就近缓存、容错性好。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">会话</span><span class="qa-q">Cookie 和 Session 有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">存放位置：Cookie 在客户端、Session 在服务器；安全性：Cookie 可被篡改、Session 更安全；容量：Cookie 受限、Session 不限。典型配合：Session 存状态、客户端 Cookie 只存 SessionId。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">挥手</span><span class="qa-q">四次挥手后客户端为什么要等 2MSL？</span><span class="qa-toggle">▼</span></div><div class="qa-body">防止最后的 ACK 丢失：若丢失，服务器会重发 FIN，客户端需要能再次响应。2MSL 是一次报文"去+回"的最长时间，等待它可确保本连接所有报文在网络中消亡，端口可安全复用。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">协议</span><span class="qa-q">ARP、DHCP、ICMP 分别解决什么问题？</span><span class="qa-toggle">▼</span></div><div class="qa-body">ARP：局域网内由 IP 求 MAC；DHCP：主机即插即用自动获得 IP；ICMP：差错报告与网络探询（如 ping、traceroute）。三者都是"辅助型"协议，支撑 IP 正常工作。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">IPv6</span><span class="qa-q">IPv6 相比 IPv4 改了什么？动力是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">动力：IPv4 地址耗尽 + 简化报文头加速转发。变化：地址 32→128 位、报文头 20→40 字节（去掉校验和）、支持无状态自动配置与更好的流标签。迁移期用双栈、隧道、NAT 过渡。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">分层</span><span class="qa-q">OSI 七层模型？各层作用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">物理层（比特）、数据链路层（帧、MAC 寻址）、网络层（分组、IP 路由）、传输层（端到端、TCP/UDP）、会话层、表示层、应用层。口诀：物数网传会表应。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">TCP</span><span class="qa-q">三次握手为什么是三次，不是两次？</span><span class="qa-toggle">▼</span></div><div class="qa-body">三次握手让双方确认彼此的发送和接收能力都正常，并<strong>同步初始序列号</strong>。若两次：服务端回复 ACK 即认为连接建立，但可能客户端早已超时重发的旧 SYN 到达服务端，服务端错误建立连接浪费资源。三次能防止这种历史连接。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">TCP</span><span class="qa-q">四次挥手为什么是四次？TIME_WAIT 作用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">TCP 是全双工，双方都要关闭发送方向，所以 FIN 和 ACK 分开发，共四次。TIME_WAIT（主动关闭方等待 2MSL）作用：① 保证最后一个 ACK 能到达，若丢失可重发；② 让旧连接报文在网络中消失，避免影响新连接。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">TCP</span><span class="qa-q">TCP 和 UDP 区别？各自应用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">见上表。TCP 可靠有序、面向连接，用于 HTTP/文件/邮件；UDP 快速低延迟、无连接，用于音视频、DNS、游戏、实时通信。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">TCP</span><span class="qa-q">TCP 怎么保证可靠传输？</span><span class="qa-toggle">▼</span></div><div class="qa-body">序号与确认应答、超时重传、滑动窗口流量控制、拥塞控制、校验和。核心是"确认 + 重传 + 序号去重排序"。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">TCP</span><span class="qa-q">TCP 拥塞控制四个算法？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① <strong>慢启动</strong>：拥塞窗口指数增长；② <strong>拥塞避免</strong>：达阈值后线性增长；③ <strong>快重传</strong>：收到 3 个重复 ACK 立即重传；④ <strong>快恢复</strong>：快重传后不进入慢启动，阈值减半后线性增长。检测到超时则重新慢启动。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">TCP</span><span class="qa-q">流量控制和拥塞控制的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">流量控制是<strong>端到端</strong>的，防止发送方淹没接收方（用接收窗口）；拥塞控制是<strong>全局</strong>的，防止发送方淹没网络（用拥塞窗口）。实际发送窗口 = min(两者)。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">TCP</span><span class="qa-q">TCP 粘包/拆包是什么？怎么解决？</span><span class="qa-toggle">▼</span></div><div class="qa-body">TCP 是字节流，无消息边界，多条消息可能粘在一起（粘包）或一条被拆开（拆包）。解决：定长消息、分隔符、消息头带长度字段。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">HTTP</span><span class="qa-q">HTTP 和 HTTPS 区别？HTTPS 握手过程？</span><span class="qa-toggle">▼</span></div><div class="qa-body">HTTPS 在 HTTP 和 TCP 间加 TLS 层，提供加密、认证、完整性。握手（简化）：客户端发送支持的加密套件 → 服务端返回证书和公钥 → 客户端验证证书、生成会话密钥用公钥加密发送 → 双方用会话密钥对称加密通信。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">HTTP</span><span class="qa-q">HTTP 1.0 / 1.1 / 2 / 3 区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">1.0 短连接；1.1 持久连接 + 管道化；2 多路复用（一个连接并发多个请求）、头部压缩、二进制分帧、服务器推送；3 基于 QUIC（UDP），0-RTT 减少握手延迟、解决队头阻塞。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">HTTP</span><span class="qa-q">GET 和 POST 区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">语义上 GET 用于获取（幂等、参数在 URL、可缓存、长度受限）；POST 用于提交（参数在请求体、非幂等）。本质区别是<strong>语义</strong>，而非"安全"——两者都可用 HTTPS 加密。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">HTTP</span><span class="qa-q">从输入 URL 到页面展示发生了什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① URL 解析；② DNS 解析域名得 IP（含缓存查询）；③ 建立 TCP 连接（三次握手，HTTPS 再加 TLS 握手）；④ 发送 HTTP 请求；⑤ 服务器处理并返回响应；⑥ 浏览器解析渲染（HTML→DOM、CSS→CSSOM、合并成渲染树、布局、绘制）；⑦ 四次挥手断开。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">DNS</span><span class="qa-q">DNS 解析过程？用什么协议？</span><span class="qa-toggle">▼</span></div><div class="qa-body">先查浏览器/系统缓存，再向本地 DNS 服务器查询，若无则递归迭代查询根域→顶级域→权威服务器。DNS 默认用 <strong>UDP 53</strong> 端口（快），超过 512 字节或区域传送用 TCP。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">应用</span><span class="qa-q">Cookie 和 Session 区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">Cookie 存客户端（浏览器），可能被篡改、有大小限制；Session 存服务端，客户端只存 Session ID，更安全但服务器压力大。配合使用实现登录态。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">网络层</span><span class="qa-q">ARP 是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">地址解析协议，把 IP 地址解析为 MAC 地址（广播请求、单播应答），同一局域网内通信需要。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">安全</span><span class="qa-q">对称加密 vs 非对称加密？</span><span class="qa-toggle">▼</span></div><div class="qa-body">对称加密加解密用同一把钥匙（快，如 AES），难点是密钥分发；非对称加密用公钥加密私钥解密（慢，如 RSA），解决密钥分发但慢。实际 HTTPS 结合两者：非对称协商、对称传输。</div></div>
+      </section>
+
+      <!-- ================= 组成原理 ================= -->
+      <section id="co">
+        <div class="section-kicker">🔧 课程四</div>
+        <h2>计算机组成原理</h2>
+        <p class="lead">重点：数据表示、存储层次与 Cache、流水线、中断、I/O。</p>
+
+        <h3>1. 数据表示</h3>
+        <ul>
+          <li><strong>原码</strong>：符号位 + 绝对值，有 ±0。</li>
+          <li><strong>反码</strong>：正数同原码，负数按位取反。</li>
+          <li><strong>补码</strong>：反码 + 1，<span class="key">无 ±0、减法可转加法</span>，现代计算机通用。</li>
+          <li><strong>浮点数</strong>：IEEE 754，$(-1)^S \times 1.M \times 2^{E}$，符号位 + 阶码 + 尾数；存在精度损失（如 0.1 无法精确表示）。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：补码为什么能让"减法变加法"</div>
+          <p>以 8 位二进制为例，计算 <code>7 - 5</code>：</p>
+          <ol class="steps">
+            <li><div class="step-title">求 -5 的补码</div><p>5 的原码 <code>00000101</code> → 取反 <code>11111010</code> → 加 1 得 <code>11111011</code>（即 -5）。</p></li>
+            <li><div class="step-title">减法转加法</div><p>$7 + (-5) = 00000111 + 11111011 = 1\,00000010$。</p></li>
+            <li><div class="step-title">丢弃进位</div><p>8 位只能存 8 位，最高位的进位 1 溢出丢弃，结果为 <code>00000010</code> = 2。✅</p></li>
+          </ol>
+          <p>本质：补码把负数"补"到模 $2^8$ 上，使 $7-5$ 与 $7+(256-5)$ 在模 $256$ 下等价。于是硬件只需一个加法器即可完成加减法。</p>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：IEEE 754 怎么表示 -5.5</div>
+          <p>用 32 位单精度表示 <code>-5.5</code>：</p>
+          <ol class="steps">
+            <li><div class="step-title">转二进制</div><p>$5.5 = 101.1_2 = 1.011 \times 2^2$。</p></li>
+            <li><div class="step-title">符号位</div><p>负数 → <code>1</code>。</p></li>
+            <li><div class="step-title">阶码</div><p>指数 2 + 偏移 127 = 129 = <code>10000001</code>。</p></li>
+            <li><div class="step-title">尾数</div><p>隐藏前导 1，取 <code>011</code> 后补 0 到 23 位。</p></li>
+          </ol>
+          <pre>符号  阶码        尾数
+ 1   10000001   01100000000000000000000</pre>
+          <p>合起来就是 <code>11000000101100000000000000000000</code>。而 0.1 转成二进制是无限循环小数，尾数只能存 23 位，所以有精度误差——这就是 0.1+0.2 ≠ 0.3 的根源。</p>
+        </div>
+
+        <h3>2. 存储层次</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>层次</th><th>容量</th><th>速度</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>寄存器</td><td>极小</td><td>最快</td><td>CPU 内部</td></tr>
+              <tr><td>Cache（SRAM）</td><td>小</td><td>很快</td><td>多级 L1/L2/L3</td></tr>
+              <tr><td>主存（DRAM）</td><td>中</td><td>较快</td><td>内存条</td></tr>
+              <tr><td>外存（磁盘/SSD）</td><td>大</td><td>慢</td><td>持久化</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>局部性原理</strong>：时间局部性（刚访问的可能再访问）+ 空间局部性（附近的可能被访问），是 Cache 有效的根本原因。</p>
+
+        <h3>3. Cache</h3>
+        <ul>
+          <li><strong>映射方式</strong>：直接映射（简单、冲突多）、全相联（灵活、硬件复杂）、组相联（折中，常用）。</li>
+          <li><strong>替换策略</strong>：随机、FIFO、LRU。</li>
+          <li><strong>写策略</strong>：写直达（write-through）、写回（write-back）。</li>
+          <li><strong>性能指标</strong>：命中率、平均访问时间 = 命中时间 + 失效率 × 缺失代价。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：Cache 命中率与平均访问时间</div>
+          <p>设 Cache 命中率 95%，Cache 访问时间 1ns，主存访问时间 100ns：</p>
+          <ul>
+            <li>命中时：访问 Cache，耗时 1ns。</li>
+            <li>未命中：先查 Cache（1ns）再访问主存（100ns），共 101ns。</li>
+          </ul>
+          <div class="formula">$$ \text{平均访问时间} = 0.95 \times 1 + 0.05 \times 101 = 6\ \text{ns} $$</div>
+          <p>比无 Cache 的 100ns 快了约 16 倍。<strong>结论：命中率越高，平均访问时间越接近 Cache 本身的速度</strong>。这正是局部性原理的价值所在。</p>
+        </div>
+
+        <h3>4. CPU 与流水线</h3>
+        <ul>
+          <li><strong>指令周期</strong>：取指 → 译码 → 执行 → 访存 → 写回。</li>
+          <li><strong>流水线</strong>：把指令周期分成多个阶段重叠执行，提高吞吐率（不是减少单条指令时间）。</li>
+          <li><strong>三种冒险</strong>：<span class="key">结构冒险</span>（硬件冲突）、<span class="key">数据冒险</span>（数据依赖）、<span class="key">控制冒险</span>（分支）。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：指令的几种寻址方式</div>
+          <p>指令要拿到操作数，常见寻址方式（设寄存器 R1 存 100，内存 100 号存 200）：</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>寻址方式</th><th>操作数来源</th><th>例子含义</th></tr></thead>
+              <tbody>
+                <tr><td>立即寻址</td><td>指令里直接给值</td><td>ADD #5 → 加常数 5</td></tr>
+                <tr><td>直接寻址</td><td>指令给内存地址</td><td>LOAD 100 → 取内存[100]=200</td></tr>
+                <tr><td>寄存器寻址</td><td>操作数在寄存器</td><td>ADD R1 → 加 R1 的值 100</td></tr>
+                <tr><td>间接寻址</td><td>寄存器/内存存的是地址</td><td>LOAD (R1) → 取内存[100]=200</td></tr>
+                <tr><td>变址寻址</td><td>基址 + 偏移</td><td>LOAD 100(R1) → 内存[200]</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>关键区分：<strong>立即寻址</strong>操作数就是指令里的数；<strong>直接寻址</strong>指令里是地址；<strong>间接寻址</strong>要再"绕一层"取地址。变址寻址常用于数组访问。</p>
+        </div>
+
+        <h3>5. 中断与 I/O</h3>
+        <ul>
+          <li><strong>中断</strong>：外部事件（如外设就绪）异步通知 CPU。</li>
+          <li><strong>异常</strong>：CPU 内部事件（除零、缺页、非法指令），同步。</li>
+          <li><strong>I/O 方式</strong>：程序查询（CPU 忙等）→ 中断驱动 → <span class="key">DMA</span>（外设直接与主存交换，CPU 只需发起和收尾）。</li>
+          <li><strong>RISC vs CISC</strong>：RISC 指令简单固定长度、易流水线；CISC 指令复杂、变长。</li>
+        </ul>
+
+        <!-- ===== 扩充：来自「考研复试常问问题·计算机组成原理」 ===== -->
+        <div class="qa"><div class="qa-head"><span class="qa-tag">体系</span><span class="qa-q">冯·诺依曼机的特点？</span><span class="qa-toggle">▼</span></div><div class="qa-body">五大部件（运算器、控制器、存储器、输入、输出）；指令和数据<strong>以同等地位存于存储器</strong>、按地址寻访；都用二进制表示；指令由操作码 + 地址码组成；指令顺序存放、顺序执行（特定条件可跳转）；<strong>存储程序</strong>——把指令代码事先装入主存再自动逐条执行。现代计算机以存储器为中心（早期以运算器为中心）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">性能</span><span class="qa-q">机器性能指标：主频、CPI、MIPS 的关系？</span><span class="qa-toggle">▼</span></div><div class="qa-body">CPU 时钟周期 = 1/主频；<strong>CPI</strong> 是执行一条指令所需的平均时钟周期数；程序执行时间 = 指令数 × CPI × 时钟周期。$\text{MIPS} = \text{主频} / (\text{CPI} \times 10^6)$。字长、主存容量、数据通路带宽也影响整体性能，但吞吐率主要取决于主存存取周期。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">指令</span><span class="qa-q">一条指令的执行过程？</span><span class="qa-toggle">▼</span></div><div class="qa-body">取指：PC → MAR → 存储器 → MDR → IR（同时 PC+1）；分析：OP(IR) → CU 译码生成控制信号；执行：Ad(IR) → MAR → 存储器 → MDR → 运算器 ACC（以取数指令为例）。核心是"<strong>取指—译码—执行</strong>"循环，控制器协调整个数据通路。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">存储</span><span class="qa-q">SRAM 和 DRAM 的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">SRAM 用双稳态触发器（6 管）存信息，<strong>非破坏性读出</strong>、无需刷新、速度快但集成度低、贵，用作 Cache。DRAM 用电容存电荷，集成度高、便宜、速度慢，但电容电荷 1~2ms 就漏光，需<strong>定期刷新</strong>（刷新周期约 2ms），用作主存。二者均为易失性；ROM 非易失。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">虚存</span><span class="qa-q">虚拟存储器？页式/段式/段页式？TLB 是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>页式</strong>：虚/实空间等分红页，页表实现虚页号→实页号映射，对程序员透明；<strong>段式</strong>：按逻辑模块分段（段长可变），便于保护与共享；<strong>段页式</strong>：先分段再分页，兼顾两者。由于每次访存要先查页表，慢，于是把最活跃的页表项缓存到高速缓存，即 <strong>TLB（快表）</strong>：先查 TLB，命中则免访内存页表，未命中再查慢表并把该项填入 TLB。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">总线</span><span class="qa-q">系统总线分哪几类？总线带宽是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">按传输信息分：<strong>数据总线</strong>（传送数据，双向）、<strong>地址总线</strong>（指明地址，单向、由 CPU 发出）、<strong>控制总线</strong>（传送控制信号，单根单向、整体可视为双向）。<strong>总线带宽</strong> = 总线每秒能传输的最大字节数 = 总线宽度 × 总线时钟频率（或工作频率）。总线复用指一条信号线分时传两种信号（如地址/数据复用）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">中断</span><span class="qa-q">CPU 响应中断的条件？向量中断是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">条件：① 中断屏蔽触发器开放；② 外设中断请求触发器置 1；③ 中断允许触发器为 1。三者满足时，CPU 在当前指令结束时响应。<strong>中断向量</strong> = 中断服务程序入口地址；<strong>向量地址</strong> = 向量表项的地址/索引；<strong>向量中断</strong>是一种由硬件识别中断源、直接取得向量地址的技术。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">流水线</span><span class="qa-q">RAW / WAR / WAW 三种数据相关？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>RAW</strong>（写后读，真相关）：后一条指令要读前一条刚写的寄存器，按序流水线只会出现这种，需停顿/转发解决；<strong>WAR</strong>（读后写）、<strong>WAW</strong>（写后写）：在非按序（乱序）流水线中才可能出现。对流水线影响最严重的是数据相关（RAW）。流水线段并非越多越快——段间缓冲开销与控制逻辑复杂度会随段数激增。</div></div>
+
+        <h3>🔧 组成原理面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是冯·诺依曼结构？</span><span class="qa-toggle">▼</span></div><div class="qa-body">冯·诺依曼结构的核心是<strong>存储程序</strong>思想：指令和数据都存放在同一存储器中，CPU 按地址取指、译码、执行。五大部件：运算器、控制器、存储器、输入设备、输出设备。现代计算机几乎都是它的变体。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是 CPU？由哪两部分组成？</span><span class="qa-toggle">▼</span></div><div class="qa-body">CPU（中央处理器）是执行指令的核心部件，由<strong>运算器（ALU）</strong>和<strong>控制器（CU）</strong>组成。控制器负责取指、译码、发出控制信号；运算器负责算术逻辑运算。CPU 性能相关指标：主频、CPI（每指令周期数）、指令数。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是存储层次？Cache 是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">存储层次是<strong>速度由快到慢、容量由小到大</strong>的分级：寄存器 → Cache → 主存 → 外存，用"局部性原理"让常用数据尽量留在高层。Cache 是 CPU 与主存之间的<strong>高速小容量缓存</strong>，命中率决定平均访问速度。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">编码</span><span class="qa-q">为什么用补码表示负数？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 没有 +0/-0 之分，表示范围多一个数；② <strong>减法可统一为加法</strong>（$a-b = a+(-b)$ 的补码），硬件只需加法器；③ 符号位可直接参与运算。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">编码</span><span class="qa-q">浮点数怎么表示？为什么有精度问题？</span><span class="qa-toggle">▼</span></div><div class="qa-body">IEEE 754：符号位 + 阶码（指数）+ 尾数（有效数字）。精度问题源于有限位数无法精确表示无限/循环二进制小数（如 0.1），以及大数加小数时有效位丢失。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">存储</span><span class="qa-q">存储层次结构？局部性原理？</span><span class="qa-toggle">▼</span></div><div class="qa-body">寄存器 → Cache → 主存 → 外存，越往上越快越贵越小。局部性：时间局部性 + 空间局部性，让"最近/相邻的数据更可能被访问"，是 Cache 有效的理论基础。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Cache</span><span class="qa-q">Cache 三种映射方式？</span><span class="qa-toggle">▼</span></div><div class="qa-body">直接映射（主存块固定映射到唯一 Cache 行，快但冲突率高）、全相联（可映射任意行，灵活但硬件复杂）、组相联（先分组再组内相联，折中，实际最常用）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">Cache</span><span class="qa-q">Cache 写直达和写回区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">写直达：每次写同时更新 Cache 和主存，简单但慢；写回：只更新 Cache 并标记脏位，被替换时才写回主存，快但需维护一致性。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">流水线</span><span class="qa-q">什么是流水线？三种冒险？</span><span class="qa-toggle">▼</span></div><div class="qa-body">把指令执行分成多阶段重叠进行，提高吞吐率。结构冒险（多条指令争用同一硬件，加硬件/分时）、数据冒险（有数据依赖，用转发/旁路或停顿）、控制冒险（分支指令，用分支预测）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">指令</span><span class="qa-q">RISC 和 CISC 区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">RISC 指令少、定长、单周期、寄存器多、易流水线（ARM）；CISC 指令丰富、变长、复杂、更接近高级语言（x86）。现代 x86 内部也把复杂指令译码成微操作，两者界限模糊。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">中断</span><span class="qa-q">中断和异常区别？中断处理过程？</span><span class="qa-toggle">▼</span></div><div class="qa-body">中断来自<strong>外部</strong>（异步，如外设、时钟），异常来自<strong>CPU 内部</strong>（同步，如除零、缺页、系统调用）。处理：保护现场 → 查中断向量表找处理程序 → 执行处理 → 恢复现场返回。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">IO</span><span class="qa-q">DMA 是什么？和中断相比有什么优势？</span><span class="qa-toggle">▼</span></div><div class="qa-body">DMA 让外设直接与主存交换数据，CPU 只负责发起和收尾，传输过程由 DMA 控制器完成。中断方式每个数据都要 CPU 介入，DMA 适合大批量数据传输（磁盘读写），大幅减轻 CPU 负担。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">编码</span><span class="qa-q">大端和小端是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">多字节数据的字节存放顺序。大端：高位字节存低地址（网络字节序、符合阅读习惯）；小端：低位字节存低地址（x86、ARM 常用）。可用联合体或指针判断。</div></div>
+      </section>
+
+      <!-- ================= 数据库 ================= -->
+      <section id="db">
+        <div class="section-kicker">🗄️ 课程五</div>
+        <h2>数据库</h2>
+        <p class="lead">重点：事务与隔离级别、索引、范式、锁与 MVCC、SQL 优化。</p>
+
+        <h3>1. 事务 ACID</h3>
+        <ul>
+          <li><strong>原子性 Atomicity</strong>：事务要么全做要么全不做。</li>
+          <li><strong>一致性 Consistency</strong>：事务前后数据满足约束。</li>
+          <li><strong>隔离性 Isolation</strong>：并发事务互不干扰。</li>
+          <li><strong>持久性 Durability</strong>：提交后永久生效。</li>
+        </ul>
+
+        <h3>2. 隔离级别与并发问题</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>隔离级别</th><th>脏读</th><th>不可重复读</th><th>幻读</th></tr></thead>
+            <tbody>
+              <tr><td>读未提交</td><td>❌ 可能</td><td>❌ 可能</td><td>❌ 可能</td></tr>
+              <tr><td>读已提交</td><td>✅ 解决</td><td>❌ 可能</td><td>❌ 可能</td></tr>
+              <tr><td>可重复读</td><td>✅</td><td>✅ 解决</td><td>❌ 可能（InnoDB 靠 MVCC 基本解决）</td></tr>
+              <tr><td>串行化</td><td>✅</td><td>✅</td><td>✅ 解决（性能差）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>脏读</strong>：读到别的事务未提交的数据。</li>
+          <li><strong>不可重复读</strong>：同一事务两次读同一条数据结果不同（被更新）。</li>
+          <li><strong>幻读</strong>：同一事务两次查询，行数不同（被插入/删除）。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：脏读是怎么发生的</div>
+          <p>账户余额 1000，两个事务并发：</p>
+          <ol class="steps">
+            <li><div class="step-title">T1 转账</div><p><code>UPDATE ... SET balance = balance - 100</code>（余额变 900），<strong>尚未提交</strong>。</p></li>
+            <li><div class="step-title">T2 查询</div><p>读到余额 <code>900</code>——这就是<strong>脏读</strong>（读到了未提交的数据）。</p></li>
+            <li><div class="step-title">T1 回滚</div><p><code>ROLLBACK</code>，余额恢复 1000。但 T2 已经基于错误的 900 做了决策。</p></li>
+          </ol>
+          <p>把隔离级别提升到"读已提交"，T2 就只能读到 T1 提交后的值，脏读被解决。</p>
+        </div>
+
+        <h3>3. 索引</h3>
+        <ul>
+          <li><strong>B+ 树索引</strong>：最常用，适合范围查询。</li>
+          <li><strong>哈希索引</strong>：只适合等值查询，不支持范围。</li>
+          <li><strong>聚簇索引</strong>：数据本身按主键顺序存储（InnoDB 主键即聚簇索引）。</li>
+          <li><strong>非聚簇（二级）索引</strong>：叶子存主键值，需<strong>回表</strong>。</li>
+          <li><strong>覆盖索引</strong>：查询字段都在索引里，无需回表。</li>
+          <li><strong>最左前缀</strong>：联合索引 (a,b,c) 只用到了 a 或 a,b 才生效，跳过 a 用 b 失效。</li>
+        </ul>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：B+ 树长什么样、为什么范围查询快</div>
+          <p>设一棵 3 阶 B+ 树存主键 1~9，结构示意：</p>
+          <pre>            [5, 8]              ← 非叶子节点（只存索引）
+           /   |   \
+        [1,3]  [5,7]  [8,9]     ← 叶子节点（存数据，连成链表）
+         ↓      ↓      ↓
+       (1..3) (5..7) (8..9)     ← 数据记录</pre>
+          <ul>
+            <li><strong>单点查询</strong>：从根节点按大小比较往下走，树很矮，最多 2~3 次磁盘 IO。</li>
+            <li><strong>范围查询</strong> <code>BETWEEN 5 AND 7</code>：先定位 5 所在的叶子，再沿<strong>叶子链表</strong>顺序读到 7，无需回溯。</li>
+          </ul>
+          <p>这就是 B+ 树"矮 + 叶子成链"带来的两大优势：单点查询 IO 少、范围查询快。相比之下哈希索引只能等值查询，无法范围查询。</p>
+        </div>
+
+        <h3>4. 范式与锁</h3>
+        <ul>
+          <li><strong>1NF</strong>：列不可再分（原子性）。</li>
+          <li><strong>2NF</strong>：非主属性完全依赖主键（消除部分依赖）。</li>
+          <li><strong>3NF</strong>：非主属性不传递依赖主键（消除传递依赖）。</li>
+          <li><strong>BCNF</strong>：主属性也不存在部分/传递依赖。</li>
+          <li><strong>锁</strong>：行锁 vs 表锁；乐观锁（版本号/CAS）vs 悲观锁（select for update）。</li>
+        </ul>
+
+        <!-- ===== 扩充：来自「考研复试常问问题·数据库」 ===== -->
+        <div class="qa"><div class="qa-head"><span class="qa-tag">锁</span><span class="qa-q">封锁粒度？读写锁、意向锁？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>封锁粒度</strong>：MySQL 提供行级锁和表级锁，粒度越细并发越高但锁开销越大，需在二者间权衡。<strong>读写锁</strong>：X 锁（排他/写，加后其他事务不能再加任何锁）、S 锁（共享/读，可再加 S 但不能加 X）。<strong>意向锁（IS/IX）</strong>是表级锁，表示"稍后会在某些行上加 S/X 锁"，使表锁与行锁能高效共存，避免逐行检测。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">锁</span><span class="qa-q">三级封锁协议分别解决什么问题？</span><span class="qa-toggle">▼</span></div><div class="qa-body">一级（修改加 X 锁直到事务结束）：解决<strong>丢失修改</strong>。二级（一级 + 读加 S 锁、读完即释放）：额外解决<strong>读脏数据</strong>。三级（一级 + 读加 S 锁直到事务结束）：额外解决<strong>不可重复读</strong>。级别越高越安全，但并发度越低。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">锁</span><span class="qa-q">两段锁协议（2PL）？和事务串行化？</span><span class="qa-toggle">▼</span></div><div class="qa-body">事务分两阶段：<strong>加锁阶段</strong>（只能加锁、不能解锁）和<strong>解锁阶段</strong>（只能解锁、不能加锁），在 commit/rollback 时一次性释放全部锁。遵循 2PL 的事务并发调度是<strong>可串行化</strong>的（冲突可串行化的充分条件），是多数数据库保证隔离性的基础。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">建模</span><span class="qa-q">ER 图怎么转换成关系模式？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① <strong>1:1</strong>：任选一端实体，加入另一端的主键；② <strong>1:n</strong>：在"多"端实体中加入"一"端的主键；③ <strong>m:n</strong>：把"联系"单独建成一个关系，主键为两端实体主键的组合，再加联系自身属性。实体本身直接转为一张表（属性为列、主键即实体键）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">范式</span><span class="qa-q">函数依赖？什么是 BCNF？</span><span class="qa-toggle">▼</span></div><div class="qa-body">若 $A$ 能唯一确定 $B$ 记作 $A \to B$。<strong>完全函数依赖</strong>：非主属性完全依赖整个键码；<strong>传递依赖</strong>：$A\to B, B\to C$ 则 $A\to C$ 传递。<strong>BCNF</strong> 是在 3NF 基础上，消除"主属性对候选键的部分/传递依赖"——要求每个决定因素都包含候选键，是修正后的 3NF，冗余更小。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">索引</span><span class="qa-q">覆盖索引、前缀索引是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>覆盖索引</strong>：索引本身包含查询要的所有字段，无需回表，能大幅减少 I/O（MyISAM 甚至不需系统调用）。<strong>前缀索引</strong>：对 BLOB/TEXT/VARCHAR 长列只索引前若干个字符，节省空间，但无法用于 ORDER BY 和覆盖扫描，前缀长度要按"索引选择性"选取。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">索引</span><span class="qa-q">Hash 索引和 B+Tree 索引怎么选？</span><span class="qa-toggle">▼</span></div><div class="qa-body">Hash 索引 $O(1)$ 查找、但<strong>无序</strong>，只能等值（=、IN、<=>）、不支持范围/排序/前缀，适合精确匹配键值。B+Tree 有序，支持范围、排序、分组、最左前缀，是绝大多数存储引擎默认类型。需要范围查询或排序选 B+Tree，纯等值高并发选 Hash。</div></div>
+
+        <h3>5. 三级模式 / 二级映像与独立性</h3>
+        <ul>
+          <li><strong>模式</strong>（全局逻辑结构）、<strong>外模式</strong>（用户视图）、<strong>内模式</strong>（物理存储）。</li>
+          <li><strong>外模式/模式映像</strong> → 保证<strong>逻辑独立性</strong>（模式变、应用不必改）；<strong>模式/内模式映像</strong> → 保证<strong>物理独立性</strong>（存储变、模式不变）。</li>
+          <li><strong>视图</strong>是从基本表导出的<strong>虚表</strong>（只存定义不存数据），用于简化操作、多角度看待数据、安全隔离。</li>
+        </ul>
+
+        <h3>6. 范式判定实例（1NF / 2NF / 3NF）</h3>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 传递依赖与 3NF</div>
+          <p>关系 $R(学号,院系,宿舍)$，主键学号：宿舍依赖院系、院系依赖学号，故"宿舍"传递依赖主键，不满足 3NF。分解为 $R_1(学号,院系)$ 与 $R_2(院系,宿舍)$ 即消除传递依赖。2NF 消除的是非主属性对候选码的<strong>部分</strong>函数依赖。</p>
+        </div>
+
+        <h3>🗄️ 数据库面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是数据库和 DBMS？</span><span class="qa-toggle">▼</span></div><div class="qa-body">数据库是按一定结构<strong>组织、存储的数据集合</strong>；DBMS（数据库管理系统）是管理数据库的软件（如 MySQL），负责数据的定义、存储、查询、安全与并发控制。关系型数据库用二维表组织数据，靠 SQL 操作。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是 SQL？常用操作有哪些？</span><span class="qa-toggle">▼</span></div><div class="qa-body">SQL（结构化查询语言）是操作关系数据库的标准语言。DDL 定义结构（CREATE/ALTER/DROP），DML 操纵数据（SELECT/INSERT/UPDATE/DELETE），DCL 控制权限（GRANT/REVOKE）。其中 SELECT 查询用得最多。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是主键和外键？</span><span class="qa-toggle">▼</span></div><div class="qa-body">主键是<strong>唯一标识一条记录</strong>的字段（如学号），不可重复、不可为空；外键是表中引用<strong>另一张表主键</strong>的字段，用来建立表之间的关联，并保证参照完整性（外键值要么为空、要么存在于被引用表）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">类型</span><span class="qa-q">关系型和非关系型数据库的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">关系型用二维表组织数据（MySQL、Oracle），支持 SQL、事务、强一致，适合结构化数据；非关系型以键值/文档/列族/图存储（Redis、MongoDB），扩展性好、读写快，适合高并发与灵活 schema。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">架构</span><span class="qa-q">三级模式/二级映像是什么？逻辑和物理独立性？</span><span class="qa-toggle">▼</span></div><div class="qa-body">三级：模式、外模式、内模式。外模式/模式映像保证逻辑独立性（模式变应用不改）；模式/内模式映像保证物理独立性（存储变模式不变）。二级映像让应用程序与数据存储解耦。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">视图</span><span class="qa-q">什么是视图？有什么优点？</span><span class="qa-toggle">▼</span></div><div class="qa-body">视图是从基本表导出的<strong>虚表</strong>，只存定义不存数据。优点：简化用户操作、以多角度看待同一数据、对机密数据提供安全保护、提供逻辑独立性。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">范式</span><span class="qa-q">1NF、2NF、3NF 分别消除什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">1NF：属性不可再分（原子性）；2NF：在 1NF 上消除非主属性对候选码的<strong>部分</strong>函数依赖；3NF：在 2NF 上消除非主属性对码的<strong>传递</strong>函数依赖。BCNF 进一步消除主属性对码的部分/传递依赖。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">事务</span><span class="qa-q">事务的 ACID 是什么？怎么实现？</span><span class="qa-toggle">▼</span></div><div class="qa-body">原子性（undo log 回滚）、一致性（由其他三个 + 约束保证）、隔离性（锁 + MVCC）、持久性（redo log + 落盘）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">事务</span><span class="qa-q">隔离级别有哪些？分别解决什么问题？</span><span class="qa-toggle">▼</span></div><div class="qa-body">见上表。MySQL 默认<strong>可重复读</strong>。脏读/不可重复读/幻读三种并发问题，隔离级别越高越安全但并发性能越差。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">事务</span><span class="qa-q">脏读、不可重复读、幻读区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">脏读：读未提交（读到可能回滚的数据）；不可重复读：同数据被<strong>更新</strong>，两次读值不同；幻读：同范围查询<strong>行数</strong>不同（被插入/删除）。后两者区别在"修改 vs 增删"。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">索引</span><span class="qa-q">索引为什么用 B+ 树而不是红黑树/B 树？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 树矮（多叉），磁盘 IO 次数少；② 相比红黑树，B+ 树一个节点存更多键，更适合磁盘按页读取；③ 相比 B 树，B+ 树数据全在叶子且叶子成链表，范围查询快、查询稳定。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">索引</span><span class="qa-q">聚簇索引和非聚簇索引区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">聚簇索引叶子存完整行数据，表数据按索引顺序物理存储，一个表只能有一个（InnoDB 主键）；非聚簇索引叶子存主键值，查到主键后还需<strong>回表</strong>查完整行。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">索引</span><span class="qa-q">什么是联合索引最左前缀原则？</span><span class="qa-toggle">▼</span></div><div class="qa-body">联合索引 (a,b,c) 按 a、b、c 顺序建立 B+ 树，查询条件必须从最左列 a 开始连续使用才能命中（如 where a=? and b=?），跳过 a 直接用 b 则索引失效。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">索引</span><span class="qa-q">索引失效的常见场景？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 对索引列用函数/运算（where a+1=2）；② 隐式类型转换；③ like 以 % 开头；④ 违反最左前缀；⑤ 用 or 连接非索引列；⑥ 优化器判断全表扫描更快时。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">范式</span><span class="qa-q">数据库范式？什么是 3NF？</span><span class="qa-toggle">▼</span></div><div class="qa-body">1NF 列原子、2NF 消除非主属性对主键的部分依赖、3NF 消除传递依赖。工程上一般满足 3NF 即可，有时为性能故意反范式（冗余）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">锁</span><span class="qa-q">乐观锁和悲观锁区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">悲观锁假设会冲突，先加锁再操作（select for update），并发低；乐观锁假设不冲突，用版本号/CAS 在提交时校验，冲突才重试，并发高，适合读多写少。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">并发</span><span class="qa-q">MVCC 原理？</span><span class="qa-toggle">▼</span></div><div class="qa-body">多版本并发控制：每行存多个版本 + 隐藏列（事务 ID、回滚指针），读操作通过 Read View 读符合可见性的旧版本，<strong>读写不阻塞</strong>。InnoDB 用它实现可重复读并大幅减少加锁。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">引擎</span><span class="qa-q">InnoDB 和 MyISAM 区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">InnoDB 支持事务、行级锁、外键、崩溃恢复（redo/undo log），是默认引擎；MyISAM 不支持事务、只表锁、查询快但不支持并发写，适合只读场景。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">优化</span><span class="qa-q">SQL 慢查询怎么优化？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 用 explain 看执行计划（是否走索引、扫描行数）；② 加合适索引、避免索引失效；③ 优化 SQL（避免 select *、减少 join）；④ 分库分表、读写分离、缓存；⑤ 数据量大考虑归档。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">SQL</span><span class="qa-q">内连接、左连接、右连接、全连接区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">内连接只返回两表匹配的行；左连接返回左表全部行（右表无匹配则 NULL）；右连接反之；全连接返回两表全部行（MySQL 用 union 模拟）。</div></div>
+      </section>
+
+      <!-- ================= C/C++ ================= -->
+      <section id="cpp">
+        <div class="section-kicker">⚙️ 课程六</div>
+        <h2>C/C++ 语言基础</h2>
+        <p class="lead">重点：指针与内存、面向对象（封装/继承/多态）、虚函数、智能指针、编译链接。</p>
+
+        <h3>1. 内存布局</h3>
+        <ul>
+          <li><strong>栈</strong>：局部变量、函数调用，自动管理、空间小、速度快。</li>
+          <li><strong>堆</strong>：new/malloc 动态分配，手动管理、空间大、速度慢。</li>
+          <li><strong>全局/静态区</strong>：全局变量、static 变量。</li>
+          <li><strong>常量区</strong>：字符串常量。</li>
+          <li><strong>代码段</strong>：二进制指令。</li>
+        </ul>
+
+        <h3>2. 指针与内存管理</h3>
+        <ul>
+          <li><strong>指针</strong>：存地址的变量；<strong>引用</strong>：变量的别名，必须初始化、不可为空。</li>
+          <li><strong>new/delete vs malloc/free</strong>：前者是 C++ 运算符（会调构造/析构函数），后者是 C 库函数（只分配内存）。</li>
+          <li><strong>内存泄漏</strong>：new 后未 delete，堆内存无法回收。</li>
+          <li><strong>野指针 / 悬空指针</strong>：指向已释放或非法内存的指针。</li>
+        </ul>
+
+        <h3>3. 面向对象三大特性</h3>
+        <ul>
+          <li><strong>封装</strong>：隐藏内部实现，通过接口访问。</li>
+          <li><strong>继承</strong>：复用代码，派生类获得基类成员。</li>
+          <li><strong>多态</strong>：同一接口不同实现，<span class="key">虚函数 + 基类指针/引用</span>实现运行时多态。</li>
+        </ul>
+
+        <h3>4. 虚函数与虚表</h3>
+        <ul>
+          <li>含虚函数的类有一个<strong>虚函数表（vtable）</strong>，对象有<strong>虚表指针（vptr）</strong>。</li>
+          <li>调用虚函数时通过 vptr → vtable 间接寻址，实现动态绑定。</li>
+          <li><strong>纯虚函数</strong>（= 0）使类成为抽象类，不能实例化。</li>
+          <li><strong>虚析构函数</strong>：基类指针删除派生对象时正确调用派生类析构，防止泄漏。</li>
+        </ul>
+
+        <h3>5. 编译链接过程</h3>
+        <ol class="steps">
+          <li><div class="step-title">预处理</div><p>宏展开、头文件展开、条件编译（.i 文件）。</p></li>
+          <li><div class="step-title">编译</div><p>生成汇编代码（.s）。</p></li>
+          <li><div class="step-title">汇编</div><p>生成目标文件（.o，机器码）。</p></li>
+          <li><div class="step-title">链接</div><p>合并目标文件和库，解析符号，生成可执行文件。</p></li>
+        </ol>
+
+        <!-- ===== 扩充：来自「考研复试常问问题·编程语言」 ===== -->
+        <div class="qa"><div class="qa-head"><span class="qa-tag">OOP</span><span class="qa-q">面向对象的三大特性？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>封装</strong>：把数据与操作数据的方法绑在一起，隐藏实现细节、只暴露接口，提高安全性与可维护性。<strong>继承</strong>：子类共享父类的属性和方法，可扩展/重写，提高代码复用。<strong>多态</strong>：同一消息发给不同对象产生不同行为（同一接口多种实现），靠虚函数 + 基类指针/引用实现，提高扩展性。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">对比</span><span class="qa-q">C++ 和 Java 的主要区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 执行：Java 半编译半解释（字节码 + JVM/JIT），C++ 直接编译成机器码；② 指针：Java 无指针概念，更安全；③ 内存：Java 自动 GC，C++ 手动 new/delete；④ 继承：Java 单继承 + 多接口，C++ 支持多重继承；⑤ 操作符重载/预处理：C++ 有，Java 为简洁去掉；⑥ 类型转换：C++ 有隐式强转，Java 需显式。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">宏</span><span class="qa-q">宏定义和内联（inline）函数的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">宏是<strong>预处理期</strong>的文本替换，不做类型检查、不占运行时、易出副作用（如 MAX(a++,b)）。inline 是<strong>编译期</strong>建议，有类型检查、按函数语义展开，避免宏的陷阱；但 inline 只是建议，含循环/switch 的函数编译器通常拒绝内联。类内定义的成员函数默认 inline。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">多态</span><span class="qa-q">覆盖（override）和隐藏（hide）的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>覆盖</strong>：子类与父类函数名、参数完全相同，且父类函数为虚函数——通过基类指针调用时动态绑定到子类版本。<strong>隐藏</strong>：① 同名但参数不同（无论父类是否虚）；② 同名同参但父类函数非虚。隐藏时父类同名函数被遮蔽，不会触发多态。要覆盖务必加 virtual + override。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">泛型</span><span class="qa-q">函数重载、函数模板、泛型编程？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><strong>函数重载</strong>：同作用域、同名不同参（与返回类型无关），编译期静态决议。<strong>函数模板</strong>：用 template 参数化类型，一份代码适配多种类型。<strong>泛型编程</strong>：以独立于具体类型的方式编写代码（STL 的核心思想），C++ 通过模板（函数模板 + 类模板）实现，常用于容器（vector、list、stack）等。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">类型</span><span class="qa-q">class 和 struct 的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">C++ 中二者几乎等价，唯一默认区别：<strong>默认访问权限</strong>——class 默认 private，struct 默认 public；默认继承方式 class 是 private 继承、struct 是 public 继承。struct 仍可定义成员函数、构造函数；工程中常用 struct 表示纯数据（POD），class 表示带行为的对象。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">传参</span><span class="qa-q">值传递和引用传递的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">值传递：形参是实参的<strong>副本</strong>，函数内修改不影响实参，有拷贝开销（大对象贵）。引用传递：形参是实参的别名，<strong>直接操作原对象</strong>，无拷贝、修改会反映到实参，且引用必须初始化、不可为空。指针传递也算"传地址"，但需解引用、可为空。大对象传参优先用 const 引用。</div></div>
+
+        <h3>6. 常量指针 vs 指针常量（const 的位置）</h3>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 const int* p 与 int* const p</div>
+          <p><code>const int *p</code>：<strong>指针所指向的值</strong>不可改（<code>*p</code> 只读），但 $p$ 本身可改指向；<code>int *const p</code>：<strong>指针本身</strong>不可改（$p$ 不可重新赋值），但 <code>*p</code> 可改。口诀：const 在 <code>*</code> 左边锁"值"，在 <code>*</code> 右边锁"指针"。</p>
+        </div>
+
+        <h3>7. C 内存五区与动态分配</h3>
+        <ul>
+          <li><strong>代码段</strong>（机器指令）、<strong>数据段</strong>（已初始化全局/静态）、<strong>BSS 段</strong>（未初始化全局/静态，默认清零）、<strong>堆</strong>（malloc 手动管理）、<strong>栈</strong>（局部变量，编译器自动）。</li>
+          <li><strong>动态分配</strong>：<code>malloc</code>（不初始化）、<code>calloc</code>（分配并清零）、<code>realloc</code>（调整大小）、<code>free</code>（释放）。</li>
+        </ul>
+
+        <h3>8. 重载 / 重写 / 隐藏（三个易混词）</h3>
+        <ul>
+          <li><strong>重载 Overload</strong>：同作用域、同名不同参（编译时多态）。</li>
+          <li><strong>重写 Override</strong>：子类重新实现父类<strong>虚函数</strong>（运行时多态）。</li>
+          <li><strong>隐藏 Hiding</strong>：子类定义与父类同名的<strong>非虚</strong>函数。</li>
+        </ul>
+
+        <h3>⚙️ C/C++ 面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是面向对象？三大特性是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">面向对象是以"对象"为中心组织代码的编程范式。三大特性：<strong>封装</strong>（数据+操作打包、隐藏内部实现）、<strong>继承</strong>（子类复用父类成员）、<strong>多态</strong>（同一调用因对象类型不同产生不同行为，靠虚函数实现运行时多态）。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是编译和链接？编译过程分几步？</span><span class="qa-toggle">▼</span></div><div class="qa-body">C/C++ 源文件到可执行程序：<strong>预处理</strong>（宏展开、头文件插入）→ <strong>编译</strong>（词法/语法/语义分析→汇编）→ <strong>汇编</strong>（生成目标文件 .o）→ <strong>链接</strong>（把多个目标文件与库合并成可执行文件）。链接解决函数/变量的符号引用。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是指针？为什么要有指针？</span><span class="qa-toggle">▼</span></div><div class="qa-body">指针是<strong>存储内存地址</strong>的变量（如 <code>int *p=&a</code> 里 p 存 a 的地址）。用途：间接访问与修改数据、实现动态内存、传递大对象避免拷贝、实现链表/树等链式结构、函数指针回调。代价是易产生悬空指针、越界等隐患。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">指针</span><span class="qa-q">const int* p 和 int* const p 有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">const int* p 是"指向常量的指针"：不能通过 p 改所指向的值，但 p 可指向别处；int* const p 是"常量指针"：p 本身不可重新赋值，但可通过 p 改所指向的值。const 在 * 左锁值、在 * 右锁指针。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">C 语言的内存分为哪几个区？</span><span class="qa-toggle">▼</span></div><div class="qa-body">代码段（指令）、数据段（已初始化全局/静态）、BSS 段（未初始化全局/静态，默认清零）、堆（动态分配，malloc 管理）、栈（局部变量，自动管理）。全局/静态在数据区，局部在栈，动态在堆。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">分配</span><span class="qa-q">malloc、calloc、realloc 有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">malloc 分配指定字节但<strong>不初始化</strong>；calloc 分配并<strong>清零</strong>；realloc 调整已分配内存块大小（可能搬移）。三者配对 free 释放，否则内存泄漏。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">传参</span><span class="qa-q">值传递、指针传递、引用传递的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">值传递传副本，改形参不影响实参；指针传递传地址（本质也是值传递，传的是指针值），可通过指针改实参；引用传递是目标变量的别名，不能改指向其他对象（比指针更安全、语法更简洁）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">多态</span><span class="qa-q">函数重载、重写、隐藏的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">重载：同作用域同名不同参（编译时多态）；重写：子类重写父类虚函数（运行时多态，靠虚表）；隐藏：子类定义与父类同名的非虚函数。三者分别对应"参数不同/虚函数覆盖/同名遮蔽"。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">指针</span><span class="qa-q">指针和引用区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">引用是别名，必须初始化、不能为空、不能改变指向；指针是变量，可为空、可重新赋值、可做运算。sizeof 引用得对象大小，指针得地址大小。底层引用也常用指针实现。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">new/delete 和 malloc/free 区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">new/delete 是 C++ 运算符，会自动调用构造/析构函数、支持重载、类型安全；malloc/free 是 C 库函数，只分配/释放内存，返回 void* 需强转，失败返回 NULL（new 抛异常）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">什么是内存泄漏？怎么检测/避免？</span><span class="qa-toggle">▼</span></div><div class="qa-body">动态分配的内存没被释放且无法再访问。检测：Valgrind、ASan、智能指针。避免：用 RAII + 智能指针、成对 new/delete、代码审查。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">C++ 程序内存布局？堆和栈区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">栈/堆/全局静态区/常量区/代码段。堆：动态分配、手动管理、大、慢、向下生长；栈：自动管理、小、快、向上生长、局部变量。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">多态</span><span class="qa-q">虚函数原理？虚表是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">含虚函数的类生成虚表（存虚函数地址），每个对象有 vptr 指向虚表。通过基类指针调用虚函数时，运行时经 vptr 查表找到实际函数地址，实现动态绑定（运行时多态）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">多态</span><span class="qa-q">多态怎么实现？静态多态 vs 动态多态？</span><span class="qa-toggle">▼</span></div><div class="qa-body">静态多态：函数重载、模板，编译期确定；动态多态：虚函数 + 基类指针/引用，运行期确定。面试通常问的是动态多态。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">构造</span><span class="qa-q">深拷贝和浅拷贝区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">浅拷贝只拷贝指针值，多个对象指向同一内存，析构时重复释放崩溃；深拷贝为新对象分配独立内存并拷贝内容。含指针成员的类需自定义拷贝构造和赋值运算符。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">构造</span><span class="qa-q">为什么基类析构函数要设为虚函数？</span><span class="qa-toggle">▼</span></div><div class="qa-body">当通过基类指针删除派生对象时，若析构函数非虚，只会调基类析构，派生类资源泄漏。虚析构保证先调派生类析构再调基类析构，正确释放。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">关键字</span><span class="qa-q">static 的作用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 静态局部变量：生命周期延长到程序结束，只初始化一次；② 静态成员变量/函数：属于类而非对象；③ 静态全局变量/函数：限制作用域在本文件（internal linkage）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">关键字</span><span class="qa-q">const 的作用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① const 变量：不可修改；② const 成员函数：不修改对象状态；③ const 指针（指针常量/常量指针）；④ const 引用：防止修改、可绑定临时对象；⑤ const 用于函数参数，保证不修改实参。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">C++11</span><span class="qa-q">智能指针有哪些？shared_ptr 循环引用？</span><span class="qa-toggle">▼</span></div><div class="qa-body">unique_ptr（独占）、shared_ptr（引用计数共享）、weak_ptr（弱引用，不增加计数）。循环引用：两个对象互相持有 shared_ptr，引用计数永不归零导致泄漏，用 weak_ptr 打破环。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">编译</span><span class="qa-q">编译链接的四个过程？</span><span class="qa-toggle">▼</span></div><div class="qa-body">预处理（宏/头文件展开）→ 编译（生成汇编）→ 汇编（生成目标文件）→ 链接（合并目标文件与库、解析符号、生成可执行文件）。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">C++11</span><span class="qa-q">C++11 有哪些新特性？</span><span class="qa-toggle">▼</span></div><div class="qa-body">auto 类型推导、范围 for、智能指针、lambda 表达式、移动语义（右值引用 + 移动构造）、nullptr、constexpr、unordered_map 等。</div></div>
+      </section>
+
+      <!-- ================= 综合面试 ================= -->
+      <section id="interview">
+        <div class="section-kicker">📝 综合面试</div>
+        <h2>综合面试题：手撕代码 · 项目 · 英语</h2>
+        <p class="lead">除专业课问答外，保研面试常见的三类：机试/手撕代码、项目问答、英语环节。</p>
+
+        <h3>一、高频手撕代码题</h3>
+        <div class="card">
+          <div class="card-title">🖥️ 必刷清单（按主题）</div>
+          <ul>
+            <li><strong>数组/字符串</strong>：两数之和、三数之和、反转字符串、最长无重复子串、合并有序数组。</li>
+            <li><strong>链表</strong>：反转链表、环检测（快慢指针）、合并两个有序链表、倒数第 K 个节点。</li>
+            <li><strong>树</strong>：三种遍历（递归+迭代）、层序遍历、最大深度、对称二叉树、最近公共祖先。</li>
+            <li><strong>动态规划</strong>：爬楼梯、打家劫舍、最长递增子序列、最长公共子序列、0-1 背包、编辑距离。</li>
+            <li><strong>排序/查找</strong>：手写快排、归并、二分查找及变体、TopK。</li>
+            <li><strong>栈/队列</strong>：有效的括号、用栈实现队列、单调栈。</li>
+          </ul>
+        </div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">代码</span><span class="qa-q">手写快速排序？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><pre><code class="language-cpp">void quickSort(vector&lt;int&gt;&amp; a, int l, int r) {
+  if (l &gt;= r) return;
+  int pivot = a[(l + r) / 2], i = l, j = r;
+  while (i &lt;= j) {
+    while (a[i] &lt; pivot) i++;
+    while (a[j] &gt; pivot) j--;
+    if (i &lt;= j) { swap(a[i++], a[j--]); }
+  }
+  quickSort(a, l, j);
+  quickSort(a, i, r);
+}</code></pre></div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">代码</span><span class="qa-q">手写二分查找？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><pre><code class="language-cpp">int binarySearch(vector&lt;int&gt;&amp; a, int target) {
+  int l = 0, r = a.size() - 1;
+  while (l &lt;= r) {
+    int mid = l + (r - l) / 2;  // 防溢出
+    if (a[mid] == target) return mid;
+    else if (a[mid] &lt; target) l = mid + 1;
+    else r = mid - 1;
+  }
+  return -1;
+}</code></pre></div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">代码</span><span class="qa-q">手写 LRU 缓存？</span><span class="qa-toggle">▼</span></div><div class="qa-body"><pre><code class="language-cpp">class LRUCache {
+  int cap;
+  list&lt;pair&lt;int,int&gt;&gt; l;                 // 维护使用顺序
+  unordered_map&lt;int, list&lt;pair&lt;int,int&gt;&gt;::iterator&gt; m;
+ public:
+  LRUCache(int capacity) : cap(capacity) {}
+  int get(int key) {
+    auto it = m.find(key);
+    if (it == m.end()) return -1;
+    l.splice(l.begin(), l, it->second);   // 移到头部
+    return it->second->second;
+  }
+  void put(int key, int value) {
+    if (m.count(key)) { m[key]->second = value; l.splice(l.begin(), l, m[key]); return; }
+    if (l.size() == cap) { m.erase(l.back().first); l.pop_back(); }
+    l.push_front({key, value}); m[key] = l.begin();
+  }
+};</code></pre></div></div>
+
+        <h3>二、项目问答</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">介绍一个你做的项目？</span><span class="qa-toggle">▼</span></div><div class="qa-body">STAR 法则：背景 → 任务 → 方案 → 结果，重点讲清<strong>"为什么这么做"</strong>和<strong>你的贡献</strong>，而非罗列技术栈。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">项目遇到了什么困难？怎么解决？</span><span class="qa-toggle">▼</span></div><div class="qa-body">体现排查思路：如接口慢 → 定位瓶颈（数据库/网络/算法）→ 加索引/缓存/优化。展现"发现问题 → 分析 → 验证 → 解决"的完整链路。</div></div>
+
+        <div class="qa"><div class="qa-head"><span class="qa-tag">项目</span><span class="qa-q">你的项目有什么可以改进的？</span><span class="qa-toggle">▼</span></div><div class="qa-body">提前准备"局限 + 改进方向"，如：单机架构 → 分布式；无缓存 → 加 Redis；缺测试 → 加单测。展现批判性思维。</div></div>
+
+        <h3>三、英语环节</h3>
+        <div class="card">
+          <ul>
+            <li>英文自我介绍（1-2 分钟，背熟）。</li>
+            <li>Why do you choose our university / lab?</li>
+            <li>What is your research interest?</li>
+            <li>用英文介绍一个项目或算法（如 explain quick sort / deadlock）。</li>
+            <li>读一段英文摘要并翻译。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================= 复习路线 ================= -->
+      <section id="roadmap">
+        <div class="section-kicker">🗺️ 保研人专属</div>
+        <h2>复习路线与资源</h2>
+        <p class="lead">建议顺序：先数据结构+算法（机试），再操作系统+网络（面试高频），最后组成原理+数据库+C++。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>阶段</th><th>内容</th><th>资源</th></tr></thead>
+            <tbody>
+              <tr><td>1. 数据结构与算法</td><td>刷题 + 手写核心数据结构</td><td>LeetCode 热题 100、代码随想录</td></tr>
+              <tr><td>2. 操作系统</td><td>进程线程、死锁、内存</td><td>《现代操作系统》、王道 408</td></tr>
+              <tr><td>3. 计算机网络</td><td>TCP/IP、HTTP</td><td>《图解 HTTP》《计算机网络》谢希仁</td></tr>
+              <tr><td>4. 计算机组成原理</td><td>存储层次、Cache、流水线</td><td>王道 408、CSAPP 前三章</td></tr>
+              <tr><td>5. 数据库</td><td>事务、索引、MySQL</td><td>《MySQL 技术内幕：InnoDB 存储引擎》</td></tr>
+              <tr><td>6. C/C++</td><td>内存、虚函数、C++11</td><td>《C++ Primer》《Effective C++》</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card tip">
+          <div class="card-title">🎯 给保研人的三个建议</div>
+          <ol>
+            <li><strong>机试是硬门槛</strong>：数据结构与算法必须刷题，保研机试淘汰率很高。</li>
+            <li><strong>面试讲原理不讲背诵</strong>：每个知识点都要能讲出"为什么"，面试官最爱追问。</li>
+            <li><strong>准备 1-2 个能深挖的项目</strong>，能经受住连续追问的项目比堆砌技术栈更有说服力。</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ================= 软件工程与系统设计 ================= -->
+      <section id="se">
+        <div class="section-kicker">🛠️ 课程七</div>
+        <h2>软件工程与系统设计</h2>
+        <p class="lead">面试常考"开放设计题"：在白板上设计一个短链、秒杀、排行榜或缓存系统——考察抽象、权衡与 scalability 思维。</p>
+
+        <h3>1. 软件工程基础</h3>
+        <ul>
+          <li><strong>软件生命周期</strong>：瀑布 / 迭代 / 敏捷（Scrum），强调可交付与反馈。</li>
+          <li><strong>设计原则（SOLID）</strong>：单一职责、开闭、里氏替换、接口隔离、依赖倒置。</li>
+          <li><strong>设计模式（常考）</strong>：单例、工厂、观察者、策略、装饰器；能说清"解决什么问题、何时用"。</li>
+          <li><strong>重构与测试</strong>：单元测试 / 集成测试、TDD、代码评审。</li>
+        </ul>
+
+        <h3>2. 系统设计核心权衡</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>维度</th><th>选项</th><th>权衡</th></tr></thead>
+            <tbody>
+              <tr><td><strong>一致性</strong></td><td>强一致 vs 最终一致</td><td>CP（CAP 中保一致）vs AP（保可用）</td></tr>
+              <tr><td><strong>缓存</strong></td><td>本地 / 分布式缓存</td><td>提速但引入一致性、击穿/雪崩/穿透</td></tr>
+              <tr><td><strong>数据库</strong></td><td>关系型 vs NoSQL</td><td>事务/规范 vs 水平扩展/灵活 schema</td></tr>
+              <tr><td><strong>扩展</strong></td><td>垂直 vs 水平</td><td>加单机配置 vs 加机器分片/副本</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>3. 高频设计题套路</h3>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 具体解释：设计一个短链系统（tinyurl）</div>
+          <ol class="steps">
+            <li><div class="step-title">需求澄清</div><p>读多写少、低延迟、短且唯一；QPS 量级、是否需要自定义短码。</p></li>
+            <li><div class="step-title">发号 / 哈希</div><p>自增 ID 经 Base62 编码；或对长 URL 哈希（需处理冲突）。</p></li>
+            <li><div class="step-title">存储</div><p>KV 存储（长→短、短→长双向索引），量大时按短码分片。</p></li>
+            <li><div class="step-title">缓存与重定向</div><p>热点短码放 Redis；访问 301/302 跳转，301 可被 CDN 缓存更省。</p></li>
+          </ol>
+        </div>
+        <div class="card warn">
+          <div class="card-title">⚠️ 缓存三大坑</div>
+          <p><strong>击穿</strong>（热点 key 失效瞬间高并发打到 DB）→ 互斥锁/逻辑过期；<strong>雪崩</strong>（大量 key 同时失效）→ 过期时间加随机；<strong>穿透</strong>（查不存在的数据）→ 布隆过滤器/缓存空值。</p>
+        </div>
+
+        <h3>🛠️ 软件工程与系统设计面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">原则</span><span class="qa-q">SOLID 原则分别是什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">单一职责（一个类一个职责）、开闭（对扩展开放对修改关闭）、里氏替换（子类可替父类）、接口隔离（接口小而专）、依赖倒置（依赖抽象而非实现）。是写出可维护、可扩展代码的基础。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">设计</span><span class="qa-q">CAP 定理是什么？怎么取舍？</span><span class="qa-toggle">▼</span></div><div class="qa-body">分布式系统下一致性(C)、可用性(A)、分区容忍(P)三者最多取二。分区不可避免，故通常在 CP（保一致，如 ZooKeeper）与 AP（保可用、最终一致，如 Cassandra）间取舍。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">缓存</span><span class="qa-q">缓存击穿、雪崩、穿透分别是什么？怎么解决？</span><span class="qa-toggle">▼</span></div><div class="qa-body">击穿：热点 key 失效瞬间高并发打 DB → 互斥锁/逻辑过期；雪崩：大量 key 同时失效 → 过期时间加随机；穿透：查不存在数据 → 布隆过滤器/缓存空值。三者都要靠"避免大量请求直达数据库"。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">设计</span><span class="qa-q">如何设计一个高并发秒杀系统？</span><span class="qa-toggle">▼</span></div><div class="qa-body">分层削峰：前端限流+按钮防重；网关限流（令牌桶）；Redis 预扣库存+异步下单（MQ）；数据库最终落库。核心是"读用缓存、写用队列、库存预扣防超卖"。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">模式</span><span class="qa-q">单例模式有哪几种写法？线程安全吗？</span><span class="qa-toggle">▼</span></div><div class="qa-body">饿汉（类加载即建，天然线程安全）、懒汉（用时再建，需加锁或双重检查锁定 DCL 才线程安全）、静态内部类（推荐，延迟且安全）、枚举（最佳，防反射/反序列化）。</div></div>
+      </section>
+
+      <!-- ================= 编译原理基础 ================= -->
+      <section id="compile">
+        <div class="section-kicker">🔩 课程八</div>
+        <h2>编译原理基础</h2>
+        <p class="lead">从源码到可执行文件的完整流水线，理解它有助于读懂语言特性与运行时。</p>
+
+        <h3>1. 编译流水线</h3>
+        <div class="vs-grid">
+          <div class="vs-col">
+            <h5>前端（与源语言相关）</h5>
+            <ul>
+              <li>词法分析：正则 → 记号(Token)流</li>
+              <li>语法分析：上下文无关文法 → 语法树(AST)</li>
+              <li>语义分析：类型检查、作用域</li>
+              <li>中间代码生成：三地址码/IR</li>
+            </ul>
+          </div>
+          <div class="vs-col">
+            <h5>后端（与目标机相关）</h5>
+            <ul>
+              <li>中间代码优化：常量折叠、死代码消除</li>
+              <li>目标代码生成：汇编/机器码</li>
+              <li>寄存器分配、指令调度</li>
+              <li>链接：合并多目标文件</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>2. 关键概念</h3>
+        <ul>
+          <li><strong>文法</strong>：正则（词法，3型）⊂ 上下文无关（语法，2型）；乔姆斯基谱系。</li>
+          <li><strong>LL / LR 分析</strong>：自顶向下（预测分析）vs 自底向上（移进-归约，更强大）。</li>
+          <li><strong>静态 vs 动态</strong>：静态类型/作用域在编译期确定；动态在运行期。</li>
+          <li><strong>静态链接 vs 动态链接</strong>：.a/.lib 拷进可执行 vs .so/.dll 运行时加载（省空间、可热更）。</li>
+        </ul>
+
+        <h3>3. 运行时与内存</h3>
+        <ul>
+          <li><strong>程序内存布局</strong>：代码段、数据段、堆（动态分配）、栈（函数调用/局部变量）、内核空间。</li>
+          <li><strong>垃圾回收（GC）</strong>：标记-清除、复制、分代收集（年轻/老年代）；引用计数（Python/Rust 部分）。</li>
+          <li><strong>调用约定</strong>：参数如何入栈/传寄存器、栈帧如何平衡。</li>
+        </ul>
+
+        <h3>🔩 编译原理面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">流程</span><span class="qa-q">从源码到可执行文件经历了哪些阶段？</span><span class="qa-toggle">▼</span></div><div class="qa-body">预处理（宏展开/头文件）→ 编译（词法→语法→语义→IR→优化→目标码）→ 汇编（汇编指令→机器码，生成 .o）→ 链接（合并目标文件、解析符号，生成可执行）。理解每阶段有助于排查编译/链接错误。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">分析</span><span class="qa-q">LL 和 LR 分析的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">LL 是自顶向下（从左到右、最左推导，如预测分析器），实现简单但表达能力弱；LR 是自底向上（移进-归约，如 LALR），更强大、能处理更多文法，是多数编译器后端采用的方式。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">链接</span><span class="qa-q">静态链接和动态链接的区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">静态链接把库代码拷进可执行（体积大、独立）；动态链接运行时加载 .so/.dll（省空间、可共享、可热更新，但依赖环境）。两者在"空间/耦合/部署"上权衡。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">内存</span><span class="qa-q">程序运行时内存如何布局？堆和栈区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">典型布局：代码段、数据段（全局/静态）、堆（向高地址增长、手动分配）、栈（向低地址增长、函数调用/局部变量）。堆手动管理、空间大但易碎片；栈自动管理、快但有大小限制。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">GC</span><span class="qa-q">垃圾回收的基本思路？分代收集为什么有效？</span><span class="qa-toggle">▼</span></div><div class="qa-body">核心是判定并回收不可达对象（可达性分析），方式如标记-清除、复制、标记-整理。分代假设"朝生夕死"：多数对象短命，故年轻代用复制算法频繁回收、老年代用标记整理少回收，整体效率更高。</div></div>
+      </section>
+
+    </div>
+
+    <footer class="footer">
+      计算机专业课 · 保研复习指南 —— 数据结构 · 操作系统 · 计算机网络 · 组成原理 · 数据库 · C/C++ · 软件工程 · 编译原理 🎓
+    </footer>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/cpp.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
