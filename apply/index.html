@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>保研申请 · 计算机保研导航</title>
+  <meta name="description" content="计算机保研人专属申请指南：择校定位、成绩排名要求、英语门槛、文书材料（简历/个人陈述/推荐信/联系导师）、面试技巧与全流程时间线。" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="read-progress" id="readProgress"></div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <a class="brand" href="#top">
+        <span class="brand-logo">APPLY</span>
+        <span>
+          <span class="brand-name">保研申请指南</span><br />
+          <span class="brand-sub">择校 · 文书 · 面试 · 时间线</span>
+        </span>
+      </a>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-group-label">申请四环节</div>
+      <a class="nav-link" href="#overview"><span class="nav-icon">🧭</span> 申请总览</a>
+      <a class="nav-link" href="#school"><span class="nav-icon">🎯</span> 择校定位</a>
+      <a class="nav-link" href="#ranking"><span class="nav-icon">📊</span> 成绩排名</a>
+      <a class="nav-link" href="#english"><span class="nav-icon">🇬🇧</span> 英语门槛</a>
+      <div class="nav-group-label">文书与面试</div>
+      <a class="nav-link" href="#docs"><span class="nav-icon">📝</span> 文书材料</a>
+      <a class="nav-link" href="#interview"><span class="nav-icon">🎤</span> 面试技巧</a>
+      <div class="nav-group-label">节奏与资源</div>
+      <a class="nav-link" href="#timeline"><span class="nav-icon">🗺️</span> 时间线攻略</a>
+      <a class="nav-link" href="#roadmap"><span class="nav-icon">📚</span> 资源路线</a>
+    </nav>
+    <div class="sidebar-foot">为计算机保研人整理 · 持续更新</div>
+  </aside>
+
+  <!-- ============ 主内容 ============ -->
+  <div class="content" id="top">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="菜单">☰</button>
+      <span class="topbar-title" id="topbarTitle">保研申请 · 全攻略</span>
+      <div class="topbar-actions">
+        <a class="btn btn-ghost" href="../index.html" style="padding:8px 14px;font-size:13px;">🏠 导航首页</a>
+        <button class="icon-btn" id="themeBtn" aria-label="切换主题">🌙</button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge">🎓 计算机保研 · 申请全攻略</span>
+        <h1>保研申请，一站式准备<br />从择校到面试的全流程指南</h1>
+        <p>成绩排名、英语门槛、文书材料、面试技巧、时间节点——把申请这件事拆成可执行的步骤。结合「汇总」中的院校申请条件、排名要求、文书模板与面试真题整理，助你少走弯路。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#overview">开始准备 →</a>
+          <a class="btn btn-ghost" href="#interview">直接看面试题</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">4 大</div><div class="stat-label">申请环节</div></div>
+          <div class="stat"><div class="stat-num">300+</div><div class="stat-label">面试真题</div></div>
+          <div class="stat"><div class="stat-num">全程</div><div class="stat-label">时间线攻略</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+
+      <!-- ================= 申请总览 ================= -->
+      <section id="overview">
+        <div class="section-kicker">🧭 申请总览</div>
+        <h2>保研申请：先弄清规则，再谈努力</h2>
+        <p class="lead">保研（推荐免试攻读研究生）是高校<strong>免初试</strong>选拔优秀应届本科生的通道。全国具有推免资格的高校约 <span class="key">366 所</span>，而名额的多少由学校层次决定——先弄清规则，你的每一步才有意义。</p>
+
+        <div class="card">
+          <div class="card-title">📊 三条主线：夏令营 · 预推免 · 九推</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>环节</th><th>时间</th><th>特点</th><th>建议</th></tr></thead>
+              <tbody>
+                <tr><td><strong>夏令营</strong></td><td>6–8 月</td><td>规模大、条件相对宽松（排名 10% 左右即可投），商科等热门方向几乎只从这里招生</td><td><strong>必投</strong>，能提前锁定 offer，是"双保险"</td></tr>
+                <tr><td><strong>预推免</strong></td><td>9 月上中旬</td><td>夏令营后的第二轮，名额更少、条件更严</td><td>夏令营未上岸的主战场</td></tr>
+                <tr><td><strong>九推</strong></td><td>9.28 前后</td><td>国家推免系统正式填报志愿、复试、待录取</td><td>最后保底机会，提前演练系统流程</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card info">
+          <div class="card-title">📌 保研率参考（推免名额占应届本科比例）</div>
+          <ul>
+            <li>设有研究生院的高校：约 <strong>15%</strong>；未设研究生院的 211：约 <strong>5%</strong>；非 211 高校：约 <strong>2%</strong>。</li>
+            <li>清北推免率超 <strong>50%</strong>；清北推免生中 <strong>985/211 生源占 98.5%+</strong>，北大推免生 95% 来自双一流（但双非逆袭案例同样存在）。</li>
+            <li><strong>考得好 + 加分多</strong>是保研的两条腿：成绩决定资格，科研/竞赛/论文决定上限。</li>
+          </ul>
+        </div>
+
+        <h3>🧭 申请总览面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">基础</span><span class="qa-q">什么是保研？和考研有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">保研 = 推荐免试攻读研究生：由本科高校按成绩与综合表现推荐、目标院校考核（笔试/机试/面试）录取，<strong>免初试</strong>。考研需参加全国统考初试再过复试。保研拼的是三年积累，考研拼的是一年冲刺；名校名额越来越向保研倾斜。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">决策</span><span class="qa-q">保研、考研、出国怎么选？</span><span class="qa-toggle">▼</span></div><div class="qa-body">保研：成本低、确定性高，适合成绩排名靠前、科研竞赛有积累的同学；考研：给想换专业/跨校冲刺的同学第三次机会，但风险高；出国：适合立志读博且家庭可支撑的同学，注意多数国外高校不承认国内硕士学历，且保研后一般不能再申请公派留学。结合专业兴趣与家庭情况综合判断。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">核心</span><span class="qa-q">保研最看重什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">一句话：<strong>你能为导师创造什么价值</strong>。拆开看：① 学习能力（成绩单是硬门槛，但名校对普校成绩有疑虑，科研/竞赛/项目经历更亮眼）；② 个性化发展（差异化优势让老师在同等成绩里选你）；③ 导师的人为因素很大，<strong>提前联系导师</strong>几乎必做。</div></div>
+      </section>
+
+      <!-- ================= 择校定位 ================= -->
+      <section id="school">
+        <div class="section-kicker">🎯 环节一</div>
+        <h2>择校定位：冲 / 稳 / 保三档 + 错位竞争</h2>
+        <p class="lead">定位不是"我想去哪"，而是"我够得着哪"。用三档法把目标分成冲刺、稳妥、保底，再学会在专业方向上错位竞争。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>档次</th><th>定位</th><th>典型选择</th><th>投递策略</th></tr></thead>
+            <tbody>
+              <tr><td><strong>冲刺</strong></td><td>排名前 10%、科研竞赛突出</td><td>清北复交人等头部院校王牌方向</td><td>可以海投，但同院同专业别挤一个方向</td></tr>
+              <tr><td><strong>稳妥</strong></td><td>排名 10%–30%、有项目经历</td><td>中坚 985 / 强 211 的对口方向</td><td>重点准备，联系导师最值得投入</td></tr>
+              <tr><td><strong>保底</strong></td><td>排名 30%–50%</td><td>普通 211 / 本校 / 中科院系统</td><td>确保"上岸"，9.28 系统有兜底</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 错位竞争：同一学院的不同专业是分开筛的</div>
+          <p>某学院的热门方向只收第一名，但<strong>战略管理、组织行为等冷门方向可能收第二名</strong>——因为不同专业分开筛选。所以一个班的同学投递时要<strong>商量着错开</strong>，别挤在同一个热门方向互相踩踏；你自己也优先"保录取率"而非"最热门"。这比盲目冲大牌管用得多。</p>
+        </div>
+
+        <div class="card info">
+          <div class="card-title">📌 生源真相（数据参考）</div>
+          <p>清华推免生中本校硕博占 45%+、985/211 生源超 98.5%；北大推免生 95% 来自双一流；中科大/国科大双一流生源分别超 89% / 81%。<strong>这不是歧视</strong>，而是双一流高校推免名额本就更多——双非同学只要足够优秀（排名、论文、竞赛），逆袭名校的案例年年都有。</p>
+        </div>
+
+        <h3>🎯 择校定位面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">定位</span><span class="qa-q">怎么确定目标院校和专业方向？</span><span class="qa-toggle">▼</span></div><div class="qa-body">先问自己毕业后要做什么（读博/就业/考公），再看专业兴趣与科研方向是否匹配。参考三步：① 用"冲稳保"三档圈出 6–10 所；② 去目标学院官网看导师研究方向，找与你科研经历对口的；③ 结合保研率、往年录取生源判断难度。别只盯着学校牌子，<strong>方向匹配比牌子更重要</strong>。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">策略</span><span class="qa-q">要不要海投？投多少合适？</span><span class="qa-toggle">▼</span></div><div class="qa-body">夏令营可以适度多投（海投 + 精准结合），但要把精力留给"稳妥档"：每所学校的材料都要针对该校修改（研究方向、导师）。投太多会摊薄材料质量；建议冲刺 2–3 所、稳妥 3–4 所、保底 2 所左右。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">双非</span><span class="qa-q">双非院校有机会保到名校吗？</span><span class="qa-toggle">▼</span></div><div class="qa-body">有，但要更努力：成绩排名尽量前几、有高质量科研/论文/竞赛支撑，并<strong>提前联系导师</strong>展示能力。名校对普校成绩有天然疑虑，就用"可验证的成果"（论文、项目、获奖）替代成绩的说服力。许多 985 也明确欢迎非 211 优秀学生。</div></div>
+      </section>
+
+      <!-- ================= 成绩排名 ================= -->
+      <section id="ranking">
+        <div class="section-kicker">📊 环节二</div>
+        <h2>成绩排名：申请的第一道硬门槛</h2>
+        <p class="lead">绝大多数夏令营把"专业排名前 10%"写进申请条件。排名不只是数字，更是你材料被<strong>初审通过</strong>的前提。</p>
+
+        <div class="card">
+          <div class="card-title">🏫 头部院校成绩要求速览（2022 参考）</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>院校（院系）</th><th>成绩要求</th></tr></thead>
+              <tbody>
+                <tr><td>清华 · 软件学院 / 车辆与运载学院</td><td>本科前三年总评排名<strong>前 10%</strong></td></tr>
+                <tr><td>清华 · 生物医学工程系</td><td>年级前 15%（可放宽）</td></tr>
+                <tr><td>清华 · 经管金融硕士</td><td>本专业前 10%；<strong>清北本校生前 40%</strong></td></tr>
+                <tr><td>北大 · 环境学院 / 马克思主义学院</td><td>全年级或本专业<strong>前 10%</strong>（突出表现可放宽）</td></tr>
+                <tr><td>北大 · 汇丰商学院</td><td>清北学生前 40%，其他重点院校<strong>前 10%</strong></td></tr>
+                <tr><td>复旦 · 马克思主义学院</td><td>本专业同年级前 10%（科研突出可例外）</td></tr>
+                <tr><td>上交 · 船舶海洋与建筑工程学院</td><td>双一流高校即可，其他高校前 10% 或参与高水平科研可报</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 夏令营 vs 九推：排名要求会"收紧"</div>
+          <p>夏令营阶段是<strong>最宽松</strong>的窗口：排名 10% 左右即可投，且"其他方面突出可放宽"。到 9 月份预推免/九推，部分文科院系甚至<strong>只有专业第一才有面试机会</strong>。所以能走夏令营就走夏令营，别把希望全押在九推。</p>
+        </div>
+
+        <div class="card tip">
+          <div class="card-title">💡 两个实用技巧</div>
+          <ul>
+            <li><strong>填"专业排名"还是"综合排名"</strong>：两种排名都有时，哪个对申请更有利就填哪个（但证明文件要与之一致）。</li>
+            <li><strong>排名被学院卡</strong>：排名不到门槛可能连成绩证明都开不出来——提前与教务确认本校推免条例，算清自己的综合成绩。</li>
+          </ul>
+        </div>
+
+        <h3>📊 成绩排名面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">门槛</span><span class="qa-q">保研成绩排名一般要达到多少？</span><span class="qa-toggle">▼</span></div><div class="qa-body">主流夏令营要求<strong>专业前 10%</strong>（部分 15%），清北热门方向更严；本校保研资格通常要求前 15%（设研究生院高校推免比例约 15%）。排名越靠前，可选择的院校档次越高；排名边缘就靠科研竞赛论文补。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">补救</span><span class="qa-q">排名不够理想怎么办？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 用<strong>科研、竞赛、论文</strong>补强——很多院校明确"其他方面突出可放宽排名"；② 错位投递竞争小的方向（见择校篇）；③ 夏令营冲、预推免捡漏；④ 提升英语（六级/雅思）和项目深度，让初审老师忽略排名短板。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">准备</span><span class="qa-q">现在（低年级）怎么为排名做准备？</span><span class="qa-toggle">▼</span></div><div class="qa-body">保研是用三年时间准备：① 每门专业课尽量高绩点，尤其数学、数据结构等核心课；② 大二开始进实验室/打比赛（美赛、数模、大英赛、互联网+），积累项目；③ 练英语（四六级高分/雅思）；④ 关注目标院校导师，尽早读其论文。</div></div>
+      </section>
+
+      <!-- ================= 英语门槛 ================= -->
+      <section id="english">
+        <div class="section-kicker">🇬🇧 环节三</div>
+        <h2>英语门槛：六级、口语与专业英语</h2>
+        <p class="lead">英语是申请材料里的"常规项"：四六级成绩证明基本是标配，口语在面试里直接考，专业英语决定了你进组后读文献的速度。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>类型</th><th>作用</th><th>建议</th></tr></thead>
+            <tbody>
+              <tr><td><strong>六级 CET-6</strong></td><td>申请材料标配，很多学校硬性要求</td><td>425 算过但偏弱，<strong>建议刷到 500+</strong>；没过六级可用雅思/托福替代</td></tr>
+              <tr><td><strong>雅思 / 托福</strong></td><td>替代六级，也是出国/外导组的加分项</td><td>六级刷不动时走这条路，部分院校明确接受</td></tr>
+              <tr><td><strong>口语</strong></td><td>面试直接考：自我介绍 + 日常问答</td><td>准备 1 分钟英文自我介绍，常见问题过一遍</td></tr>
+              <tr><td><strong>专业英语</strong></td><td>读文献、组会、学术交流的基础</td><td>背专业词汇表 + 精读几篇顶会论文摘要</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card info">
+          <div class="card-title">📌 关于"不要求六级的院校"</div>
+          <p>汇总资料里专门整理了<strong>未要求六级的 985 / 211 院校列表</strong>（如部分院校允许用四级或雅思/托福代替、或仅作参考不作硬性门槛）。注意：每年简章会调整，务必以目标院校<strong>当年招生简章</strong>为准——这是不少六级未过同学的救命窗口。</p>
+        </div>
+
+        <h3>🇬🇧 英语门槛面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">六级</span><span class="qa-q">六级 425 算通过吗？要不要刷分？</span><span class="qa-toggle">▼</span></div><div class="qa-body">425 算通过，但在保研申请里属于"能过但不好看"。排名竞争激烈时，六级 550+ 是加分项；时间紧则建议用雅思/托福替代，或把精力放在科研竞赛上。简历里可以只写六级不写四级。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">口语</span><span class="qa-q">英语口语面试怎么准备？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 准备 1 分钟英文自我介绍（基本信息 + 科研 + 性格，与中文版对应）；② 过一遍高频问题（self-introduction、greatest strength/weakness、why our school、future plan）；③ 答案要<strong>结合自己经历</strong>准备，别背通用模板，否则容易被追问露馅。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">专业英语</span><span class="qa-q">专业英语怎么提升？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 精读 3–5 篇目标方向的顶会论文摘要和引言；② 背专业词汇（教材附录词汇表即可）；③ 面试前准备 1–2 句英文介绍自己研究方向的表述。研究生阶段要读大量英文文献，老师会通过你的专业英语判断你的上手速度。</div></div>
+      </section>
+
+      <!-- ================= 文书材料 ================= -->
+      <section id="docs">
+        <div class="section-kicker">📝 环节四</div>
+        <h2>文书材料：简历 · 个人陈述 · 推荐信 · 联系导师</h2>
+        <p class="lead">文书不是"堆经历"，而是<strong>说服老师"你有价值"</strong>。四件套各有各的坑，逐个拆解。</p>
+
+        <h3>1. 简历（一页纸法则）</h3>
+        <ul>
+          <li><strong>一页以内</strong>（绝对不超过三页），简约大方、少花哨表格；英文简历与中文对应。</li>
+          <li>奖项按<strong>国奖 → 省奖 → 校奖</strong>顺序，优先与专业相关、体现能力的；<strong>国奖按得奖时间排</strong>。</li>
+          <li>科研经历每段 <strong>2–3 行</strong>：项目背景 + 你的角色 + 成果；没有论文可用课程大作业、数模竞赛（美赛/国赛）代替——建模本质也是"发现问题→解决问题"。</li>
+          <li>少写"精通 Word"这类低价值项；没考计算机等级就写"熟练使用 XX 软件"。</li>
+        </ul>
+
+        <h3>2. 个人陈述（十要十不要）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>十要</th><th>十不要</th></tr></thead>
+            <tbody>
+              <tr><td>求深度不求广度，聚焦一两个主题</td><td>不写流水账式简历、不重复材料已有信息</td></tr>
+              <tr><td>写别人写不出的独特经历</td><td>不抱怨生活境遇</td></tr>
+              <tr><td>让老师看到"你之所以是你"的精神内核</td><td>不布道、不狂热极端地表达观点</td></tr>
+              <tr><td>实事求是，别把"理想的你"当"现在的你"</td><td>不把"钱"当求学动机</td></tr>
+              <tr><td>开头不落俗套</td><td>不写无意义的开头结尾</td></tr>
+              <tr><td>就各校特点做针对性评论</td><td>不采用怪异风格或包装</td></tr>
+              <tr><td>写性格积极面；过失在附录解释</td><td>不空谈、不堆砌</td></tr>
+              <tr><td>评价经历而非简单讲故事</td><td>不提及学校排名</td></tr>
+              <tr><td>请人帮你改语法、标点、用词</td><td>不随便寄材料以外的附件</td></tr>
+              <tr><td>易辨字体、通用行距白边</td><td><strong>不写错校名</strong>（常见低级失误）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>3. 推荐信</h3>
+        <ul>
+          <li>一般<strong>自己起草、找老师签字</strong>（老师愿意亲自写更好）；装进信封、封口处签字。</li>
+          <li>目标院校<strong>没有要求可以不准备</strong>；准备的话，找了解你、职称高、与申请方向相关的老师。</li>
+        </ul>
+
+        <h3>4. 联系导师（提前联系，几乎必做）</h3>
+        <div class="deepdive">
+          <div class="deepdive-title">📧 第一封邮件怎么写</div>
+          <p>格式要全：<strong>称谓、寒暄、正文、祝语、此致敬礼、落款</strong>都不能少。正文四段：① 自我介绍 + 如何了解到这位老师；② 突出对他研究方向的兴趣；③ 本科表现（成绩、科研、竞赛，<strong>与科研无关的奖项一笔带过</strong>），项目经历讲细并给出你的看法/新 idea；④ 表达目的（夏令营/复试前想进课题组）。字数 <strong>600–800 字</strong>，可附成绩单和论文，<strong>别附杂七杂八的奖状</strong>。</p>
+        </div>
+        <div class="card tip">
+          <div class="card-title">💡 联系导师的 5 条红线</div>
+          <ul>
+            <li><strong>不要同时联系同一学校的多个老师</strong>（大忌）。</li>
+            <li>发给不同学校老师时，<strong>记得改称谓和研究方向</strong>，别原封转发。</li>
+            <li>发出去后耐心等，<strong>一周未回复</strong>可再发一封礼貌询问。</li>
+            <li>老师回复后<strong>一定要回信</strong>（谢谢百忙中回复之类）。</li>
+            <li>老师说"欢迎报考"≠承诺录取，好好准备复试；名额已满就礼貌道谢后联系其他老师。</li>
+          </ul>
+        </div>
+
+        <h3>📝 文书材料面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">简历</span><span class="qa-q">没有论文经历，简历怎么写？</span><span class="qa-toggle">▼</span></div><div class="qa-body">① 寒假来得及写一篇参营论文或投递论文；② 没有论文就用科研、竞赛、实习补充：课程大作业、美赛/国赛建模（短期科研）、创新创业项目都可以写。实际上大多数本科生科研只是"科研训练"，离真正的创新很远，老师心里有数。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">奖项</span><span class="qa-q">简历里奖项怎么排序？校奖要写吗？</span><span class="qa-toggle">▼</span></div><div class="qa-body">国奖、省奖、校奖的顺序，优先写认可度高、与专业贴近、你是负责人/主持人的奖项；国奖内部按得奖时间排。校奖少写或不写（奖学金除外），经历很多时两页纸也可以。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">邮件</span><span class="qa-q">联系导师的邮件一般写多长？附件带什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">正文 600–800 字，四段结构（介绍+兴趣+表现+目的）。附件带<strong>成绩单和学术论文</strong>即可，杂七杂八的奖状不要附；邮件主题写清楚，如"免试推荐——XX大学 XXX 同学来信"。<strong>必须提前联系导师</strong>。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">推荐信</span><span class="qa-q">推荐信必须准备吗？怎么弄？</span><span class="qa-toggle">▼</span></div><div class="qa-body">目标院校<strong>没要求就不必准备</strong>；要准备的话一般自己起草、找老师审阅签字，放进信封并封口签字。选推荐人：了解你、与申请方向相关、职称较高的老师（教授/副教授）。</div></div>
+      </section>
+
+      <!-- ================= 面试技巧 ================= -->
+      <section id="interview">
+        <div class="section-kicker">🎤 面试实战</div>
+        <h2>面试技巧：压力题、行为题、简历题、英语题</h2>
+        <p class="lead">面试题库千千万，套路就四类。掌握<strong>应对框架</strong>，任何变体都能接住。</p>
+
+        <h3>1. 压力面试：心态是第一道题</h3>
+        <div class="deepdive">
+          <div class="deepdive-title">🎯 高频压力题 Top 8（先心里过一遍）</div>
+          <ul>
+            <li>你还报了其他学校吗？如果我们和 XX 都录你，你怎么选？</li>
+            <li>为什么我们学校没录取你 / 如果我们不录取你怎么办？</li>
+            <li>你最大的缺点是什么？你与别人比优势在哪？</li>
+            <li>你的科研经历为什么这么少 / 这门课分数为什么这么低？</li>
+            <li>科研遇到最大的困难是什么？实验一直失败怎么办？</li>
+            <li>六级成绩为什么不高？学校是双非你怎么看？</li>
+            <li>你还有什么要问我的吗？（别说"没有"）</li>
+            <li>你的论文是你自己完成的吗？为什么讲不清原理？</li>
+          </ul>
+        </div>
+        <div class="card info">
+          <div class="card-title">💡 应对心法</div>
+          <p>压力题考的是<strong>情绪管理与诚实度</strong>：① 稳住节奏，停顿思考再答，别抢答；② 承认短板 + 给出改进计划（如"六级不高，因为我把精力放在项目上，已报名雅思"）；③ "为什么选我们"必答出对学校/导师的<strong>具体了解</strong>；④ 反问环节准备 1–2 个关于研究方向、课题组的问题，体现主动思考。</p>
+        </div>
+
+        <h3>2. 行为面试：用 STAR 讲经历</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>四类</th><th>典型问题</th><th>应对</th></tr></thead>
+            <tbody>
+              <tr><td><strong>适应能力</strong></td><td>说一段高压力经历 / 失败经历及如何克服</td><td>挑真实的科研/竞赛经历，讲清"困境 → 行动 → 结果"</td></tr>
+              <tr><td><strong>团队合作</strong></td><td>与性格不合的同学怎么合作 / 团队有摸鱼的怎么办</td><td>体现"主动沟通、明确分工、为结果负责"</td></tr>
+              <tr><td><strong>时间管理</strong></td><td>任务多时怎么排优先级 / 举例你设定目标并实现</td><td>用"四象限 + 里程碑"讲方法论，附真实例子</td></tr>
+              <tr><td><strong>动机价值观</strong></td><td>最自豪的成就 / 你的驱动力 / 为什么读研</td><td>答案要自洽、真诚，别空喊"热爱科研"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>3. 简历面试：项目会被深挖</h3>
+        <div class="deepdive">
+          <div class="deepdive-title">🔍 简历上的每个项目，都要能回答这 6 问</div>
+          <ol>
+            <li>这个项目的<strong>创新点</strong>是什么？</li>
+            <li>结果如何？与已有方法比，改进和不足有哪些？</li>
+            <li>你在其中<strong>具体做了什么</strong>（角色与贡献）？</li>
+            <li>核心<strong>原理</strong>是什么（会追问到公式/实现细节）？</li>
+            <li>如果重来，哪里会做得更好？</li>
+            <li>这段经历对你想做的研究方向有什么启发？</li>
+          </ol>
+          <p>老师判断"经历是否真实、能力是否扎实"全靠这几问——<strong>自己写的项目必须真的懂</strong>。</p>
+        </div>
+
+        <h3>4. 英语面试：别背模板，结合经历</h3>
+        <ul>
+          <li>准备 1 分钟英文自我介绍：基本信息 + 科研/项目 + 性格特点，<strong>与中文版对应</strong>。</li>
+          <li>高频题：What can you tell me about yourself? / What is your greatest strength / weakness? / Why do you choose our university? / What are your plans in five years?</li>
+          <li>策略：用<strong>自己经历</strong>组织答案（如 strength 用"项目里坚持到结果"来证明），被追问也能自圆其说。</li>
+        </ul>
+
+        <h3>🎤 面试技巧面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">压力</span><span class="qa-q">"如果我们学校没录取你，你会怎么办？"怎么答？</span><span class="qa-toggle">▼</span></div><div class="qa-body">考心态与韧性。参考答法：先感谢机会，再说"我会复盘这次面试暴露的不足并改进，同时积极准备其他学校；如果您这里后续有名额，我很希望能再有机会"。既不贬低对方，也展现抗压与上进。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">缺点</span><span class="qa-q">"你最大的缺点是什么？"怎么答不踩雷？</span><span class="qa-toggle">▼</span></div><div class="qa-body">别说"没有缺点"，也别说致命缺点（如"不爱学新东西"）。策略：说一个<strong>真实的、可改进的</strong>缺点 + 改进行动，如"我有时追求完美导致进度偏慢，后来学会先定里程碑再打磨细节"。最好选一个不致命的、甚至侧面体现优点（追求完美）的。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">行为</span><span class="qa-q">行为面试用什么框架回答？</span><span class="qa-toggle">▼</span></div><div class="qa-body">用 <strong>STAR</strong>：Situation（情境）→ Task（任务）→ Action（你的行动，重点讲）→ Result（结果 + 反思）。选真实的科研/竞赛/项目经历，行动部分突出你的决策与贡献，结果给数字或可验证的成果。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">反问</span><span class="qa-q">面试最后"你还有什么要问我的吗？"该问什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">别问薪资/宿舍等，也别答"没有"。好问题：① 老师课题组目前的研究重点与规划；② 研究生一年级的学习安排与文献要求；③ 组内科研节奏（组会频率、是否有跨组合作）。这体现你真的想进组、有准备。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">科研</span><span class="qa-q">"你的科研经历为什么这么少？"怎么应对？</span><span class="qa-toggle">▼</span></div><div class="qa-body">承认事实 + 展示补救 + 表明潜力：如"我大一大二侧重夯实基础（排名前 X%），大三进入实验室完成了 XX；研究生阶段希望尽快补上系统科研训练"。可顺带说课程大作业、建模竞赛也算科研思维训练。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">英文</span><span class="qa-q">英文自我介绍怎么准备？</span><span class="qa-toggle">▼</span></div><div class="qa-body">1 分钟左右、3 段：开头（姓名、学校、专业 + 一句兴趣）；主体（科研/竞赛经历 + 技能，突出与申请方向相关）；结尾（为什么选该校该方向 + 读研规划）。<strong>背熟但自然</strong>，与中文简历对应，别吹嘘，留出可被追问的点。</div></div>
+      </section>
+
+      <!-- ================= 时间线攻略 ================= -->
+      <section id="timeline">
+        <div class="section-kicker">🗺️ 节奏把控</div>
+        <h2>全流程时间线与准备节奏</h2>
+        <p class="lead">保研是"三年准备、一年冲刺"的长跑。把节点列出来，你就知道每个阶段该干什么。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>时间</th><th>阶段</th><th>关键动作</th></tr></thead>
+            <tbody>
+              <tr><td><strong>大一大二</strong></td><td>打基础</td><td>保持高绩点（数学、专业课尤其重要）；过四六级；进实验室/社团积累</td></tr>
+              <tr><td><strong>大三上 · 12–2 月</strong></td><td>定位启动</td><td>确定目标院校与方向；系统复习数学与专业课；开始读目标导师论文</td></tr>
+              <tr><td><strong>大三下 · 3–5 月</strong></td><td>材料蓄力</td><td>科研/竞赛冲刺（数模、美赛、论文）；整理成绩单、推荐信、个人陈述初稿；练机试</td></tr>
+              <tr><td><strong>大三下 · 6 月</strong></td><td>夏令营申请</td><td>集中投递（按校改材料）；<strong>提前联系导师</strong>；准备中英文自我介绍与项目 PPT</td></tr>
+              <tr><td><strong>暑假 · 7–8 月</strong></td><td>夏令营考核</td><td>笔试（数学+专业课）+ 机试（算法）+ 面试（项目/论文/英语）；复盘每场表现</td></tr>
+              <tr><td><strong>大四上 · 9 月</strong></td><td>预推免 & 九推</td><td>未上岸者冲刺预推免；9.28 前后国家推免系统填志愿、复试、接受待录取</td></tr>
+              <tr><td><strong>大四上 · 10 月</strong></td><td>录取确认</td><td>在系统确认待录取，体检与档案，保研结束 🎉</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card tip">
+          <div class="card-title">💡 过来人 5 条经验</div>
+          <ol>
+            <li><strong>夏令营是最宽松的窗口</strong>，条件允许就投，它是"双保险"。</li>
+            <li>联系导师要<strong>早</strong>、要<strong>真诚</strong>，别等到 9 月才动。</li>
+            <li>文书按校定制：研究方向、导师名字、学校特色都要改到位。</li>
+            <li>机试/手撕代码从 3 月开始每天练，面试前保持手感。</li>
+            <li>心态上"冲稳保"都有兜底，9.28 系统别慌，志愿有确认机制。</li>
+          </ol>
+        </div>
+
+        <h3>🗺️ 时间线面试题</h3>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">流程</span><span class="qa-q">夏令营、预推免、九推有什么区别？</span><span class="qa-toggle">▼</span></div><div class="qa-body">夏令营（6–8 月）：规模大、条件最宽松，热门方向的主招生渠道；预推免（9 月上中旬）：第二轮补录，名额少、条件严；九推（9.28 前后）：国家推免系统正式填报，是最后的保底。拿到夏令营 offer 也不能松懈，还要过九推系统的正式确认。</div></div>
+        <div class="qa"><div class="qa-head"><span class="qa-tag">起步</span><span class="qa-q">现在大二/大三上，保研要开始做什么？</span><span class="qa-toggle">▼</span></div><div class="qa-body">大二：保绩点（核心课高分）、过六级、进实验室/参加数模等竞赛、读目标方向的文献；大三上：确定冲稳保三档目标、联系导师、开始复习数学与专业课、准备文书初稿。越早开始，9 月越从容。</div></div>
+      </section>
+
+      <!-- ================= 资源路线 ================= -->
+      <section id="roadmap">
+        <div class="section-kicker">📚 资源与路线</div>
+        <h2>申请资源清单与行动路线</h2>
+        <p class="lead">「汇总」里的申请资料，按用途给你排好优先级。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>用途</th><th>资料</th><th>怎么用</th></tr></thead>
+            <tbody>
+              <tr><td>全局认知</td><td>《保研小白手册》</td><td>了解保研数据、流程、绩点与竞赛加分体系</td></tr>
+              <tr><td>择校参考</td><td>160+ 院校申请条件汇总 / 2000+ 院校排名要求</td><td>查目标院校"可放宽条件"与成绩排名门槛</td></tr>
+              <tr><td>英语门槛</td><td>未要求六级的院校列表</td><td>六级未过的救命名单（以当年简章为准）</td></tr>
+              <tr><td>文书写作</td><td>文书 80 问 / 个人陈述十要十不要 / 简历修改指南</td><td>逐条对照改简历、PS、推荐信、联系导师邮件</td></tr>
+              <tr><td>面试备考</td><td>压力面试 100 问 / 行为面试 50 问 / 简历面试 95 问 / 英语面试 100 问</td><td>每天过 10 题，用 STAR 框架练口述</td></tr>
+              <tr><td>经验借鉴</td><td>夏令营及推免全攻略 / 前辈保研经历</td><td>看定位、投递与心态层面的真实经验</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card tip">
+          <div class="card-title">🎯 给你的三条行动建议</div>
+          <ol>
+            <li><strong>先定位再行动</strong>：花一周时间查清冲稳保三档院校的要求（排名/六级/材料），比盲目刷题更重要。</li>
+            <li><strong>文书是"说人话"</strong>：简历、PS、邮件都要体现"你能给导师带来什么"，并针对每所学校修改。</li>
+            <li><strong>面试靠练不靠背</strong>：把压力题、行为题、英语题按 STAR 框架口述 3 遍，找同学模拟面试一次。</li>
+          </ol>
+        </div>
+
+        <div class="card info">
+          <div class="card-title">🔗 与本导航其他支柱联动</div>
+          <p>申请过关后，硬实力同样关键：数学看<a href="../math/index.html">数学复习指南</a>，专业课看<a href="../cs/index.html">计算机基础</a>，AI 方向看<a href="../dl/index.html">深度学习</a>与<a href="../dl/llm.html">大模型专题</a>。面试里的"项目深挖"正好对应这些页面的推导题。</p>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="footer">
+      保研申请 · 指南 —— 与「数学」「计算机基础」「深度学习」构成计算机保研导航四大支柱 🎓
+    </footer>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
